@@ -50,13 +50,14 @@
 
 
 .image {
-  width: 80px;
-  height: 80px;
+  /* width: 80px;
+  height: 80px; */
+  margin:20px;
 }
 .image img {
   /* border-radius: 50%; */
-  width: 100%;
-  height: 100%;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
 }
 .title-header {
@@ -170,23 +171,38 @@
   border-radius: 15px;
 }
 
+.arrow-finished{
+  background-color: #174753;
+}
+.arrow-current{
+  background-color: #3c9a00;
+}
+.arrow-default{
+  background-color: #c5e8e1;
+}
 .arrowtext1 {
-  background: linear-gradient(to right, #3ca5f5, #00e8b2);
+  /* background: linear-gradient(to right, #3ca5f5, #00e8b2); */
+  background-color: #174753;
 }
 .arrowtext2 {
-  background: linear-gradient(to right, #f3007c, #6708a2);
+  /* background: linear-gradient(to right, #f3007c, #6708a2); */
+    background-color: #3c9a00;
 }
 .arrowtext3 {
-  background: linear-gradient(to right, #4721d7, #04d9f4);
+  /* background: linear-gradient(to right, #4721d7, #04d9f4); */
+    background-color: #c5e8e1;
 }
 .arrowtext4 {
-  background: linear-gradient(to right, #f30857, #f85bdf);
+  /* background: linear-gradient(to right, #f30857, #f85bdf); */
+    background-color: #c5e8e1;
 }
 .arrowtext5 {
-  background: linear-gradient(to right, #7dad03, #c1c500);
+  /* background: linear-gradient(to right, #7dad03, #c1c500); */
+    background-color: #c5e8e1;
 }
 .arrowtext6 {
-  background: linear-gradient(to right, #f30000, #fdb03c);
+  /* background: linear-gradient(to right, #f30000, #fdb03c); */
+    background-color: #c5e8e1;
 }
 
 @media only screen and (max-width: 767px) {
