@@ -380,7 +380,7 @@
                             </form>
 
 
-                            <form action="{{ route('reading-portal-register') }}" id="registration_form" method="post">
+                            {{--<form action="{{ route('reading-portal-register') }}" id="registration_form" method="post">
 							@csrf
 							<header class="form__head">
 								<h4>Register to Participate in the OKR Reading Buddy Program!</h4>
@@ -645,7 +645,7 @@
 
 
 
-						</form>
+						</form>--}}
 
 
 
