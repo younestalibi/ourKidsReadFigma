@@ -1,0 +1,66 @@
+/* ------------------------------------------------------------ *\
+	Icons
+\* ------------------------------------------------------------ */
+
+.ico-linkedin {
+    background: url(../images/svg/ico-linkedin.svg) no-repeat center center;
+
+    &:hover {
+        background-image: url(../images/svg/ico-linkedin-hover.svg);
+    }
+}
+
+.ico-linkedin-2 {
+    background: url(../images/svg/ico-linkedin-2.svg) no-repeat center center;
+}
+
+.ico-facebook {
+    background: url(../images/svg/ico-facebook.svg) no-repeat center center;
+
+    &:hover {
+        background-image: url(../images/svg/ico-facebook-hover.svg);
+    }
+}
+
+.ico-instagram {
+    background: url(../images/svg/ico-instagram.svg) no-repeat center center;
+
+    &:hover {
+        background-image: url(../images/svg/ico-instagram-hover.svg);
+    }
+}
+
+.ico-youtube {
+    background: url(../images/svg/ico-youtube.svg) no-repeat center center;
+
+    &:hover {
+        background-image: url(../images/svg/ico-youtube-hover.svg);
+    }
+}
+
+.ico-twitter {
+    background: url(../images/svg/ico-twitter.svg) no-repeat center center;
+
+    &:hover {
+        background-image: url(../images/svg/ico-twitter-hover.svg);
+    }
+}
+
+.ico-arrow-right {
+    background: url(../images/svg/ico-arrow-right.svg) no-repeat center center;
+}
+
+.ico-arrow-right-white {
+    background: url(../images/svg/ico-arrow-right-white.svg) no-repeat center center;
+}
+
+.ico-arrow-light {
+    background: url(../images/svg/ico-arrow-light.svg) no-repeat center center;
+}
+
+.ico-envelope {
+    background: url(../images/svg/ico-envelope.svg) no-repeat center center;
+    display: inline-block;
+    width: 1.8rem;
+    height: 1.4rem;
+}

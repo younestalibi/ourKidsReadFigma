@@ -1,0 +1,55 @@
+/* ------------------------------------------------------------ *\
+	Accordion
+\* ------------------------------------------------------------ */
+
+.accordion {
+    .accordion__section {
+        border-top: 0.1rem solid $c-turquoise;
+    }
+
+    .accordion__section.is-expanded .accordion__head i {
+        transform: rotate(180deg);
+    }
+
+    .accordion__head {
+        display: flex;
+        justify-content: space-between;
+        padding: 2.2rem 0 2rem;
+
+        @include breakpoint-down(mobile) {
+            padding: 2.4rem 0 1.8rem;
+        }
+    }
+
+    .accordion__head h5 {
+        font-size: 2rem;
+        line-height: 1.4;
+        font-weight: normal;
+        letter-spacing: 0.012em;
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+    }
+
+    .accordion__head i {
+        transition: transform $t-duration;
+        height: 2.4rem;
+    }
+
+    .accordion__entry {
+        padding-top: 0.4rem;
+
+        &:last-child {
+            padding-bottom: 4.8rem;
+        }
+    }
+
+    .accordion__entry+.accordion__entry {
+        margin-top: 2rem;
+    }
+
+    .accordion__entry h6 {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+        font-weight: normal;
+    }
+}

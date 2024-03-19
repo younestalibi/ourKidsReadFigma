@@ -1,0 +1,29 @@
+/* ------------------------------------------------------------ *\
+	Checkbox
+\* ------------------------------------------------------------ */
+
+.checkbox {
+	input[type="checkbox"] {
+		opacity: 0;
+		position: absolute;
+
+		& ~ label {
+			display: flex;
+			gap: 0.8rem;
+			position: relative;
+
+			&:before {
+				content: "";
+				display: inline-block;
+				flex-shrink: 0;
+				height: 2.4rem;
+				width: 2.4rem;
+				border: 0.1rem solid $c-turquoise;
+			}
+		}
+
+		&:checked ~ label:before {
+			background-color: $c-turquoise;
+		}
+	}
+}

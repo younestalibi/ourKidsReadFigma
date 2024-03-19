@@ -1,0 +1,232 @@
+/* ------------------------------------------------------------ *\
+	Form
+\* ------------------------------------------------------------ */
+
+.form {
+    background-color: $c-off-white;
+    box-shadow: 0 .4rem .4rem rgba(0, 0, 0, 0.25);
+    padding: 0 3.2rem 6.4rem;
+    border-radius: 0.4rem;
+
+    @include breakpoint-down(tablet) {
+        padding-bottom: 4.8rem;
+    }
+
+    @include breakpoint-down(mobile) {
+        padding: 0 2.4rem 4.8rem;
+    }
+
+    .form__head {
+        padding: 3.2rem 0 0;
+        background-color: $c-white;
+        display: flex;
+        gap: 2.4rem;
+        position: relative;
+        margin-bottom: 3.2rem;
+
+        @include breakpoint-down(mobile-medium) {
+            gap: 1.8rem;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 0.4rem;
+            background-color: $c-seafoam;
+        }
+
+        &>* {
+            flex: 1;
+        }
+    }
+
+    .form__head a {
+        display: inline-block;
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 1.14;
+        position: relative;
+        padding: 1.3rem 0 1.2rem;
+        text-decoration: none;
+
+        &:hover:after {
+            background-color: rgba($c-turquoise, 0.7);
+        }
+
+        &.is-current:after {
+            background-color: $c-turquoise;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 0.4rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            transition: background-color $t-duration;
+            background-color: transparent;
+        }
+    }
+
+    .form__row+.form__row {
+        margin-top: 3rem;
+    }
+
+    .form__row h6 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: 0.014em;
+        margin-bottom: 1.2rem;
+    }
+
+    .form__label {
+        display: block;
+        margin-bottom: 0.9rem;
+    }
+
+    .form__controls {
+        max-width: 30.4rem;
+        width: 100%;
+
+        @include breakpoint-down(mobile) {
+            max-width: 100%;
+        }
+    }
+
+    .form__controls input[type="number"] {
+        width: 100%;
+        outline: none;
+        border-color: transparent;
+        background-color: transparent;
+        padding: 1.2rem 0.6rem;
+        border-bottom: 0.1rem solid $c-turquoise;
+
+        &::placeholder {
+            color: $c-medium-gray;
+        }
+    }
+
+    .form__actions {
+        margin-top: 3rem;
+        text-align: right;
+    }
+}
+
+.form--alt {
+    padding-top: 3.2rem;
+
+    @include breakpoint-down(tablet) {
+        padding: 5.1rem 3.2rem 4.8rem;
+    }
+
+    @include breakpoint-down(mobile) {
+        padding: 3.1rem 2.4rem 4.8rem;
+    }
+
+    .form__row+.form__row {
+        margin-top: 1.5rem;
+    }
+
+    .form__row:last-child {
+        margin-top: 3rem;
+    }
+
+    .form__controls {
+        max-width: 100%;
+    }
+
+    .form__cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.6rem;
+        align-items: end;
+
+        @include breakpoint-down(mobile) {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+
+    .form__field,
+    .form__select select {
+        width: 100%;
+        height: 4.5rem;
+    }
+
+    .form__textarea {
+        width: 100%;
+        border-radius: 0;
+        border-color: $c-turquoise;
+        resize: none;
+        height: 19.2rem;
+        padding: 1.2rem;
+
+        &::placeholder {
+            color: $c-medium-gray;
+        }
+    }
+
+    .form__label {
+        margin-bottom: 1.2rem;
+    }
+
+    .form__label--textarea {
+        margin-bottom: 0.9rem;
+    }
+
+    .form__notice {
+        font-size: 1.4rem;
+        line-height: 1.14;
+        color: $c-medium-gray;
+    }
+
+    .form__field {
+        background: transparent;
+        border-radius: 0;
+        border: none;
+        border-bottom: 0.1rem solid $c-turquoise;
+        padding: 1.2rem 0.6rem;
+    }
+
+    .form__select select {
+        background-color: transparent;
+        border: none;
+        border-bottom: 0.1rem solid $c-turquoise;
+        padding: 1.2rem 0.6rem;
+        appearance: none;
+        background: url(../images/svg/ico-chevron-down.svg) no-repeat;
+        background-position: right 0.8rem center;
+
+        &::-ms-expand {
+            display: none;
+        }
+    }
+
+    .form__actions {
+        margin-top: 3.2rem;
+    }
+
+    .form__btn {
+        padding: 1.6rem 2.3rem;
+    }
+}
+
+.form--contact {
+    .form__actions {
+        margin-top: 2.6rem;
+    }
+
+    .form__row:last-child {
+        margin-top: 3.2rem;
+    }
+}

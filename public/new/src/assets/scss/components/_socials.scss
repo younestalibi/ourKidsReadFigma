@@ -1,0 +1,48 @@
+/* ------------------------------------------------------------ *\
+    Shell
+\* ------------------------------------------------------------ */
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-top: 4.4rem;
+
+    @media #{$small-desktop} {
+        margin-top: -9.5rem;
+        padding-top: 0;
+    }
+
+    @media #{$mobile} {
+        justify-content: center;
+        margin-top: 5rem;
+    }
+
+    h6 {
+        margin-right: -0.4rem;
+        font-size: 1.4rem;
+        font-weight: normal;
+    }
+
+    li {
+        display: inline-block;
+        width: 1.6rem;
+        height: 1.6rem;
+        margin-left: 3rem;
+    }
+
+    a {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    i {
+        display: block;
+        width: 1.6rem;
+        height: 1.6rem;
+        transition: $t-duration;
+    }
+}

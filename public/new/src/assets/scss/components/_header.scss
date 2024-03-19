@@ -1,0 +1,121 @@
+/* ------------------------------------------------------------ *\
+	Header
+\* ------------------------------------------------------------ */
+
+.header {
+    position: relative;
+    width: 100%;
+
+    .header__shell {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .header__bar {
+        z-index: 50;
+        width: 77%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        @media #{$mobile} {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            font-size: 2rem;
+            line-height: 2.4rem;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+            position: fixed;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            background: $c-seafoam;
+            transition: $t-duration;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            color: $c-turquoise;
+            padding: 0 2.4rem;
+            flex-wrap: nowrap;
+        }
+
+        @media #{$mobile-smallxs} {
+            font-size: 1.6rem;
+            line-height: 2rem;
+        }
+    }
+}
+
+.header.is-fixed {
+    z-index: 10;
+    box-shadow: 0 .2rem 1rem rgba(0, 0, 0, 0.5);
+    background: $c-white;
+    opacity: 0.95;
+    position: fixed;
+    top: 0;
+
+    .nav-toggle span {
+        @media #{$tablet-portrait} {
+            background: $c-turquoise;
+        }
+    }
+
+    .logo {
+        max-width: 8rem;
+        padding-bottom: 0.4rem;
+
+        @media #{$mobile} {
+            max-width: 7rem;
+        }
+    }
+
+    .nav {
+        padding: 0 0 .75rem 0;
+        color: $c-turquoise;
+    }
+
+    .nav-secondary {
+        padding: 1rem 0 .75rem 0;
+        color: $c-turquoise;
+    }
+}
+
+.header.is-active {
+
+    @media #{$tablet-portrait} {
+        opacity: 1;
+    }
+
+    .logo {
+        max-width: 14rem;
+    }
+
+    .header__bar {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+/* Header white text*/
+
+.header--white {
+    color: $c-white;
+
+    .nav-toggle {
+        span {
+            background: $c-white;
+        }
+
+        &.is-active {
+            span {
+                background: $c-turquoise;
+            }
+        }
+    }
+}

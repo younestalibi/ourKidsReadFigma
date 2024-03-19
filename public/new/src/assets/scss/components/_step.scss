@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------ *\
+	Step
+\* ------------------------------------------------------------ */
+
+.step {
+	text-align: center;
+	position: relative;
+	& + &:before {
+		content: "";
+		display: block;
+		background: url(../images/svg/ico-arrow-right.svg) no-repeat center
+			center;
+		width: 2.4rem;
+		height: 2.4rem;
+		position: absolute;
+		top: 50%;
+		left: -2.2rem;
+		transform: translateY(-50%);
+
+		@include breakpoint-down(tablet) {
+			left: -2.8rem;
+		}
+
+		@include breakpoint-down(mobile) {
+			background-image: url(../images/svg/ico-arrow-down.svg);
+			left: 50%;
+			top: -5.7rem;
+			transform: translateX(-50%);
+		}
+	}
+
+	.step__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.2rem;
+	}
+
+	.step__title {
+		font-size: 2rem;
+		margin-bottom: 1.8rem;
+	}
+}

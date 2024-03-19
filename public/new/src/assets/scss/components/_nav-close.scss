@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------ *\
+	Nav toggle
+\* ------------------------------------------------------------ */
+
+.nav-toggle {
+    display: none;
+  
+    @media #{$mobile} {
+      display: block;
+      position: absolute;
+      right: 2.2rem;
+      top: 2rem;
+      z-index: 100;
+    }
+  
+    span {
+      display: block;
+      width: 3.7rem;
+      height: 0.2rem;
+      margin: .8rem auto;
+      transition: $t-duration;
+      background: $c-turquoise;
+    }
+  
+    &.is-active {
+      span:nth-child(2) {
+        opacity: 0;
+        visibility: hidden;
+      }
+  
+      span:nth-child(1) {
+        transform: translateY(1rem) rotate(45deg);
+      }
+  
+      span:nth-child(3) {
+        transform: translateY(-1rem) rotate(-45deg);
+      }
+    }
+  }

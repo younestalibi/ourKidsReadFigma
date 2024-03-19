@@ -1,0 +1,115 @@
+/* ------------------------------------------------------------ *\
+	Slider
+\* ------------------------------------------------------------ */
+
+/* Slider slick*/
+
+.slider--slick {
+
+  .slider__prev:before,
+  .slider__next:before {
+    content: '';
+    background: url(../images/svg/ico-arrow-light.svg) no-repeat 0 0;
+    transition: $t-duration;
+    width: 1.8rem;
+    height: 1.8rem;
+    display: inline-block;
+    opacity: 1;
+    position: absolute;
+    bottom: 0;
+    right: -1rem;
+  }
+
+  .slider__prev:before {
+    transform: rotateZ(180deg);
+    right: inherit;
+    left: -1rem;
+  }
+
+  .slider__prev:hover:before,
+  .slider__next:hover:before {
+    background-image: url(../images/svg/ico-arrow-light-hover.svg);
+  }
+
+  .slick-arrow {
+    height: 1.8rem;
+    display: inline-block;
+    z-index: 1000;
+    bottom: 0;
+    top: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .slider__prev,
+  .slider__next {
+    line-height: 0;
+    position: absolute;
+    padding: 1rem 2rem 1rem 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.6rem;
+    color: $c-turquoise;
+    right: 44.3%;
+
+    @media #{$small-desktop} {
+      right: 40%;
+    }
+
+    @media #{$mobile} {
+      right: 30%;
+    }
+
+    @media #{$mobile-smallxs} {
+      right: 20%;
+    }
+  }
+
+  .slider__prev {
+    padding: 1rem 0 1rem 2rem;
+    left: 44.4%;
+    right: inherit;
+
+    @media #{$small-desktop} {
+      left: 40%;
+    }
+
+    @media #{$mobile} {
+      left: 30%;
+    }
+
+    @media #{$mobile-smallxs} {
+      left: 20%;
+    }
+  }
+
+  .slick-slider {
+    margin-bottom: 0;
+  }
+
+  .slider__actions {
+    position: relative;
+    width: 100%;
+    min-height: 2rem;
+    top: 1.9rem;
+    font-family: $ff-neue-haas-grotesk-text-pro-md;
+
+    @media #{$small-desktop} {
+      top: 1rem;
+    }
+
+    @media #{$mobile} {
+      top: 3.3rem;
+      margin-bottom: 8rem;
+    }
+  }
+}

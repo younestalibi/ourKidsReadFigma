@@ -1,0 +1,49 @@
+/* ------------------------------------------------------------ *\
+    Masonry
+\* ------------------------------------------------------------ */
+
+.masonry {
+
+    .masonry__col,
+    .masonry__grid-sizer {
+        width: 30%;
+
+        @media #{$small-desktop} {
+            width: 31%;
+        }
+
+        @media #{$mobile} {
+            width: 48%;
+        }
+    }
+
+    .masonry__col {
+        margin-bottom: 3.2rem;
+        text-align: center;
+
+        @media #{$mobile} {
+            margin-bottom: 2rem;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .masonry__col a {
+        display: block;
+    }
+
+    .masonry__gutter-sizer {
+        width: 5%;
+
+        @media #{$small-desktop} {
+            width: 3.4%;
+        }
+
+        @media #{$mobile} {
+            width: 3.8%;
+        }
+    }
+}

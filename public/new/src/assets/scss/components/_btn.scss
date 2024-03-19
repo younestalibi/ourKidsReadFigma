@@ -1,0 +1,84 @@
+/* ------------------------------------------------------------ *\
+    Button
+\* ------------------------------------------------------------ */
+
+.btn {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    appearance: none;
+    border: 0.2rem solid transparent;
+    transition: $t-duration;
+}
+
+/*  Btn block  */
+
+.btn--block {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*  Btn primary  */
+
+.btn--primary {
+    padding: 1.3rem 2.4rem;
+    border-color: $c-turquoise;
+    background: transparent;
+    font-family: $ff-neue-haas-grotesk-text-pro-md;
+    font-weight: bold;
+
+    &:hover {
+        background: $c-mint;
+    }
+
+    &:active {
+        background: $c-seafoam;
+    }
+
+    &:disabled {
+        border-color: $c-light-gray;
+        color: $c-light-gray;
+    }
+}
+
+/*  Btn secondary  */
+
+.btn--secondary {
+    padding: 1.3rem 1.8rem 1.3rem 2.4rem;
+    background: $c-turquoise;
+    color: $c-white;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+
+    i {
+        display: flex;
+        align-items: center;
+    }
+
+    &:hover {
+        color: $c-turquoise;
+        background: $c-mint;
+        border-color: $c-turquoise;
+
+        i {
+            stroke: $c-turquoise;
+        }
+    }
+}
+
+/*  Btn right arrow  */
+
+.btn--right-icon {
+
+    i {
+        display: inline-flex;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 1.1rem;
+    }
+}

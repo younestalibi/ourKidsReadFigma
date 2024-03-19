@@ -1,0 +1,106 @@
+/* ------------------------------------------------------------ *\
+    Book Box
+\* ------------------------------------------------------------ */
+
+.book-box {
+    width: 100%;
+    height: 50rem;
+    background: $c-white;
+    padding: 2rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 0 0 2.1rem;
+
+    @media #{$small-desktop} {
+        height: 100%;
+        padding: 0;
+    }
+
+    h2 {
+        font-family: $ff-warnock-pro;
+        font-weight: 600;
+        font-size: 4rem;
+        line-height: 4.4rem;
+        letter-spacing: -0.12rem;
+        margin-bottom: 3.6rem;
+        position: relative;
+
+        @media #{$small-desktop} {
+            font-size: 3.2rem;
+            line-height: 3.6rem;
+        }
+
+        &:after {
+            content: '';
+            background: $c-turquoise;
+            height: .4rem;
+            width: 9.4rem;
+            position: absolute;
+            bottom: -1.9rem;
+            left: 0;
+        }
+    }
+
+    h3 {
+        font-size: 2rem;
+        line-height: 2.8rem;
+        margin-bottom: 2.3rem;
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+        font-weight: normal;
+    }
+
+    p {
+        margin-bottom: 2.4rem;
+    }
+
+    .book-box__image,
+    .book-box__body {
+        max-width: 50%;
+        flex: 0 50%;
+
+        @media #{$small-desktop} {
+            min-width: 100%;
+        }
+    }
+
+    .book-box__body {
+        overflow-y: auto;
+        max-height: 50rem;
+        padding: .3rem 0.9rem 0 1.3rem;
+
+        @media #{$small-desktop} {
+            padding: 5rem 0 0 0;
+        }
+
+        @media #{$mobile} {
+            padding: 0 0;
+            max-height: inherit;
+        }
+    }
+
+    .book-box__image {
+        text-align: center;
+        justify-content: center;
+        margin: 0 -1.5rem;
+
+        @media #{$small-desktop} {
+            margin: 0 -1.1rem;
+            padding-top: 8rem;
+        }
+
+        @media #{$mobile} {
+            padding-top: 8.3rem;
+            margin: 0 0 3.5rem 0;
+        }
+    }
+
+    .book-box__image img {
+        margin: 0 auto;
+    }
+
+    .book-box__actions {
+        padding-top: 0.7rem;
+    }
+}

@@ -1,0 +1,138 @@
+/* ------------------------------------------------------------ *\
+	Nav
+\* ------------------------------------------------------------ */
+
+.nav {
+    width: 100%;
+    padding: 0 0 2.4rem 0;
+    font-family: $ff-neue-haas-grotesk-text-pro-md;
+    font-size: 1.6rem;
+    text-align: right;
+
+    @media #{$mobile} {
+        order: 1;
+    }
+
+    @media #{$mobile} {
+        font-size: 2rem;
+        line-height: 2.4rem;
+    }
+
+    @media #{$mobile-smallxs} {
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+    ul {
+
+        @media #{$mobile} {
+            padding: 16rem 0 0 0;
+        }
+    }
+
+    li {
+        border-bottom: .4rem solid transparent;
+        display: inline-block;
+
+        @media #{$mobile} {
+            border-bottom: .2rem solid $c-turquoise;
+            display: block;
+            width: 100%;
+            margin: 0;
+            text-align: left;
+        }
+
+        &:first-child {
+            @media #{$mobile} {
+                border-top: .2rem solid $c-turquoise;
+            }
+        }
+
+        &:not(:first-child) {
+            margin-left: 2.9rem;
+
+            @media #{$mobile} {
+                margin-left: 0;
+            }
+        }
+
+        &:last-child {
+            @media #{$mobile} {
+                margin-top: 3rem;
+                border: .2rem solid $c-turquoise;
+                text-align: center;
+                font-size: 1.6rem;
+
+                a {
+                    padding: 1.5rem 2.4rem;
+                    background: transparent;
+
+                    &:hover {
+                        background: $c-mint;
+                    }
+
+                    &:active {
+                        background: $c-seafoam;
+                    }
+
+                    &:disabled {
+                        border-color: $c-light-gray;
+                        color: $c-light-gray;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            transition: $t-duration;
+
+            @media (min-width:$responsive-xs+1) {
+                border-bottom: .4rem solid $c-emerald;
+            }
+        }
+
+        &.is-active {
+            @media (min-width:$responsive-xs+1) {
+                border-bottom: .4rem solid $c-emerald;
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+
+        @media #{$mobile} {
+            padding: 1.6rem 0;
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        @media #{$mobile-smallxs} {
+            padding: 1rem 0;
+        }
+
+        i {
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-right: 1rem;
+            display: none;
+
+            @media #{$mobile} {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+/* Nav pink hover*/
+
+.nav--pink-hover {
+    li {
+        &:hover {
+            @media (min-width:$responsive-xs+1) {
+                border-bottom-color: $c-pink;
+            }
+        }
+    }
+}

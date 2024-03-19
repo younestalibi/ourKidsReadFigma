@@ -1,0 +1,59 @@
+/* ------------------------------------------------------------ *\
+	Quote
+\* ------------------------------------------------------------ */
+
+.quote {
+    margin: 2.8rem 0 4.9rem 0;
+
+    @media #{$small-desktop} {
+        margin: 1.4rem 0 5rem 0;
+    }
+
+    @media #{$tablet-portrait} {
+        margin: 0.9rem 0 3.4rem 0;
+    }
+
+    @media #{$mobile} {
+        margin: 1.9rem 0 5rem 0;
+    }
+
+    blockquote {
+        padding: 9.4rem 0 3.8rem 0;
+        border-bottom: .2rem solid $c-turquoise;
+        border-top: .2rem solid $c-turquoise;
+        line-height: 4.4rem;
+        position: relative;
+
+        @media #{$tablet-portrait} {
+            padding: 9.4rem 0 3.9rem 0;
+        }
+
+        &:before {
+            content: url('../images/svg/quotation-mark.svg');
+            position: absolute;
+            z-index: 0;
+            left: 0;
+            top: 2.4rem;
+            width: 6.4rem;
+            height: 4.6rem;
+        }
+
+        p:first-child {
+            font-size: 4rem;
+            line-height: 4.4rem;
+            font-family: $ff-warnock-pro;
+            margin-bottom: 2.2rem;
+
+            @media #{$small-desktop} {
+                font-size: 3.2rem;
+                line-height: 3.8rem;
+            }
+
+            @media #{$tablet-portrait} {
+                font-size: 3.2rem;
+                line-height: 3.6rem;
+                letter-spacing: -.035rem;
+            }
+        }
+    }
+}

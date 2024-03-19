@@ -1,0 +1,32 @@
+/* ------------------------------------------------------------ *\
+    Member
+\* ------------------------------------------------------------ */
+
+.member {
+    padding-bottom: 2.1rem;
+
+    @media #{$small-desktop} {
+        padding-bottom: 4rem;
+    }
+
+    @media #{$mobile} {
+        padding-bottom: 2.7rem;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    h6 {
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+        font-size: 2rem;
+        line-height: 2.8rem;
+        margin: 1.6rem 0 .4rem 0;
+        font-weight: normal;
+    }
+
+    p {
+        margin: 1.6rem 0;
+    }
+}

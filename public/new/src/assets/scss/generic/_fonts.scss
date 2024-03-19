@@ -1,0 +1,57 @@
+/* ------------------------------------------------------------ *\
+    Fonts
+\* ------------------------------------------------------------ */
+
+@font-face {
+    font-family: 'NeueHaasGroteskDisp Pro';
+    src: url('../fonts/NHaasGroteskDSPro-75Bd.woff2') format('woff2'),
+        url('../fonts/NHaasGroteskDSPro-75Bd.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NeueHaasGroteskDisp Pro Lt';
+    src: url('../fonts/NHaasGroteskDSPro-45Lt.woff2') format('woff2'),
+        url('../fonts/NHaasGroteskDSPro-45Lt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NeueHaasGroteskText Pro Md';
+    src: url('../fonts/NHaasGroteskTXPro-65Md.woff2') format('woff2'),
+        url('../fonts/NHaasGroteskTXPro-65Md.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NeueHaasGroteskText Pro';
+    src: url('../fonts/NHaasGroteskTXPro-55Rg.woff2') format('woff2'),
+        url('../fonts/NHaasGroteskTXPro-55Rg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Warnock Pro';
+    src: url('../fonts/WarnockPro-Regular.woff2') format('woff2'),
+        url('../fonts/WarnockPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Warnock Pro';
+    src: url('../fonts/WarnockPro-Semibold.woff2') format('woff2'),
+        url('../fonts/WarnockPro-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

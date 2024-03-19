@@ -1,0 +1,33 @@
+/* ------------------------------------------------------------ *\
+	Radio
+\* ------------------------------------------------------------ */
+
+.radio {
+    label {
+        display: flex;
+        vertical-align: center;
+        gap: 0.8rem;
+    }
+
+    input[type="radio"] {
+        opacity: 0;
+        position: absolute;
+
+        &~label {
+            position: relative;
+
+            &:before {
+                content: "";
+                display: inline-block;
+                height: 2.4rem;
+                width: 2.4rem;
+                border-radius: 50%;
+                border: .1rem solid $c-turquoise;
+            }
+        }
+
+        &:checked~label:before {
+            background-color: $c-turquoise;
+        }
+    }
+}

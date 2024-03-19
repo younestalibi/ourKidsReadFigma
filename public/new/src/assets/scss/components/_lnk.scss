@@ -1,0 +1,46 @@
+/* ------------------------------------------------------------ *\
+	Link
+\* ------------------------------------------------------------ */
+
+.lnk {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: $t-duration;
+}
+
+/*  lnk primary  */
+
+.lnk--primary {
+    font-family: $ff-neue-haas-grotesk-text-pro-md;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: $c-coral;
+    }
+
+    &:disabled {
+        color: $c-light-gray;
+    }
+
+    i {
+        display: inline-block;
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+}
+
+.lnk--ico-end {
+    i {
+        margin-left: .8rem
+    }
+}
+
+.lnk--ico-start {
+    i {
+        margin-right: .8rem
+    }
+}

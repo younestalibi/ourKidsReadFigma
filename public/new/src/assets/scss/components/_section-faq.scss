@@ -1,0 +1,45 @@
+/* ------------------------------------------------------------ *\
+	Section Faq
+\* ------------------------------------------------------------ */
+
+.section-faq {
+    margin: 6.8rem 0 15.6rem;
+
+    @media #{$tablet-portrait} {
+        margin: 4.5rem 0 13.5rem;
+    }
+
+    @media #{$mobile} {
+        margin: 2.8rem 0 15.3rem;
+    }
+
+    .section__inner {
+        display: grid;
+        grid-template-columns: 52.8rem 1fr;
+        gap: 3.2rem;
+
+        @include breakpoint-down(small-desktop) {
+            grid-template-columns: 40rem 1fr;
+        }
+
+        @include breakpoint-down(tablet) {
+            grid-template-columns: 1fr;
+            gap: 4.7rem;
+        }
+
+        @include breakpoint-down(mobile) {
+            gap: 3.1rem;
+        }
+    }
+
+    .section__head h1 {
+        font-size: 4.8rem;
+        line-height: 1.08;
+        letter-spacing: -0.032em;
+
+        @include breakpoint-down(tablet) {
+            font-size: 4rem;
+            line-height: 1.3;
+        }
+    }
+}

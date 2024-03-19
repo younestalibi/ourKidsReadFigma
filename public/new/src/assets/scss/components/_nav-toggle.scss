@@ -1,0 +1,59 @@
+/* ------------------------------------------------------------ *\
+	Nav toggle
+\* ------------------------------------------------------------ */
+
+.nav-toggle {
+  display: none;
+  right: 2.2rem;
+  top: 2rem;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+
+  @media #{$mobile} {
+    display: block;
+  }
+
+  span {
+    display: block;
+    width: 3.7rem;
+    height: 0.2rem;
+    margin: .8rem auto;
+    transition: $t-duration;
+    background: $c-turquoise;
+  }
+
+  &.is-active {
+    span:nth-child(2) {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    span:nth-child(1) {
+      transform: translateY(1rem) rotate(45deg);
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-1rem) rotate(-45deg);
+    }
+  }
+}
+
+.nav-toggle--popup {
+  right: 6.5rem;
+  top: -7.4rem;
+
+  @media #{$small-desktop} {
+    right: 3.7rem;
+    top: 1rem;
+  }
+
+  @media #{$mobile} {
+    right: 2.3rem;
+    top: 2.2rem;
+  }
+
+  span {
+    width: 4.7rem;
+  }
+}

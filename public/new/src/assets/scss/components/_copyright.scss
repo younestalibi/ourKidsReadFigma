@@ -1,0 +1,14 @@
+/* ------------------------------------------------------------ *\
+	copyright
+\* ------------------------------------------------------------ */
+
+.copyright {
+    float: left;
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.017rem;
+
+    @media #{$small-desktop} {
+        float: inherit;
+        margin: 3.2rem 0;
+    }
+}

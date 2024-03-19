@@ -1,0 +1,95 @@
+//Variables
+$font-size-base: 1.6rem;
+$font-weight-base: 400;
+$line-height-base: 2.4rem;
+
+//75-normal
+$ff-neue-haas-grotesk-disp-pro: "NeueHaasGroteskDisp Pro",
+Helvetica,
+sans-serif;
+
+//45-300
+$ff-neue-haas-grotesk-disp-pro-lt: "NeueHaasGroteskDisp Pro Lt",
+Helvetica,
+sans-serif;
+
+//65-500
+$ff-neue-haas-grotesk-text-pro-md: "NeueHaasGroteskText Pro Md",
+Helvetica,
+sans-serif;
+
+//55-normal
+$ff-neue-haas-grotesk-text-pro: "NeueHaasGroteskText Pro",
+Helvetica,
+sans-serif;
+
+$ff-warnock-pro: "Warnock Pro",
+Georgia,
+serif;
+
+$t-duration: 0.3s;
+
+$c-black: #000;
+$c-base: #055590;
+
+$c-turquoise: #004750;
+$c-white: #fff;
+$c-off-white: #fcfcfc;
+
+$c-charcoal-gray: #333333;
+$c-medium-gray: #666666;
+$c-coral: #c82660;
+$c-seafoam: #bfe9e1;
+$c-mint: #e3f1ef;
+$c-lemon: #ffe500;
+$c-tangerine: #ffb71b;
+
+$c-emerald: #52a192;
+$c-pink: #ff6fa3;
+$c-light-gray: #dddddd;
+
+$c-system-green: #3c7750;
+$c-system-yellow: #f6e331;
+$c-system-red: #df051b;
+
+$responsive-ios: 812px;
+
+$breakpoints: (mobile-small: 374px,
+    mobile-medium: 543px,
+    mobile: 767px,
+    admin-bar: 782px,
+    tablet: 1023px,
+    small-desktop: 1199px,
+    large-desktop: 1399px,
+);
+
+$shell-max-width: 131.2rem;
+$shell-gutter-lg: 6.4rem;
+$shell-gutter-md: 4.8rem;
+$shell-gutter-sm: 3.6rem;
+$shell-gutter-xs: 3.2rem;
+$shell-gutter-xxs: 2.3rem;
+
+$responsive-xxss: 374px;
+$responsive-xxs: 543px;
+$responsive-xs: 767px;
+$responsive-sm-landscape: 813px;
+$responsive-sm-xs: 959px;
+$responsive-sm: 1023px;
+$responsive-md: 1199px;
+$responsive-lg: 1439px;
+$responsive-lg-xl: 1759px;
+$responsive-xl: 1919px;
+
+
+$mobile-smallxs: "(max-width: #{$responsive-xxss}) ";
+$mobile-small: "(max-width: #{$responsive-xxs}) ";
+$mobile: "(max-width: #{$responsive-xs}), screen and (max-width: #{$responsive-sm-landscape}) and (orientation: landscape) ";
+$tablet-portrait-xs: "(max-width: #{$responsive-sm-xs}) ";
+$tablet-portrait: "(max-width: #{$responsive-sm}) ";
+$small-desktop: "(max-width: #{$responsive-md}) ";
+$large-desktop: "(max-width: #{$responsive-lg}) ";
+$large-desktop-xl: "(max-width: #{$responsive-lg-xl}) ";
+$largest-desktop: "(max-width: #{$responsive-xl}) ";
+$desktop-xl: "(max-width: #{$responsive-xl}) ";
+$retina: "(min-resolution: 2dppx) ";

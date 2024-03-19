@@ -1,0 +1,56 @@
+/* ------------------------------------------------------------ *\
+    Story item
+\* ------------------------------------------------------------ */
+
+.story-item {
+    margin-bottom: 6.4rem;
+
+    @media #{$small-desktop} {
+        margin-bottom: 4.9rem;
+    }
+
+    @media #{$mobile} {
+        margin-bottom: 4.8rem;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    span {
+        display: block;
+        margin-top: .7rem;
+    }
+
+    span:nth-child(2) {
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+    }
+
+    span:nth-child(3) {
+        font-size: 1.4rem;
+        color: $c-medium-gray;
+    }
+
+    hr {
+        width: 9.4rem;
+        height: .4rem;
+        background: $c-lemon;
+        border: 0;
+        margin: 1.1rem 0 1.5rem 0;
+    }
+
+    h6 {
+        font-size: 2.4rem;
+        line-height: 3.2rem;
+        margin-top: 1.6rem;
+        letter-spacing: 0.03rem;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: $c-emerald;
+        }
+    }
+}

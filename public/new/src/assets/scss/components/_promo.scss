@@ -1,0 +1,117 @@
+/* ------------------------------------------------------------ *\
+    Promo
+\* ------------------------------------------------------------ */
+
+.promo {
+
+    @media #{$mobile} {
+        margin-bottom: 4.8rem;
+    }
+
+    h3 {
+        font-family: $ff-warnock-pro;
+        font-weight: 600;
+        font-size: 4rem;
+        line-height: 4.4rem;
+        position: relative;
+        margin-bottom: 3.5rem;
+        letter-spacing: -0.12rem;
+
+        @media #{$small-desktop} {
+            font-size: 3.2rem;
+            line-height: 3.6rem;
+        }
+
+        &:after {
+            content: '';
+            background: $c-turquoise;
+            height: .4rem;
+            width: 9.4rem;
+            position: absolute;
+            bottom: -1.9rem;
+            left: 0;
+        }
+    }
+
+    .promo__shell {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+    }
+
+    .promo__image,
+    .promo__body {
+        width: 50%;
+
+        @media #{$mobile} {
+            min-width: 100%;
+        }
+    }
+
+    .promo__image {
+        margin-left: 0;
+    }
+
+    .promo__image img {
+        height: 72rem;
+        object-fit: cover;
+        width: 100%;
+
+        @media #{$small-desktop} {
+            height: 38.4rem;
+        }
+
+        @media #{$mobile} {
+            height: 41.4rem;
+        }
+    }
+
+    .promo__body {
+        margin-right: auto;
+        padding: 0 6.2rem 0 3.2rem;
+
+        @media #{$small-desktop} {
+            padding: 0 3.6rem 0 2.8rem;
+        }
+
+        @media #{$mobile} {
+            margin-top: 2.6rem;
+            padding-left: 2.3rem;
+            padding-right: 2.3rem;
+        }
+    }
+}
+
+/* Promo reversed */
+
+.promo--reversed {
+    .promo__image {
+        order: 2;
+        margin-left: 0;
+
+        @media #{$mobile} {
+            order: inherit;
+        }
+    }
+
+    .promo__body {
+        padding: 0;
+        margin-left: auto;
+        max-width: 50%;
+        padding: 0rem 2.7rem 0 6.5rem;
+
+        @media #{$small-desktop} {
+            padding: 0rem 2.7rem 0 3.7rem;
+            max-width: 50%;
+        }
+
+        @media #{$mobile} {
+            min-width: 100%;
+            margin-right: 0;
+            padding-left: 2.3rem;
+            padding-right: 2.3rem;
+        }
+    }
+}

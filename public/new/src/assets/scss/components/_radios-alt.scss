@@ -1,0 +1,18 @@
+/* ------------------------------------------------------------ *\
+	Radios Alt
+\* ------------------------------------------------------------ */
+
+.radios-alt {
+	max-width: 27.2rem;
+
+	ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+		gap: 1.2rem 1.6rem;
+		list-style: none;
+
+		@include breakpoint-down(tablet) {
+			gap: 1.2rem 1.4rem;
+		}
+	}
+}

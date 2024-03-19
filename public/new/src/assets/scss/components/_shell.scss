@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------ *\
+  Shell
+\* ------------------------------------------------------------ */
+
+.shell {
+  max-width: calc(#{$shell-max-width} + #{$shell-gutter-lg} * 2);
+  padding-left: $shell-gutter-lg;
+  padding-right: $shell-gutter-lg;
+  margin: auto;
+  width: 100%;
+
+  @media #{$tablet-portrait} {
+    padding-left: $shell-gutter-md;
+    padding-right: $shell-gutter-md;
+  }
+
+  @media #{$tablet-portrait-xs} {
+    padding-left: $shell-gutter-sm;
+    padding-right: $shell-gutter-sm;
+  }
+
+  @media #{$mobile} {
+    padding-left: $shell-gutter-xs;
+    padding-right: $shell-gutter-xs;
+  }
+
+  @media #{$mobile-small} {
+    padding-left: $shell-gutter-xxs;
+    padding-right: $shell-gutter-xxs;
+  }
+}
+
+/* Shell Fluid */
+
+.shell--fluid {
+  max-width: none;
+}
+
+/* Shell No Padding */
+
+.shell--no-padding {
+  padding: 0;
+}

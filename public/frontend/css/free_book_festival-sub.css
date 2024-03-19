@@ -1,0 +1,230 @@
+body {
+    background-color: #c5e9e1;
+}
+.hide {
+    display: none !important;
+}
+.page-head {
+	font-size: 1.9rem;
+}
+.page-head h1 {
+    font-size: 5.6rem;
+    line-height: 6rem;
+    position: relative;
+    margin-bottom: 5.6rem;
+    letter-spacing: -0.19rem;
+}
+.page-head h1:after {
+    background: #004750;
+}
+.page-head h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    marign-bottom: 1rem;
+}
+.page-head h2.heading-2 {
+    font-size: 4rem;
+    margin-bottom: 1em;
+    text-transform: initial;
+}
+.page-head p {
+	margin-bottom: 1em;
+	line-height: 1.5;
+}
+.page-head ul {
+	padding-left: 1em;
+}
+.page-head li {
+	margin-bottom: 1em;
+}
+.page-head img {
+    display: block;
+    margin-bottom: 2rem;
+}
+.event-lists {
+	background: #004750;
+	color: #FFF;
+	line-height: 1.5;
+	font-size: 1.9rem;
+}
+.event-lists h1, .video-library h1 {
+    font-weight: 600;
+    font-size: 4rem;
+    line-height: 4.4rem;
+    position: relative;
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.12rem;
+}
+.section {
+    font-size: 1.9rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 60px 0;
+    line-height: 1.4;
+}
+.section h2 {
+    font-weight: 600;
+    font-family: "Warnock Pro", Georgia, serif;
+    font-weight: 600;
+    font-size: 4rem;
+    line-height: 4.4rem;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.12rem;
+    color: inherit;
+}
+
+.section-testimonial {
+    background: #004750;
+    color: #fff;
+}
+.author-details {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+.author-details img {
+    float: left;
+    margin-right: 1.5rem;
+    margin-bottom: 1rem;
+}
+.testimonial-content {
+    display: flex;
+    gap: 5%;
+    text-align: center;
+}
+.testimonial-content .quote-icon img {
+    min-width: 48px;
+}
+.testimonial-content .quote-right {
+    align-self: flex-end;
+    transform: scaleX(-1);
+}
+.testimonial-content p {
+    padding: 3rem 0;
+    position: relative;
+}
+.testimonial-content p:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.9);;
+}
+.options-section .option-header {
+    display: flex;
+    align-items: flex-start;
+    font-size: 3rem;
+    font-weight: bold;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.options-section .option-header a {
+    text-decoration: none;
+}
+.options-section .option-header span {
+    color: #FFF;
+    padding: 1rem 2.5rem 0.5rem;
+    background-image: url('/public/new/assets/images/events/ribbon.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    aspect-ratio: 268 / 107;
+    white-space: nowrap;
+}
+.options-section .option-header strong {
+    padding-top: 1rem;
+}
+.options-section .option-subheader {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #c5e9e1;
+    border-bottom: 1px solid #c5e9e1;
+    font-size: 3rem;
+    gap: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+.options-section .option-subheader .button {
+    padding: 1rem 3rem;
+    background: #c5e9e1;
+    color: #004750;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+.options-section.options-section-2 .option-subheader {
+    border-color: inherit;
+}
+.options-section.options-section-2 .option-subheader .button {
+    color: #c5e9e1;
+    background: #004750;
+}
+.options-section .option-subheader ~ p {
+    margin-bottom: 1em;
+}
+.options-section img {
+    width: 100%;
+}
+.options-seciton-1, .options-section-3 {
+    background: #004750;
+    color: #fff;
+}
+.options-seciton-1 .image-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4%;
+    margin-top: 3rem;
+}
+.options-seciton-1 .image-wrapper img {
+    display: block;
+    width: 100%;
+    box-shadow: 4px 4px 6px rgba(0,0,0,0.7);
+}
+@media (min-width: 768px) {
+	
+}
+@media (max-width: 767px), screen and (max-width: 813px) and (orientation: landscape) {
+	.page-head {
+		font-size: 1.6rem;
+	}
+	.page-head h1 {
+        font-size: 4.9rem;
+    }
+	h2 {
+		font-size: 2.4rem;
+	}
+	.section {
+	    font-size: 1.6rem;
+	}
+	.author-details {
+	    font-size: 2rem;
+	}
+	.author-details img {
+	    max-width: 40%;
+	}
+	.testimonial-content {
+	    font-size: inherit;
+	}
+	.testimonial-content .quote-icon img {
+	    min-width: 24px;
+	}
+	.options-seciton-1 .image-wrapper {
+	    grid-template-columns: repeat(2, minmax(0, 1fr));
+	    gap: 2rem;
+	}
+	.options-section .option-header {
+	    flex-direction: column;
+        font-size: 2rem;
+        gap: 0;
+	}
+	.options-section .option-subheader {
+	    /*flex-direction: column;*/
+        /*border: none;*/
+        /*align-items: flex-start;*/
+        font-size: 2rem;
+        gap: 1rem;
+	}
+
+}

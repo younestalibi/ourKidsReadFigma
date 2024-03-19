@@ -1,0 +1,62 @@
+/* ------------------------------------------------------------ *\
+	Nav footer
+\* ------------------------------------------------------------ */
+
+.nav-footer {
+
+    @media #{$mobile} {
+        li:last-child a {
+            display: none;
+        }
+
+        li:last-child span {
+            display: block;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        @media #{$small-desktop} {
+            flex-direction: column;
+        }
+    }
+
+    li {
+        border-bottom: .4rem solid transparent;
+        margin: 0 1.6rem;
+        position: relative;
+
+        @media #{$small-desktop} {
+            display: block;
+            margin: 0 0 2.8rem;
+
+            &::after {
+                display: none;
+            }
+        }
+
+
+
+        &:not(:first-child):after {
+            content: '';
+            position: absolute;
+            height: 1.6rem;
+            width: .2rem;
+            background: $c-white;
+            left: -1.6rem;
+            top: 0;
+        }
+
+        &:hover {
+            color: $c-seafoam;
+            transition: $t-duration;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

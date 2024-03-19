@@ -1,0 +1,21 @@
+/* ------------------------------------------------------------ *\
+	Footer
+\* ------------------------------------------------------------ */
+
+.footer {
+    padding: 9.7rem 0 9rem 0;
+    background: $c-turquoise;
+    color: $c-white;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+
+    @media #{$small-desktop} {
+        padding: 6.5rem 0 8rem 0;
+    }
+
+    @media #{$mobile} {
+        padding: 5rem 0 8rem 0;
+        text-align: center;
+    }
+
+}

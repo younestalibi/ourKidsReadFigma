@@ -1,0 +1,226 @@
+/* ------------------------------------------------------------ *\
+    Tab
+\* ------------------------------------------------------------ */
+
+.tab {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: $c-lemon;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    display: none;
+    transition: $t-duration;
+
+    @media #{$mobile} {
+        padding-top: 4.8rem
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 13.6%;
+        top: -2.5rem;
+        width: 0;
+        height: 0;
+        border-left: 3rem solid transparent;
+        border-right: 3rem solid transparent;
+        border-bottom: 3rem solid $c-lemon;
+        clear: both;
+
+        @media #{$small-desktop} {
+            top: -1.1rem;
+            left: 13.1%;
+            border-left: 1.7rem solid transparent;
+            border-right: 1.7rem solid transparent;
+            border-bottom: 1.7rem solid $c-lemon;
+        }
+
+        @media #{$mobile} {
+            left: 45.5%;
+        }
+    }
+
+    .tab__head {
+        padding: 0 3.2rem;
+        text-align: center;
+
+        @media #{$small-desktop} {
+            padding: 0 0 0 .9rem;
+        }
+
+        @media #{$mobile} {
+            padding: 0 1rem 0 1rem;
+        }
+    }
+
+    .tab__head h5 {
+        font-size: 7.8rem;
+        line-height: 8rem;
+        margin-bottom: 1.6rem;
+        font-family: $ff-neue-haas-grotesk-disp-pro;
+
+        @media #{$small-desktop} {
+            font-size: 6rem;
+            line-height: 6.2rem;
+            padding: 0 0 0 5rem;
+        }
+
+        @media #{$mobile} {
+            padding: 0;
+        }
+    }
+
+    .tab__head p {
+        font-family: $ff-neue-haas-grotesk-text-pro-md;
+        font-size: 2rem;
+        line-height: 2.8rem;
+    }
+
+    .tab__body {
+        padding: 6.4rem 2.2rem 6.4rem 3rem;
+
+        @media #{$tablet-portrait} {
+            padding: 6.4rem 2.2rem 6.4rem 7.7rem;
+        }
+
+        @media #{$mobile} {
+            padding: 6.2rem 2.6rem 4.8rem 2.4rem;
+        }
+    }
+
+    .tab__body p {
+        font-family: $ff-warnock-pro;
+        font-size: 4rem;
+        line-height: 4.4rem;
+        letter-spacing: -0.12rem;
+        font-weight: 600;
+
+        @media #{$small-desktop} {
+            font-size: 3.2rem;
+            line-height: 3.6rem;
+        }
+    }
+
+    .tab__body span {
+        display: block;
+        padding-top: 3rem;
+    }
+
+    &.is-current {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: all;
+        animation: fadein $t-duration ease-in;
+
+        @media #{$mobile} {
+            margin-top: 2.7rem;
+        }
+    }
+}
+
+/*Tab seafoam*/
+
+.tab--seafoam {
+    background: $c-seafoam;
+
+    &:after {
+        left: 47.7%;
+        border-bottom-color: $c-seafoam;
+
+        @media #{$mobile} {
+            left: 45.5%;
+        }
+    }
+}
+
+/*Tab tangerine*/
+
+.tab--tangerine {
+    background: $c-tangerine;
+
+    &:after {
+        left: 81%;
+        border-bottom-color: $c-tangerine;
+
+        @media #{$mobile} {
+            left: 45.5%;
+        }
+    }
+}
+
+/*Tab three grid*/
+
+.tab--three-grid {
+    @media #{$mobile} {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+    }
+
+    .tab__head {
+        padding: 11.9rem 3.2rem;
+
+        @media #{$small-desktop} {
+            padding: 2.8rem 1.5rem 7.9rem 1.5rem;
+        }
+
+        @media #{$mobile} {
+            padding: 0 1.5rem 0 1.5rem;
+        }
+    }
+
+    .tab__head h5 {
+        font-size: 4.8rem;
+        line-height: 5.2rem;
+        font-family: $ff-neue-haas-grotesk-disp-pro-lt;
+        font-weight: normal;
+
+        @media #{$small-desktop} {
+            font-size: 4rem;
+            padding: 5.1rem 0 0 0;
+        }
+
+        @media #{$mobile} {
+            padding: 2.9rem 0 0 0;
+        }
+    }
+
+    .tab__head h5 strong {
+        font-family: $ff-neue-haas-grotesk-disp-pro;
+        font-weight: normal;
+    }
+
+    .tab__head p {
+        font-family: $ff-neue-haas-grotesk-text-pro;
+    }
+
+    .tab__head span {
+        position: relative;
+        display: block;
+        margin: 1.6rem 0 1.8rem 0;
+
+        &:after {
+            content: '';
+            background: $c-emerald;
+            height: .2rem;
+            width: 7.6rem;
+            position: absolute;
+            bottom: -.8rem;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
