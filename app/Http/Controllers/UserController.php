@@ -58,7 +58,7 @@ class UserController extends Controller
                     $data1['user_profile_address_zip'] = $request->input('zip');
                     $data1['okr_student'] = $request->input('okr_student');
 
-                    return view('newdesign.reading_buddies', [
+                    return view('newdesign.reading_portal', [
                         'error_message_email' => 'Email already exists!',
                         'data1' => $data1,
                     ]);
@@ -124,6 +124,27 @@ class UserController extends Controller
                     'user_password' => $data1['user_password'],
                 ];
 
+
+                DB::table('tbl_complete_step')->insert([
+                    'user_profile_id' => $last_id, // Assuming $id contains the user_profile_id
+                    'step1_status' => 0,
+                    'step2_status' => 0,
+                    'step3_status' => 0,
+                    'step4_status' => 0,
+                    'step5_status' => 0,
+                    'step6_status' => 0,
+                    'last_updated_at'=>now(),
+
+                ]);
+                $user = DB::table('tbl_user')
+                    ->where('user_email', $data1['user_email'])
+                    ->where('user_password', $data1['user_password'])
+                    ->first();
+
+                session(['user' => $user]);
+
+                return redirect()->route('dashboard');
+
                 return Redirect::route('reading-portal-login')->with([
                     'email' => $credentials['user_email'],
                     'password' => $credentials['user_password']
@@ -171,7 +192,6 @@ class UserController extends Controller
 
 
             }
-            //return view('pages.reading_buddies', ['error_message' => 'All fields are required']);
         }
     }
     public function our_kids_login(Request $request)
@@ -187,24 +207,6 @@ class UserController extends Controller
         session(['user' => $user]);
 
         return redirect()->route('dashboard');
-
-        // $step1 = 'current';
-        // $step2 = 'current';
-        // $id = $user->user_id;
-
-        // // Add more steps as needed
-
-        // // Check step 1
-
-        // $check1 = $this->Checkerstep1($id);
-        // if ($check1['userStep1'] && $check1['profileStep1']) {
-        //     $step1 = 'finished';
-        // }
-        // if ($user) {
-        //     return view('newdesign.home', compact('user', 'step1'));
-        // } else {
-        //     dd('user not found');
-        // }
     }
     public function our_kids_logout()
     {
@@ -253,45 +255,18 @@ class UserController extends Controller
         } else {
             $step1 = 'current';
         }
-
-        // $check1 = $this->Checkerstep1($id);
-        // if ($check1['userStep1'] && $check1['profileStep1']) {
-        //     $step1 = 'finished';
-        //     $check2 = $this->Checkerstep2($id);
-        //     if ($check2['profileStep2']) {
-        //         $step2 = 'finished';
-        //         $check3 = $this->Checkerstep3($id);
-        //         if ($check3['profileStep3'] && $check3['existingImage']) {
-        //             $step3 = 'finished';
-        //             $check4 = $this->Checkerstep4($id);
-        //             if ($check4['profileStep4'] && $check4['scheduale']) {
-        //                 $step4 = 'finished';
-        //             } else {
-        //                 $step4 = 'current';
-        //             }
-        //         } else {
-        //             $step3 = 'current';
-        //         }
-        //     } else {
-        //         $step2 = 'current';
-        //     }
-        // } else {
-        //     $step1 = 'current';
-        // }
-
-
         if ($user) {
             if (
                 $step1 == 'finished' && $step2 == 'finished' &&
                 $step3 == 'finished' && $step4 == 'finished' &&
                 $step5 == 'finished' && $step6 == 'finished'
             ) {
-                echo('dashboard page still working on it');
+                echo ('dashboard page still working on it');
                 exit;
             }
             return view('newdesign.home', compact('user', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
         } else {
-            echo('user not found');
+            echo ('user not found');
             exit;
         }
     }
@@ -302,32 +277,6 @@ class UserController extends Controller
             ->value('step1_status');
 
         return $step1Status === 1;
-        // $userStep1 = DB::table('tbl_user')
-        //     ->where('user_id', $id)
-        //     ->whereNotNull('user_email')
-        //     ->whereNotNull('parent_fname')
-        //     ->whereNotNull('parent_lname')
-        //     ->whereNotNull('student_fname')
-        //     ->whereNotNull('student_lname')
-        //     ->whereNotNull('user_name_first')
-        //     ->whereNotNull('user_name_last')
-        //     ->whereNotNull('cell_phone')
-        //     ->first();
-        // $profileStep1 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->whereNotNull('user_profile_address_01')
-        //     ->whereNotNull('city_name')
-        //     ->whereNotNull('state_id')
-        //     ->whereNotNull('user_profile_address_zip')
-        //     ->whereNotNull('employer_id')
-        //     ->whereNotNull('time_zone')
-        //     ->whereNotNull('other_employer')
-        //     ->first();
-
-        // return [
-        //     'profileStep1' => $profileStep1,
-        //     'userStep1' => $userStep1
-        // ];
     }
     private function Checkerstep2($id)
     {
@@ -336,16 +285,6 @@ class UserController extends Controller
             ->value('step2_status');
 
         return $step2Status === 1;
-        // $profileStep2 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->where('video_1_completed', 1)
-        //     ->where('video_2_completed', 1)
-        //     ->where('video_3_completed', 1)
-        //     ->where('video_4_completed', 1)
-        //     ->first();
-        // return [
-        //     'profileStep2' => $profileStep2,
-        // ];
     }
     private function Checkerstep3($id)
     {
@@ -354,18 +293,6 @@ class UserController extends Controller
             ->value('step3_status');
 
         return $step3Status === 1;
-        // $profileStep3 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->where('user_other_activities', '!=', '')
-        //     ->where('user_think', '!=', '')
-        //     ->first();
-
-        // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
-
-        // return [
-        //     'profileStep3' => $profileStep3,
-        //     'existingImage' => $existingImage
-        // ];
     }
     private function Checkerstep4($id)
     {
@@ -374,24 +301,6 @@ class UserController extends Controller
             ->value('step4_status');
 
         return $step4Status === 1;
-        // $profileStep4 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->whereNotNull('week_time')
-        //     ->whereNotNull('speak_language')
-        //     ->first();
-
-        // $scheduale = DB::table('tbl_item_user')
-        //     ->where('user_id', $id)
-        //     ->where('item_type_id', 11)
-        //     ->first();
-
-
-        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
-
-        // return [
-        //     'profileStep4' => $profileStep4,
-        //     'scheduale' => $scheduale
-        // ];
     }
     private function Checkerstep6($id)
     {
@@ -400,24 +309,6 @@ class UserController extends Controller
             ->value('step6_status');
 
         return $step6Status === 1;
-        // $profileStep4 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->whereNotNull('week_time')
-        //     ->whereNotNull('speak_language')
-        //     ->first();
-
-        // $scheduale = DB::table('tbl_item_user')
-        //     ->where('user_id', $id)
-        //     ->where('item_type_id', 11)
-        //     ->first();
-
-
-        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
-
-        // return [
-        //     'profileStep4' => $profileStep4,
-        //     'scheduale' => $scheduale
-        // ];
     }
     private function Checkerstep5($id)
     {
@@ -426,24 +317,6 @@ class UserController extends Controller
             ->value('step5_status');
 
         return $step5Status === 1;
-        // $profileStep4 = DB::table('tbl_user_profile')
-        //     ->where('user_profile_id', $id)
-        //     ->whereNotNull('week_time')
-        //     ->whereNotNull('speak_language')
-        //     ->first();
-
-        // $scheduale = DB::table('tbl_item_user')
-        //     ->where('user_id', $id)
-        //     ->where('item_type_id', 11)
-        //     ->first();
-
-
-        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
-
-        // return [
-        //     'profileStep4' => $profileStep4,
-        //     'scheduale' => $scheduale
-        // ];
     }
     public function step1(Request $request)
     {
@@ -460,24 +333,27 @@ class UserController extends Controller
     }
     public function updateStep1(Request $request)
     {
-        $id = $request->id;
-        $inputs = $request->only([
-            'email',
-            'first_name',
-            'last_name',
-            'parent_first_name',
-            'student_last_name',
-            'parent_last_name',
-            'address',
-            'city',
-            'state',
-            'zip',
-            'phone',
-            'timezone',
-            'employment',
-            'other_employer'
+        $user = session('user');
+
+        $id = $user->user_id;
+        $inputs = $request->validate([
+            'email' => 'required|email',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'parent_first_name' => 'required|string',
+            'student_last_name' => 'required|string',
+            'parent_last_name' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'zip' => 'required|string',
+            'phone' => 'required|string',
+            'timezone' => 'required|string',
+            'employment' => 'required|string',
+            'other_employer' => 'nullable|string', // Assuming other_employer is optional
         ]);
-        // dd($inputs);
+
+
         DB::table('tbl_user')
             ->where('user_id', $id)
             ->update([
@@ -504,10 +380,12 @@ class UserController extends Controller
             ]);
 
 
+
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
+            ->where('user_profile_id', $id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step1_status' => 1]);
-        return redirect()->route('dashboard');
+
+        return redirect()->route('second-step');
     }
 
     public function step2(Request $request)
@@ -606,7 +484,7 @@ class UserController extends Controller
         DB::table('tbl_complete_step')
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step3_status' => 1]);
-        return redirect()->route('dashboard');
+        return redirect()->route('forth-step');
     }
     public function step4(Request $request)
     {
@@ -689,7 +567,7 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step4_status' => 1]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('fifth-step');
     }
     public function step5(Request $request)
     {
@@ -704,7 +582,7 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step5_status' => 1]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('sixth-step');
     }
     public function step6(Request $request)
     {
@@ -738,7 +616,6 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Signature does not match the user\'s full name.');
         }
 
-        // Use updateOrInsert to either update or insert the signature
         DB::table('tbl_complete_profile')->updateOrInsert(
             ['user_profile_id' => $userId], // Condition
             ['signature' => $signature] // Data to be updated or inserted
