@@ -41,7 +41,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow ">STEP 01</div>
-          <a href="{{route('first-step')}}">
+          <a href="{{route('first-step')}}" class="{{$step1 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step1 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step1 == 'current' ? 'arrow-current' : '' }}
                   {{ $step1 == 'default' ? 'arrow-default' : '' }}">Complete Profile</div>
@@ -59,7 +59,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow">STEP 02</div>
-          <a href="{{route('second-step')}}">
+          <a href="{{route('second-step')}}" class="{{$step2 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step2 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step2 == 'current' ? 'arrow-current' : '' }}
                   {{ $step2 == 'default' ? 'arrow-default' : '' }}">Training Videos</div>
@@ -76,7 +76,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow">STEP 03</div>
-          <a href="{{route('third-step')}}">
+          <a href="{{route('third-step')}}" class="{{$step3 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step3 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step3 == 'current' ? 'arrow-current' : '' }}
                   {{ $step3 == 'default' ? 'arrow-default' : '' }}">For your Student</div>
@@ -94,7 +94,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow">STEP 04</div>
-          <a href="{{route('forth-step')}}">
+          <a href="{{route('forth-step')}}" class="{{$step4 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step4 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step4 == 'current' ? 'arrow-current' : '' }}
                   {{ $step4 == 'default' ? 'arrow-default' : '' }}">Availability</div>
@@ -111,7 +111,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow">STEP 05</div>
-          <a href="{{route('fifth-step')}}">
+          <a href="{{route('fifth-step')}}" class="{{$step5 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step5 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step5 == 'current' ? 'arrow-current' : '' }}
                   {{ $step5 == 'default' ? 'arrow-default' : '' }}">Responsibilites</div>
@@ -128,7 +128,7 @@
         </div>
         <div class="arrow-container">
           <div class="arrow">STEP 06</div>
-          <a href="{{route('sixth-step')}}">
+          <a href="{{route('sixth-step')}}" class="{{$step6 =='default'? 'disabled-link':''}}">
             <div class="arrow-text {{ $step6 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step6 == 'current' ? 'arrow-current' : '' }}
                   {{ $step6 == 'default' ? 'arrow-default' : '' }}">Pledge</div>

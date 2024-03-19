@@ -223,18 +223,24 @@ class UserController extends Controller
         $user = session('user');
         $id = $user->user_id;
 
-        $check1 = $this->Checkerstep1($id);
-        if ($check1['userStep1'] && $check1['profileStep1']) {
+        if ($this->Checkerstep1($id)) {
             $step1 = 'finished';
-            $check2 = $this->Checkerstep2($id);
-            if ($check2['profileStep2']) {
+            if ($this->Checkerstep2($id)) {
                 $step2 = 'finished';
-                $check3 = $this->Checkerstep3($id);
-                if ($check3['profileStep3'] && $check3['existingImage']) {
+                if ($this->Checkerstep3($id)) {
                     $step3 = 'finished';
-                    $check4 = $this->Checkerstep4($id);
-                    if ($check4['profileStep4'] && $check4['scheduale']) {
+                    if ($this->Checkerstep4($id)) {
                         $step4 = 'finished';
+                        if ($this->Checkerstep5($id)) {
+                            $step5 = 'finished';
+                            if ($this->Checkerstep6($id)) {
+                                $step6 = 'finished';
+                            } else {
+                                $step6 = 'current';
+                            }
+                        } else {
+                            $step5 = 'current';
+                        }
                     } else {
                         $step4 = 'current';
                     }
@@ -248,93 +254,196 @@ class UserController extends Controller
             $step1 = 'current';
         }
 
+        // $check1 = $this->Checkerstep1($id);
+        // if ($check1['userStep1'] && $check1['profileStep1']) {
+        //     $step1 = 'finished';
+        //     $check2 = $this->Checkerstep2($id);
+        //     if ($check2['profileStep2']) {
+        //         $step2 = 'finished';
+        //         $check3 = $this->Checkerstep3($id);
+        //         if ($check3['profileStep3'] && $check3['existingImage']) {
+        //             $step3 = 'finished';
+        //             $check4 = $this->Checkerstep4($id);
+        //             if ($check4['profileStep4'] && $check4['scheduale']) {
+        //                 $step4 = 'finished';
+        //             } else {
+        //                 $step4 = 'current';
+        //             }
+        //         } else {
+        //             $step3 = 'current';
+        //         }
+        //     } else {
+        //         $step2 = 'current';
+        //     }
+        // } else {
+        //     $step1 = 'current';
+        // }
+
 
         if ($user) {
-            if ($step1 == 'finished' && $step2 == 'finishedb') {
-                dd('dashboard page');
+            if (
+                $step1 == 'finished' && $step2 == 'finished' &&
+                $step3 == 'finished' && $step4 == 'finished' &&
+                $step5 == 'finished' && $step6 == 'finished'
+            ) {
+                echo('dashboard page still working on it');
+                exit;
             }
             return view('newdesign.home', compact('user', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
         } else {
-            dd('user not found');
+            echo('user not found');
+            exit;
         }
     }
     private function Checkerstep1($id)
     {
-        $userStep1 = DB::table('tbl_user')
-            ->where('user_id', $id)
-            ->whereNotNull('user_email')
-            ->whereNotNull('parent_fname')
-            ->whereNotNull('parent_lname')
-            ->whereNotNull('student_fname')
-            ->whereNotNull('student_lname')
-            ->whereNotNull('user_name_first')
-            ->whereNotNull('user_name_last')
-            ->whereNotNull('cell_phone')
-            ->first();
-        $profileStep1 = DB::table('tbl_user_profile')
+        $step1Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
-            ->whereNotNull('user_profile_address_01')
-            ->whereNotNull('city_name')
-            ->whereNotNull('state_id')
-            ->whereNotNull('user_profile_address_zip')
-            ->whereNotNull('employer_id')
-            ->whereNotNull('time_zone')
-            ->whereNotNull('other_employer')
-            ->first();
+            ->value('step1_status');
 
-        return [
-            'profileStep1' => $profileStep1,
-            'userStep1' => $userStep1
-        ];
+        return $step1Status === 1;
+        // $userStep1 = DB::table('tbl_user')
+        //     ->where('user_id', $id)
+        //     ->whereNotNull('user_email')
+        //     ->whereNotNull('parent_fname')
+        //     ->whereNotNull('parent_lname')
+        //     ->whereNotNull('student_fname')
+        //     ->whereNotNull('student_lname')
+        //     ->whereNotNull('user_name_first')
+        //     ->whereNotNull('user_name_last')
+        //     ->whereNotNull('cell_phone')
+        //     ->first();
+        // $profileStep1 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->whereNotNull('user_profile_address_01')
+        //     ->whereNotNull('city_name')
+        //     ->whereNotNull('state_id')
+        //     ->whereNotNull('user_profile_address_zip')
+        //     ->whereNotNull('employer_id')
+        //     ->whereNotNull('time_zone')
+        //     ->whereNotNull('other_employer')
+        //     ->first();
+
+        // return [
+        //     'profileStep1' => $profileStep1,
+        //     'userStep1' => $userStep1
+        // ];
     }
     private function Checkerstep2($id)
     {
-        $profileStep2 = DB::table('tbl_user_profile')
+        $step2Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
-            ->where('video_1_completed', 1)
-            ->where('video_2_completed', 1)
-            ->where('video_3_completed', 1)
-            ->where('video_4_completed', 1)
-            ->first();
-        return [
-            'profileStep2' => $profileStep2,
-        ];
+            ->value('step2_status');
+
+        return $step2Status === 1;
+        // $profileStep2 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->where('video_1_completed', 1)
+        //     ->where('video_2_completed', 1)
+        //     ->where('video_3_completed', 1)
+        //     ->where('video_4_completed', 1)
+        //     ->first();
+        // return [
+        //     'profileStep2' => $profileStep2,
+        // ];
     }
     private function Checkerstep3($id)
     {
-        $profileStep3 = DB::table('tbl_user_profile')
+        $step3Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
-            ->where('user_other_activities', '!=', '')
-            ->where('user_think', '!=', '')
-            ->first();
+            ->value('step3_status');
 
-        $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
-
-        return [
-            'profileStep3' => $profileStep3,
-            'existingImage' => $existingImage
-        ];
-    }
-    private function Checkerstep4($id)
-    {
-        $profileStep4 = DB::table('tbl_user_profile')
-            ->where('user_profile_id', $id)
-            ->whereNotNull('week_time')
-            ->whereNotNull('speak_language')
-            ->first();
-
-        $scheduale = DB::table('tbl_item_user')
-            ->where('user_id', $id)
-            ->where('item_type_id', 11)
-            ->first();
-
+        return $step3Status === 1;
+        // $profileStep3 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->where('user_other_activities', '!=', '')
+        //     ->where('user_think', '!=', '')
+        //     ->first();
 
         // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
 
-        return [
-            'profileStep4' => $profileStep4,
-            'scheduale' => $scheduale
-        ];
+        // return [
+        //     'profileStep3' => $profileStep3,
+        //     'existingImage' => $existingImage
+        // ];
+    }
+    private function Checkerstep4($id)
+    {
+        $step4Status = DB::table('tbl_complete_step')
+            ->where('user_profile_id', $id)
+            ->value('step4_status');
+
+        return $step4Status === 1;
+        // $profileStep4 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->whereNotNull('week_time')
+        //     ->whereNotNull('speak_language')
+        //     ->first();
+
+        // $scheduale = DB::table('tbl_item_user')
+        //     ->where('user_id', $id)
+        //     ->where('item_type_id', 11)
+        //     ->first();
+
+
+        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
+
+        // return [
+        //     'profileStep4' => $profileStep4,
+        //     'scheduale' => $scheduale
+        // ];
+    }
+    private function Checkerstep6($id)
+    {
+        $step6Status = DB::table('tbl_complete_step')
+            ->where('user_profile_id', $id)
+            ->value('step6_status');
+
+        return $step6Status === 1;
+        // $profileStep4 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->whereNotNull('week_time')
+        //     ->whereNotNull('speak_language')
+        //     ->first();
+
+        // $scheduale = DB::table('tbl_item_user')
+        //     ->where('user_id', $id)
+        //     ->where('item_type_id', 11)
+        //     ->first();
+
+
+        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
+
+        // return [
+        //     'profileStep4' => $profileStep4,
+        //     'scheduale' => $scheduale
+        // ];
+    }
+    private function Checkerstep5($id)
+    {
+        $step5Status = DB::table('tbl_complete_step')
+            ->where('user_profile_id', $id)
+            ->value('step5_status');
+
+        return $step5Status === 1;
+        // $profileStep4 = DB::table('tbl_user_profile')
+        //     ->where('user_profile_id', $id)
+        //     ->whereNotNull('week_time')
+        //     ->whereNotNull('speak_language')
+        //     ->first();
+
+        // $scheduale = DB::table('tbl_item_user')
+        //     ->where('user_id', $id)
+        //     ->where('item_type_id', 11)
+        //     ->first();
+
+
+        // // $existingImage = DB::table('tbl_image')->where('user_id', $id)->first();
+
+        // return [
+        //     'profileStep4' => $profileStep4,
+        //     'scheduale' => $scheduale
+        // ];
     }
     public function step1(Request $request)
     {
@@ -395,7 +504,7 @@ class UserController extends Controller
             ]);
 
 
-            DB::table('tbl_complete_step')
+        DB::table('tbl_complete_step')
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step1_status' => 1]);
         return redirect()->route('dashboard');
