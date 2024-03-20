@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticateSessionUser
 {
@@ -17,9 +18,14 @@ class AuthenticateSessionUser
     public function handle(Request $request, Closure $next)
     {
         // Check if the user is authenticated in the session
-        if (!session()->has('user')) {
-            // User is not authenticated, redirect to login page
-            return redirect()->route('reading-portal-register');
+        if (!session()->has('id')) {
+            return redirect()->route('reading-portal-register')->with('error', 'User does not exist.');
+        }
+        $userId = $request->session()->get('id');
+
+        $registeredUser = DB::table('tbl_user')->where('user_id', $userId)->first();
+        if (!$registeredUser) {
+            return redirect()->route('reading-portal-register')->with('error', 'User does not exist.');
         }
 
         // User is authenticated, proceed with the request

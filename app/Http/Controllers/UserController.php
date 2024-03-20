@@ -204,14 +204,17 @@ class UserController extends Controller
             ->where('user_password', $password)
             ->first();
 
-        session(['user' => $user]);
-        session(['id' => $user->user_id]);
-
-        return redirect()->route('main-dashboard');
+            if($user){
+                session(['user' => $user]);
+                session(['id' => $user->user_id]);
+                return redirect()->route('main-dashboard');
+            }else{
+                return redirect()->back()->with('error', 'User does not exist.');
+            }
     }
     public function our_kids_logout()
     {
-        Session::forget('user');
+        Session::forget('id');
         return redirect()->route('reading-portal-register');
     }
     public function dashboard()
