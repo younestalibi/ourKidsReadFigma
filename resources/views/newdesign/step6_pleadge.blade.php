@@ -4,7 +4,7 @@
 @if(session('error'))
 <script>
     Swal.fire({
-        title: 'Error!',
+        title: 'Wrong Signatrue!',
         text: @json(session('error')),
         icon: 'error',
         confirmButtonText: 'OK'

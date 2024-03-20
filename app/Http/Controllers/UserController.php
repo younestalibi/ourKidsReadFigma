@@ -12,7 +12,6 @@ class UserController extends Controller
 {
     public function our_kids_register(Request $request, User $userModel)
     {
-
         error_reporting(0);
         if ($request->isMethod('get')) {
             return view('newdesign.reading_portal');
@@ -110,6 +109,7 @@ class UserController extends Controller
 
                     $registeredUser = DB::table('tbl_user')->where('user_id', $last_id)->first();
                     session(['user' => $registeredUser]);
+                    session(['id' => $last_id]);
                 }
 
                 session()->flash('flash_msg_type', 'success');
@@ -125,17 +125,17 @@ class UserController extends Controller
                 ];
 
 
-                DB::table('tbl_complete_step')->insert([
-                    'user_profile_id' => $last_id, // Assuming $id contains the user_profile_id
-                    'step1_status' => 0,
-                    'step2_status' => 0,
-                    'step3_status' => 0,
-                    'step4_status' => 0,
-                    'step5_status' => 0,
-                    'step6_status' => 0,
-                    'last_updated_at'=>now(),
+                // DB::table('tbl_complete_step')->insert([
+                //     'user_profile_id' => $last_id, // Assuming $id contains the user_profile_id
+                //     'step1_status' => 0,
+                //     'step2_status' => 0,
+                //     'step3_status' => 0,
+                //     'step4_status' => 0,
+                //     'step5_status' => 0,
+                //     'step6_status' => 0,
+                //     'last_updated_at' => now(),
 
-                ]);
+                // ]);
                 $user = DB::table('tbl_user')
                     ->where('user_email', $data1['user_email'])
                     ->where('user_password', $data1['user_password'])
@@ -143,7 +143,7 @@ class UserController extends Controller
 
                 session(['user' => $user]);
 
-                return redirect()->route('dashboard');
+                return redirect()->route('main-dashboard');
 
                 return Redirect::route('reading-portal-login')->with([
                     'email' => $credentials['user_email'],
@@ -205,8 +205,9 @@ class UserController extends Controller
             ->first();
 
         session(['user' => $user]);
+        session(['id' => $user->user_id]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('main-dashboard');
     }
     public function our_kids_logout()
     {
@@ -222,7 +223,8 @@ class UserController extends Controller
         $step4 = 'default';
         $step5 = 'default';
         $step6 = 'default';
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $id = $user->user_id;
 
         if ($this->Checkerstep1($id)) {
@@ -261,13 +263,12 @@ class UserController extends Controller
                 $step3 == 'finished' && $step4 == 'finished' &&
                 $step5 == 'finished' && $step6 == 'finished'
             ) {
-                echo ('dashboard page still working on it');
-                exit;
+
+                return redirect()->route('old-dashboard');
             }
             return view('newdesign.home', compact('user', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
         } else {
-            echo ('user not found');
-            exit;
+            return redirect()->route('reading-portal-register');
         }
     }
     private function Checkerstep1($id)
@@ -320,7 +321,9 @@ class UserController extends Controller
     }
     public function step1(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+
         $profile = DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
             ->first();
@@ -329,11 +332,13 @@ class UserController extends Controller
 
         // Retrieve all records from tbl_country
         $countries = DB::table('tbl_country')->get();
+
         return view('newdesign.step1_profile', compact('user', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         $id = $user->user_id;
         $inputs = $request->validate([
@@ -342,6 +347,7 @@ class UserController extends Controller
             'last_name' => 'required|string',
             'parent_first_name' => 'required|string',
             'student_last_name' => 'required|string',
+            'student_first_name' => 'required|string',
             'parent_last_name' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
@@ -360,7 +366,7 @@ class UserController extends Controller
                 'user_email' => $inputs['email'],
                 'parent_fname' => $inputs['parent_first_name'],
                 'parent_lname' => $inputs['parent_last_name'],
-                'student_fname' => $inputs['first_name'],
+                'student_fname' => $inputs['student_first_name'],
                 'student_lname' => $inputs['student_last_name'],
                 'user_name_first' => $inputs['first_name'],
                 'user_name_last' => $inputs['last_name'],
@@ -381,22 +387,51 @@ class UserController extends Controller
 
 
 
-        DB::table('tbl_complete_step')
-            ->where('user_profile_id', $id) // Assuming you have a user_id column in tbl_complete_step
-            ->update(['step1_status' => 1]);
+        // DB::table('tbl_complete_step')
+        //     ->where('user_profile_id', $id) // Assuming you have a user_id column in tbl_complete_step
+        //     ->update(['step1_status' => 1]);
+        // Check if a record exists for the given user_profile_id
+        $existingRecord = DB::table('tbl_complete_step')
+            ->where('user_profile_id', $id)
+            ->first();
+
+        if ($existingRecord) {
+            // Update the existing record
+            DB::table('tbl_complete_step')
+                ->where('user_profile_id', $id)
+                ->update([
+                    'step1_status' => 1,
+                    'last_updated_at' => now(),
+                ]);
+        } else {
+            // Insert a new record
+            DB::table('tbl_complete_step')->insert([
+                'user_profile_id' => $id,
+                'step1_status' => 1,
+                'step2_status' => 0,
+                'step3_status' => 0,
+                'step4_status' => 0,
+                'step5_status' => 0,
+                'step6_status' => 0,
+                'last_updated_at' => now(),
+            ]);
+        }
+
 
         return redirect()->route('second-step');
     }
 
     public function step2(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         return view('newdesign.step2_training', compact('user'));
     }
     public function updateStep2(Request $request)
     {
         $videoId = $request->videoId;
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         // return response()->json(['success' => $videoId]);
 
         switch ($videoId) {
@@ -433,7 +468,8 @@ class UserController extends Controller
 
     public function step3(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $profile = DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
             ->first();
@@ -448,7 +484,8 @@ class UserController extends Controller
             'user_think' => 'required',
         ]);
 
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         // Delete the existing picture if it exists
         $existingImage = DB::table('tbl_image')->where('user_id', $user->user_id)->first();
@@ -488,7 +525,8 @@ class UserController extends Controller
     }
     public function step4(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $profile = DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
             ->first();
@@ -524,7 +562,8 @@ class UserController extends Controller
             'scheduale' => 'nullable|array',
         ]);
 
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         // Update week time if present in the request
         if ($request->has('week_time')) {
@@ -571,13 +610,15 @@ class UserController extends Controller
     }
     public function step5(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         return view('newdesign.step5_responsibilites', compact('user'));
     }
     public function updateStep5(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         DB::table('tbl_complete_step')
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step5_status' => 1]);
@@ -586,7 +627,8 @@ class UserController extends Controller
     }
     public function step6(Request $request)
     {
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         return view('newdesign.step6_pleadge', compact('user'));
     }
@@ -600,7 +642,8 @@ class UserController extends Controller
         $signature = $request->input('signature');
 
         // Get the user ID
-        $user = session('user');
+        // $user = session('user');
+        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $userId = $user->user_id;
 
         // Retrieve the user's first name and last name from the database
@@ -625,6 +668,6 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step6_status' => 1]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('main-dashboard');
     }
 }

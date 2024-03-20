@@ -21,7 +21,10 @@ Route::group(['prefix' => 'reading-portal'], function () {
     
     Route::middleware(['auth.session.user'])->group(function () {
         Route::post('/logout', [UserController::class, 'our_kids_logout'])->name('reading-portal-logout');
-        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('main-dashboard');
+        Route::get('/app/dashboard',function(){
+            return view('newdesign.dashboard');
+        })->name('old-dashboard');
 
         Route::get('/dashboard/step1', [UserController::class, 'step1'])->name('first-step');
         Route::post('/dashboard/step1/update', [UserController::class, 'updateStep1'])->name('first-step-update');

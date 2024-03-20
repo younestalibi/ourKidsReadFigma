@@ -64,8 +64,8 @@
                 </div>
                 <!-- end input -->
                 <div class="input-style-1">
-                    <input name='first_name' type="text" value="{{$user->student_fname}}" placeholder="Student first name" />
-                    @error('first_name')
+                    <input name='student_first_name' type="text" value="{{$user->student_fname}}" placeholder="Student first name" />
+                    @error('student_first_name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

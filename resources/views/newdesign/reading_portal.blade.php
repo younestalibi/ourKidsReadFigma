@@ -380,7 +380,7 @@
                             </form>
 
 
-                            {{--<form action="{{ route('reading-portal-register') }}" id="registration_form" method="post">
+                            <form action="{{ route('reading-portal-register') }}" id="registration_form" method="post">
 							@csrf
 							<header class="form__head">
 								<h4>Register to Participate in the OKR Reading Buddy Program!</h4>
@@ -403,14 +403,14 @@
 									<label for="field-okr_student" class="form__label">I am an ...</label>
 
 									<div class="form__controls">
-										<div class="">
+										{{--<div class="">
 
 											<input type="radio" name="okr_student" id="ess" value="1" {{ optional($data1)['okr_student'] && old('okr_student', optional($data1)['okr_student']) == 1 ? 'checked' : '' }}>
 
 
 											<label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Elementary School Student</label>
 
-										</div>
+										</div>--}}
 
 										<div class="">
 
@@ -645,7 +645,7 @@
 
 
 
-						</form>--}}
+						</form>
 
 
 

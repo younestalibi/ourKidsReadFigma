@@ -106,7 +106,8 @@
           <div class="row d-flex justify-content-center align-items-center">
             <div class=" d-flex justify-content-center col-md-4">
               <div class="image ">
-                <img class="rounded-circle" src="https://s3-alpha-sig.figma.com/img/66b2/132a/13e8d368acee97c5f223fc6662b5b1f2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OO7vJXxG18mkBKD60No-2IiJ0Qs3QsM6SN~ni6SBfrL1f1pwm7XP-g545jai3jerANf7YmrWyPju3BsdiklbDvTdv7AirvM-uH01fwCe-FfIO4vEmTpIhBDxEEYiMJG3hMTR-Zj2IlsfXxJZm4~ceaVbGrnjklG5sCjdt7ybBihki4y7J3ZqU1qA64ojTTiOuIjIqe5~bOrnKGj7FPcCDcQO21Z5ry6UwDtt6j3VuSFyUV-USUenK1gvBWZQzx9gJhavzGMP56cqUVUlDiuvuXS4VQypPJKRrmycIQGAb7if0Ho6h1~me~QmpCpOrQpbEuDoYBBwWH9p18giBx9qjQ__" alt="" />
+                <img class="rounded" src="https://www.ourkidsreadinc.org/myimg/dashboard/avatar.webp" alt="" />
+                <!--<img class="rounded-circle" src="https://s3-alpha-sig.figma.com/img/66b2/132a/13e8d368acee97c5f223fc6662b5b1f2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OO7vJXxG18mkBKD60No-2IiJ0Qs3QsM6SN~ni6SBfrL1f1pwm7XP-g545jai3jerANf7YmrWyPju3BsdiklbDvTdv7AirvM-uH01fwCe-FfIO4vEmTpIhBDxEEYiMJG3hMTR-Zj2IlsfXxJZm4~ceaVbGrnjklG5sCjdt7ybBihki4y7J3ZqU1qA64ojTTiOuIjIqe5~bOrnKGj7FPcCDcQO21Z5ry6UwDtt6j3VuSFyUV-USUenK1gvBWZQzx9gJhavzGMP56cqUVUlDiuvuXS4VQypPJKRrmycIQGAb7if0Ho6h1~me~QmpCpOrQpbEuDoYBBwWH9p18giBx9qjQ__" alt="" />-->
               </div>
             </div>
             <div class=" d-flex justify-content-center col-md-8">
