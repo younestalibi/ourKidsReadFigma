@@ -133,9 +133,18 @@
     @if(session('error'))
     <script>
         Swal.fire({
-            title: 'User Not Found!',
+            title: 'Email Failed!',
             text: @json(session('error')),
             icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @elseif(session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: @json(session('success')),
+            icon: 'success',
             confirmButtonText: 'OK'
         });
     </script>
@@ -346,50 +355,25 @@
 
 
                             <!--newslettersignup_info-->
-                            <form action="{{route('reading-portal-login')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('reset-password')}}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form__body">
                                     <div class="form__row">
-                                        <div class="form__row">
-
-                                            <label for="field-1#" class="form__label">Email</label>
-
-                                            <div class="form__controls">
-
-                                                <input type="email" class="form__field" name="email" value="" required>
-                                            </div><!-- /.form__controls -->
-                                            <!-- /.form__col -->
-                                        </div><!-- /.form__cols -->
+                                        <label for="field-1#" class="form__label">Email</label>
+                                        <div class="form__controls">
+                                            <input type="email" class="form__field" name="email" value="{{ old('email') }}" required>
+                                            @if ($errors->has('email'))
+                                            <span class="error">{{ $errors->first('email') }}</span>
+                                            @endif
+                                        </div><!-- /.form__controls -->
                                     </div><!-- /.form__row -->
 
+                                    <div class="form__actions" style="display: flex; justify-content: flex-end">
+                                        <button type="submit" class="form__btn btn btn--secondary">
+                                            Reset Password
+                                        </button>
+                                    </div>
 
-
-                                    <div class="form__row">
-                                        <div class="form__row">
-                                            <label for="field-5#" class="form__label form__label--textarea">Password</label>
-
-                                            <div class="form__controls">
-                                                <input type="password" class="form__field" name="password" id="field-4#" value="" required>
-                                            </div><!-- /.form__controls -->
-
-                                        </div><!-- /.form__row -->
-                                    </div><!-- /.form__row -->
-                                </div><!-- /.form__body -->
-
-                                <div class="forget" style="margin-top: 10px">
-                                    <a href="{{ route('reset-password-form') }}">
-                                        Forget Password
-                                    </a>
-                                </div>
-
-                                <div class="form__actions" style="display: flex; justify-content: flex-end">
-                                    <button type="submit" class="form__btn btn btn--secondary">
-                                        Submit
-                                    </button>
-                                </div>
-                                <div>
-                                    <button><a href="{{route('reading-portal-register-form')}}">Create an account</a></button>
-                                </div>
                             </form>
 
 

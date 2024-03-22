@@ -3,196 +3,212 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
+
+    public function our_kids_login_form()
+    {
+        return view('newdesign.reading_portal');
+    }
+    public function our_kids_register_form()
+    {
+        error_reporting(0);
+        return view('newdesign.reading_portal_register');
+    }
+
     public function our_kids_register(Request $request, User $userModel)
     {
         error_reporting(0);
-        if ($request->isMethod('get')) {
-            return view('newdesign.reading_portal');
-        } else {
+        // if ($request->isMethod('get')) {
+        //     return view('newdesign.reading_portal');
+        // } 
+        // else {
 
-            $allFieldsFilled = true;
+        $allFieldsFilled = true;
 
-            $fieldsToCheck = ['fname', 'lname', 'email', 'password', 'cpassword', 'zip'];
+        $fieldsToCheck = ['fname', 'lname', 'email', 'password', 'cpassword', 'zip'];
 
-            foreach ($fieldsToCheck as $field) {
-                if (!$request->filled($field)) {
-                    $allFieldsFilled = false;
-                    break;
-                }
+        foreach ($fieldsToCheck as $field) {
+            if (!$request->filled($field)) {
+                $allFieldsFilled = false;
+                break;
             }
+        }
 
-            if ($allFieldsFilled) {
-                $password = $request->input('password');
-                $cpassword = $request->input('cpassword');
-
-
-                $item_types = $userModel->getItemByTypeName('tbl_item_type');
+        if ($allFieldsFilled) {
+            $password = $request->input('password');
+            $cpassword = $request->input('cpassword');
 
 
-                $data1['item_type_id'] = $item_types[0]['item_type_id'];
+            $item_types = $userModel->getItemByTypeName('tbl_item_type');
 
+
+            $data1['item_type_id'] = $item_types[0]['item_type_id'];
+
+            $data1['user_username'] = $request->input('fname') . '' . $request->input('lname');
+            $data1['user_email'] = $request->input('email');
+            $data1['user_password'] = $request->input('password');
+            $data1['user_name_first'] = $request->input('fname');
+            $data1['user_name_last'] = $request->input('lname');
+
+
+
+            $email_exists = $userModel->checkEmailExists($data1['user_email']);
+
+            if ($email_exists) {
                 $data1['user_username'] = $request->input('fname') . '' . $request->input('lname');
                 $data1['user_email'] = $request->input('email');
                 $data1['user_password'] = $request->input('password');
                 $data1['user_name_first'] = $request->input('fname');
                 $data1['user_name_last'] = $request->input('lname');
+                $data1['user_profile_address_zip'] = $request->input('zip');
+                $data1['okr_student'] = $request->input('okr_student');
 
-
-
-                $email_exists = $userModel->checkEmailExists($data1['user_email']);
-
-                if ($email_exists) {
-                    $data1['user_username'] = $request->input('fname') . '' . $request->input('lname');
-                    $data1['user_email'] = $request->input('email');
-                    $data1['user_password'] = $request->input('password');
-                    $data1['user_name_first'] = $request->input('fname');
-                    $data1['user_name_last'] = $request->input('lname');
-                    $data1['user_profile_address_zip'] = $request->input('zip');
-                    $data1['okr_student'] = $request->input('okr_student');
-
-                    return view('newdesign.reading_portal', [
-                        'error_message_email' => 'Email already exists!',
-                        'data1' => $data1,
-                    ]);
-                }
-
-
-                $last_id = $userModel->storedata($data1, 'tbl_user');
-
-
-                $item_types_profile = $userModel->getItemTypesProfile('tbl_item_type');
-
-                if ($last_id) {
-                    $data['item_type_id'] = $item_types_profile[0]['item_type_id'];
-                    $data['user_profile_id'] = $last_id;
-                    $data['user_profile_address_zip'] = $request->input('zip');
-                    $data['employer_id'] = 0;
-                    $data['user_other_activities'] = '';
-                    $data['video_1_completed'] = 0;
-                    $data['video_2_completed'] = 0;
-                    $data['video_3_completed'] = 0;
-                    $data['video_4_completed'] = 0;
-                    $data['user_think'] = '';
-                    $data['vdo_check'] = '';
-
-
-                    $item_types_profile = $userModel->storedata($data, 'tbl_user_profile');
-
-
-                    $data2['item_type_id'] = $item_types_profile[0]['item_type_id'];
-                    $data2['user_id'] = $last_id;
-                    $data2['item_id'] = $last_id;
-
-                    $userModel->storedata($data2, 'tbl_item_user');
-
-
-                    $student = $request->input('okr_student');
-                    $item_user_type = $userModel->getItemUserType('tbl_item_type');
-
-                    $data2['item_type_id'] = $item_user_type[0]['item_type_id'];
-                    $data2['user_id'] = $last_id;
-                    $data2['item_id'] = $student;
-
-                    $userModel->storedata($data2, 'tbl_item_user');
-
-                    $data3['user_profile_id'] = $last_id;
-                    $data3['complete_onboarding_process'] = '';
-                    $data3['signature'] = '';
-                    $userModel->storedata($data3, 'tbl_complete_profile');
-
-                    $registeredUser = DB::table('tbl_user')->where('user_id', $last_id)->first();
-                    session(['user' => $registeredUser]);
-                    session(['id' => $last_id]);
-                }
-
-                session()->flash('flash_msg_type', 'success');
-                session()->flash('flash_msg_text', 'Successfully registered');
-
-                // Login the user
-                //$user_data = $userModel->loginCredentials('tbl_user',$data1['user_email'], $data1['user_password']);
-
-
-                $credentials = [
-                    'user_email' => $data1['user_email'],
-                    'user_password' => $data1['user_password'],
-                ];
-
-
-                // DB::table('tbl_complete_step')->insert([
-                //     'user_profile_id' => $last_id, // Assuming $id contains the user_profile_id
-                //     'step1_status' => 0,
-                //     'step2_status' => 0,
-                //     'step3_status' => 0,
-                //     'step4_status' => 0,
-                //     'step5_status' => 0,
-                //     'step6_status' => 0,
-                //     'last_updated_at' => now(),
-
-                // ]);
-                $user = DB::table('tbl_user')
-                    ->where('user_email', $data1['user_email'])
-                    ->where('user_password', $data1['user_password'])
-                    ->first();
-
-                session(['user' => $user]);
-
-                return redirect()->route('main-dashboard');
-
-                return Redirect::route('reading-portal-login')->with([
-                    'email' => $credentials['user_email'],
-                    'password' => $credentials['user_password']
+                return view('newdesign.reading_portal', [
+                    'error_message_email' => 'Email already exists!',
+                    'data1' => $data1,
                 ]);
-
-                $externalLink = 'https://ourkidsreadinc.org/our_kids/ourkids_login?uid=' . $last_id;
-
-                // Redirect to the external link
-                return Redirect::away($externalLink);
-
-                // Send a POST request to the CodeIgniter controller
-                $response = Http::post('https://www.ourkidsreadinc.org/our_kids/static_page/portal/handleLogin', $credentials);
-
-
-                $responseData = $response->json();
-
-
-                return response()->json(['message' => 'Data sent successfully']);
-
-                // if ($user_data) {
-                //     session(['user_id' => $user_data['user_id'], 'user_email' => $user_data['user_email']]);
-
-
-                //  $userId = $user_data['user_id'];
-
-                //     $items = DB::table('tbl_item_user')
-                //         ->select('*')
-                //         ->where('user_id', $userId)
-                //         ->where('item_type_id', 12)
-                //         ->get();
-
-                //     if ($items) {
-                //         $firstRow = $items[0];
-                //         $item_id = $firstRow->item_id;
-
-                //         if ($item_id == 1) {
-                //             return redirect('https://www.ourkidsreadinc.org/our_kids/student_access/student/dashboard');
-                //         }
-                //     }
-
-                //     return redirect()->route('static_page.portal.dashboard');
-                // }
-
-                //return redirect()->route('reading-buddies')->with('success', 'User registered successfully');
-
-
             }
+
+
+            $last_id = $userModel->storedata($data1, 'tbl_user');
+
+
+            $item_types_profile = $userModel->getItemTypesProfile('tbl_item_type');
+
+            if ($last_id) {
+                $data['item_type_id'] = $item_types_profile[0]['item_type_id'];
+                $data['user_profile_id'] = $last_id;
+                $data['user_profile_address_zip'] = $request->input('zip');
+                $data['employer_id'] = 0;
+                $data['user_other_activities'] = '';
+                $data['video_1_completed'] = 0;
+                $data['video_2_completed'] = 0;
+                $data['video_3_completed'] = 0;
+                $data['video_4_completed'] = 0;
+                $data['user_think'] = '';
+                $data['vdo_check'] = '';
+
+
+                $item_types_profile = $userModel->storedata($data, 'tbl_user_profile');
+
+
+                $data2['item_type_id'] = $item_types_profile[0]['item_type_id'];
+                $data2['user_id'] = $last_id;
+                $data2['item_id'] = $last_id;
+
+                $userModel->storedata($data2, 'tbl_item_user');
+
+
+                $student = $request->input('okr_student');
+                $item_user_type = $userModel->getItemUserType('tbl_item_type');
+
+                $data2['item_type_id'] = $item_user_type[0]['item_type_id'];
+                $data2['user_id'] = $last_id;
+                $data2['item_id'] = $student;
+
+                $userModel->storedata($data2, 'tbl_item_user');
+
+                $data3['user_profile_id'] = $last_id;
+                $data3['complete_onboarding_process'] = '';
+                $data3['signature'] = '';
+                $userModel->storedata($data3, 'tbl_complete_profile');
+
+                $registeredUser = DB::table('tbl_user')->where('user_id', $last_id)->first();
+                session(['user' => $registeredUser]);
+                session(['id' => $last_id]);
+            }
+
+            session()->flash('flash_msg_type', 'success');
+            session()->flash('flash_msg_text', 'Successfully registered');
+
+            // Login the user
+            //$user_data = $userModel->loginCredentials('tbl_user',$data1['user_email'], $data1['user_password']);
+
+
+            $credentials = [
+                'user_email' => $data1['user_email'],
+                'user_password' => $data1['user_password'],
+            ];
+
+
+            // DB::table('tbl_complete_step')->insert([
+            //     'user_profile_id' => $last_id, // Assuming $id contains the user_profile_id
+            //     'step1_status' => 0,
+            //     'step2_status' => 0,
+            //     'step3_status' => 0,
+            //     'step4_status' => 0,
+            //     'step5_status' => 0,
+            //     'step6_status' => 0,
+            //     'last_updated_at' => now(),
+
+            // ]);
+            $user = DB::table('tbl_user')
+                ->where('user_email', $data1['user_email'])
+                ->where('user_password', $data1['user_password'])
+                ->first();
+
+            session(['user' => $user]);
+
+            return redirect()->route('home');
+
+            return redirect()->route('main-dashboard');
+
+            return Redirect::route('reading-portal-login')->with([
+                'email' => $credentials['user_email'],
+                'password' => $credentials['user_password']
+            ]);
+
+            $externalLink = 'https://ourkidsreadinc.org/our_kids/ourkids_login?uid=' . $last_id;
+
+            // Redirect to the external link
+            return Redirect::away($externalLink);
+
+            // Send a POST request to the CodeIgniter controller
+            $response = Http::post('https://www.ourkidsreadinc.org/our_kids/static_page/portal/handleLogin', $credentials);
+
+
+            $responseData = $response->json();
+
+
+            return response()->json(['message' => 'Data sent successfully']);
+
+            // if ($user_data) {
+            //     session(['user_id' => $user_data['user_id'], 'user_email' => $user_data['user_email']]);
+
+
+            //  $userId = $user_data['user_id'];
+
+            //     $items = DB::table('tbl_item_user')
+            //         ->select('*')
+            //         ->where('user_id', $userId)
+            //         ->where('item_type_id', 12)
+            //         ->get();
+
+            //     if ($items) {
+            //         $firstRow = $items[0];
+            //         $item_id = $firstRow->item_id;
+
+            //         if ($item_id == 1) {
+            //             return redirect('https://www.ourkidsreadinc.org/our_kids/student_access/student/dashboard');
+            //         }
+            //     }
+
+            //     return redirect()->route('static_page.portal.dashboard');
+            // }
+
+            //return redirect()->route('reading-buddies')->with('success', 'User registered successfully');
+
+
         }
+        // }
     }
     public function our_kids_login(Request $request)
     {
@@ -204,13 +220,15 @@ class UserController extends Controller
             ->where('user_password', $password)
             ->first();
 
-            if($user){
-                session(['user' => $user]);
-                session(['id' => $user->user_id]);
-                return redirect()->route('main-dashboard');
-            }else{
-                return redirect()->back()->with('error', 'User does not exist.');
-            }
+        if ($user) {
+            session(['user' => $user]);
+            session(['id' => $user->user_id]);
+            return redirect()->route('home');
+
+            return redirect()->route('main-dashboard');
+        } else {
+            return redirect()->back()->with('error', 'User does not exist.');
+        }
     }
     public function our_kids_logout()
     {
@@ -261,14 +279,14 @@ class UserController extends Controller
             $step1 = 'current';
         }
         if ($user) {
-            if (
-                $step1 == 'finished' && $step2 == 'finished' &&
-                $step3 == 'finished' && $step4 == 'finished' &&
-                $step5 == 'finished' && $step6 == 'finished'
-            ) {
+            // if (
+            //     $step1 == 'finished' && $step2 == 'finished' &&
+            //     $step3 == 'finished' && $step4 == 'finished' &&
+            //     $step5 == 'finished' && $step6 == 'finished'
+            // ) {
 
-                return redirect()->route('old-dashboard');
-            }
+            //     return redirect()->route('home');
+            // }
             return view('newdesign.home', compact('user', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
         } else {
             return redirect()->route('reading-portal-register');
@@ -671,6 +689,61 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step6_status' => 1]);
 
-        return redirect()->route('main-dashboard');
+        return redirect()->route('home');
+    }
+
+    public function home()
+    {
+        $id = session('id');
+        if ($this->Checkerstep1($id)) {
+            if ($this->Checkerstep2($id)) {
+                if ($this->Checkerstep3($id)) {
+                    if ($this->Checkerstep4($id)) {
+                        if ($this->Checkerstep5($id)) {
+                            if (!$this->Checkerstep6($id)) {
+                                return redirect()->route('main-dashboard');
+                            }
+                        } else {
+                            return redirect()->route('main-dashboard');
+                        }
+                    } else {
+                        return redirect()->route('main-dashboard');
+                    }
+                } else {
+                    return redirect()->route('main-dashboard');
+                }
+            } else {
+                return redirect()->route('main-dashboard');
+            }
+        } else {
+            return redirect()->route('main-dashboard');
+        }
+        return view('newdesign.dashboard');
+    }
+
+
+    public function ResetPassword(Request $request)
+    {
+        $email = $request->input('email');
+
+        $user = DB::table('tbl_user')
+            ->where('user_email', $email)
+            ->whereNotNull('user_email')->first();
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['email' => 'Email address not found.'])->withInput();
+        }
+
+        $password = $user->user_password; // Retrieve the password from the database
+        try {
+            Mail::to($email)->send(new ResetPassword($password));
+            return redirect()->back()->with('success', 'Your password has been sent to your email address.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Email sending failed, try later');
+        }
+
+    }
+    public function ResetPasswordForm(){
+        return view('newdesign.reset_password');
     }
 }

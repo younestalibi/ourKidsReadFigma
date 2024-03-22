@@ -16,15 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'reading-portal'], function () {
-    Route::match(['get', 'post'], '/', [UserController::class, 'our_kids_register'])->name('reading-portal-register');
+    // Route::match(['get', 'post'], '/', [UserController::class, 'our_kids_register'])->name('reading-portal-register');
+    Route::post('/', [UserController::class, 'our_kids_register'])->name('reading-portal-register');
+    Route::get('/register', [UserController::class, 'our_kids_register_form'])->name('reading-portal-register-form');
+    
+    Route::get('/', [UserController::class, 'our_kids_login_form'])->name('reading-portal-login-form');
     Route::post('/login', [UserController::class, 'our_kids_login'])->name('reading-portal-login');
+    
+    Route::post('/reset-password', [UserController::class, 'ResetPassword'])->name('reset-password');
+    Route::get('/reset-password', [UserController::class, 'ResetPasswordForm'])->name('reset-password-form');
     
     Route::middleware(['auth.session.user'])->group(function () {
         Route::post('/logout', [UserController::class, 'our_kids_logout'])->name('reading-portal-logout');
         Route::get('/dashboard', [UserController::class, 'dashboard'])->name('main-dashboard');
-        Route::get('/app/dashboard',function(){
-            return view('newdesign.dashboard');
-        })->name('old-dashboard');
+        Route::get('/app/dashboard',[UserController::class,'home'])->name('home');
 
         Route::get('/dashboard/step1', [UserController::class, 'step1'])->name('first-step');
         Route::post('/dashboard/step1/update', [UserController::class, 'updateStep1'])->name('first-step-update');
@@ -43,5 +48,6 @@ Route::group(['prefix' => 'reading-portal'], function () {
 
         Route::get('/dashboard/step6', [UserController::class, 'step6'])->name('sixth-step');
         Route::post('/dashboard/step6/update', [UserController::class, 'updateStep6'])->name('sixth-step-update');
+
     });
 });

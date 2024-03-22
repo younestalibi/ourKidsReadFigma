@@ -54,7 +54,16 @@
             <div class="list-icon">
               <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
             </div>
-            <div class="list-text"><a href="">Home</a></div>
+            <div class="list-text"><a href="{{route('home')}}">Home</a></div>
+          </div>
+        </li>
+        <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
+
+          <div class="d-flex align-items-center  w-100">
+            <div class="list-icon">
+              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="onBoarding">
+            </div>
+            <div class="list-text"><a href="{{route('main-dashboard')}}">OnBoarding</a></div>
           </div>
         </li>
         <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
