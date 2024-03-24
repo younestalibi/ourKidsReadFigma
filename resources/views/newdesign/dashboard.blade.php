@@ -26,10 +26,12 @@
 
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
         html,
         body {
             font-family: Montserrat;
-            height: 100vh;
+            /* height: 100vh; */
             background-image: url("https://www.ourkidsreadinc.org/myimg/dashboard/bg.webp");
             background-size: cover;
             background-color: inherit !important;
@@ -72,6 +74,9 @@
         ul li:hover {
             background: #C4E8E0;
             color: #004750;
+        }
+        ul .row:hover {
+            background: none;
         }
 
         .menu span {
@@ -309,9 +314,23 @@
         .bi-power:hover {
             color: red;
         }
-        a{
-            color:white;
+
+        a {
+            color: white;
             text-decoration: none;
+        }
+
+        .image {
+            /* width: 80px;
+  height: 80px; */
+            /* margin: 20px; */
+        }
+
+        .image img {
+            /* border-radius: 50% !important; */
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
         }
     </style>
 
@@ -330,6 +349,24 @@
                 <!--</div>-->
                 <div class="menu">
                     <ul>
+                        <li class="row gap-10">
+                            <div class="image d-flex ">
+                                @if ($image)
+                                @if ($image->image_path)
+                                <img class="rounded-circle border border-light" src="{{ $image->image_path }}" alt="" />
+                                @else
+                                <img class="rounded-circle border border-light" src="https://cdn.vectorstock.com/i/preview-1x/76/27/default-profile-picture-avatar-photo-placeholder-vector-30247627.webp" alt="" />
+                                @endif
+                                @else
+                                <img class="rounded-circle border border-light" src="https://cdn.vectorstock.com/i/preview-1x/76/27/default-profile-picture-avatar-photo-placeholder-vector-30247627.webp" alt="" />
+                                @endif
+
+                                <div class="p-3 d-flex text-sm-left text-md-left justify-content-center flex-column ">
+                                    <b class="text-white">{{ $user->user_username }}</b>
+                                    <div class="text-light">{{ $user->user_email }}</div>
+                                </div>
+                            </div>
+                        </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png">
                                 <img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" />

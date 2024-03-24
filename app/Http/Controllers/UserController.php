@@ -247,6 +247,11 @@ class UserController extends Controller
         // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $id = $user->user_id;
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $id)
+            ->first();
 
         if ($this->Checkerstep1($id)) {
             $step1 = 'finished';
@@ -287,7 +292,7 @@ class UserController extends Controller
 
             //     return redirect()->route('home');
             // }
-            return view('newdesign.home', compact('user', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
+            return view('newdesign.home', compact('user', 'image', 'step1', 'step2', 'step3', 'step4', 'step5', 'step6'));
         } else {
             return redirect()->route('reading-portal-register');
         }
@@ -354,7 +359,13 @@ class UserController extends Controller
         // Retrieve all records from tbl_country
         $countries = DB::table('tbl_country')->get();
 
-        return view('newdesign.step1_profile', compact('user', 'profile', 'employers', 'countries'));
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
+
+        return view('newdesign.step1_profile', compact('user', 'image', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
@@ -446,7 +457,12 @@ class UserController extends Controller
     {
         // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
-        return view('newdesign.step2_training', compact('user'));
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
+        return view('newdesign.step2_training', compact('user', 'image'));
     }
     public function updateStep2(Request $request)
     {
@@ -495,7 +511,12 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id)
             ->first();
 
-        return view('newdesign.step3_image', compact('user', 'profile'));
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
+        return view('newdesign.step3_image', compact('user', 'profile', 'image'));
     }
     public function updateStep3(Request $request)
     {
@@ -552,7 +573,11 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id)
             ->first();
         $scheduale = DB::table('tbl_sched_availability')->get();
-
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
         $selectedItemIds = DB::table('tbl_item_user')
             ->where('user_id', $user->user_id)
             ->where('item_type_id', 11)
@@ -572,7 +597,7 @@ class UserController extends Controller
             $days[$day][] = $item;
         }
 
-        return view('newdesign.step4_availability', compact('user', 'profile', 'selectedItemIds', 'days'));
+        return view('newdesign.step4_availability', compact('user', 'image', 'profile', 'selectedItemIds', 'days'));
     }
     public function updateStep4(Request $request)
     {
@@ -633,8 +658,13 @@ class UserController extends Controller
     {
         // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
 
-        return view('newdesign.step5_responsibilites', compact('user'));
+        return view('newdesign.step5_responsibilites', compact('user', 'image'));
     }
     public function updateStep5(Request $request)
     {
@@ -650,8 +680,12 @@ class UserController extends Controller
     {
         // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
-
-        return view('newdesign.step6_pleadge', compact('user'));
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $user->user_id)
+            ->first();
+        return view('newdesign.step6_pleadge', compact('user', 'image'));
     }
     public function updateStep6(Request $request)
     {
@@ -695,6 +729,13 @@ class UserController extends Controller
     public function home()
     {
         $id = session('id');
+        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $id)
+            ->first();
         if ($this->Checkerstep1($id)) {
             if ($this->Checkerstep2($id)) {
                 if ($this->Checkerstep3($id)) {
@@ -718,7 +759,7 @@ class UserController extends Controller
         } else {
             return redirect()->route('main-dashboard');
         }
-        return view('newdesign.dashboard');
+        return view('newdesign.dashboard',compact('image','user'));
     }
 
 
@@ -741,9 +782,9 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Email sending failed, try later');
         }
-
     }
-    public function ResetPasswordForm(){
+    public function ResetPasswordForm()
+    {
         return view('newdesign.reset_password');
     }
 }

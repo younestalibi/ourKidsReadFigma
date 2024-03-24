@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="{{asset('assets/images/favicon.svg')}}" type="image/x-icon" />
-  <title>Blank Page</title>
+  <title>Our Kids Read: Sparking the Joy of Reading in Low-Income Communities</title>
 
   <!-- ========== All CSS files linkup ========= -->
   <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/css/lineicons.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/css/materialdesignicons.min.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/css/fullcalendar.css')}}" />
-  <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/css/main.css?v=').time()}}" />
   <!--my style-->
-  <link rel="stylesheet" href="{{asset('assets/css/index.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/css/index.css?v=').time()}}" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -41,7 +41,7 @@
     <div class=" pb-3 fw-bold text-white  fs-3  p-3 text-center justify-content-center">
       <div class="jusitfy-content-center d-flex ">
         <!--<i class="bi bi-list list-icon "></i>-->
-        <b class="mx-3">{{ $user->user_name_first . ' ' . $user->user_name_last }}</b>
+        {{-- <b class="mx-3">{{ $user->user_name_first . ' ' . $user->user_name_last }}</b> --}}
         <!--<b class="mx-3">Menu</b>-->
 
       </div>
@@ -49,12 +49,31 @@
     <nav class="sidebar-nav">
       <ul>
 
+        <li class="row gap-10 image-container">
+          <div class="image d-flex ">
+            @if ($image)
+            @if ($image->image_path)
+            <img class="rounded-circle border border-light" src="{{ $image->image_path }}" alt="" />
+            @else
+            <img class="rounded-circle border border-light" src="https://cdn.vectorstock.com/i/preview-1x/76/27/default-profile-picture-avatar-photo-placeholder-vector-30247627.webp" alt="" />
+            @endif
+            @else
+            <img class="rounded-circle border border-light" src="https://cdn.vectorstock.com/i/preview-1x/76/27/default-profile-picture-avatar-photo-placeholder-vector-30247627.webp" alt="" />
+            @endif
+
+            <div class="p-3 d-flex text-sm-left text-md-left justify-content-center flex-column ">
+              <b class="text-white">{{ $user->user_username }}</b>
+              <div class="text-light">{{ $user->user_email }}</div>
+            </div>
+          </div>
+        </li>
+
         <li class="nav-item d-flex border-secondary justify-content-between p-3">
           <div class="d-flex align-items-center w-100">
             <div class="list-icon">
               <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
             </div>
-            <div class="list-text"><a href="{{route('home')}}">Home</a></div>
+            <div class="list-text"><a href="{{route('home')}}"><b>Home</b></a></div>
           </div>
         </li>
         <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
@@ -145,7 +164,7 @@
 
     <!-- ========== section start ========== -->
     <section class="section">
-    @yield('content')
+      @yield('content')
     </section>
     <!-- ========== section end ========== -->
 

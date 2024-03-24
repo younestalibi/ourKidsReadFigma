@@ -29,7 +29,7 @@
   </div>
   <!-- ========== title-wrapper end ========== -->
   <div class="content-container">
-    <h1 class="timeline-title display-6">ONBOARDING PROCESS</h1>
+    <h1 class="timeline-title display-5">ONBOARDING PROCESS</h1>
     <div class="timeline">
       <div class="tl-container">
         <div class="circle {{ $step1 == 'current' || $step1 == 'finished' ? 'active-circle' : ''}}  d-flex justify-content-center align-items-center">
