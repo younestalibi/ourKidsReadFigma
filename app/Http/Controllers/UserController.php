@@ -759,7 +759,7 @@ class UserController extends Controller
         } else {
             return redirect()->route('main-dashboard');
         }
-        return view('newdesign.dashboard',compact('image','user'));
+        return view('newdesign.dashboard', compact('image', 'user'));
     }
 
 
@@ -786,5 +786,62 @@ class UserController extends Controller
     public function ResetPasswordForm()
     {
         return view('newdesign.reset_password');
+    }
+
+    public function training()
+    {
+        $id = session('id');
+        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $id)
+            ->first();
+        return view('newdesign.training', compact('user', 'image'));
+    }
+    public function trainingVideo(Request $request, $id)
+    {
+        $data = [
+            1 => [
+                'video' => 'https://www.ourkidsreadinc.org/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
+                'title' => '1. READING BUDDIES WELCOME!',
+                'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
+            ],
+            2 => [
+                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
+                'title' => '2. INTRODUCTION TO THE PROGRAM',
+                'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
+            ],
+            3 => [
+                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
+                'title' => '3. DIFFEENT STYLES OF READING',
+                'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
+            ],
+            4 => [
+                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_getting_to_know_your_student3.mp4',
+                'title' => '4. UNDERSTANDING YOUR BUDDY’S READING PREFERENCES',
+                'description' => 'The first time you read with your student, the absolute most important objective (after developing rapport) is to understand your students interests. This will, in turn, help you identify books the she/he will enjoy.'
+            ]
+        ];
+
+    
+        if (!array_key_exists($id, $data)) {
+            return redirect()->route('training');
+        }
+        $video = $data[$id]['video'];
+        $description = $data[$id]['description'];
+        $title = $data[$id]['title'];
+
+
+        $id = session('id');
+        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+
+        $image = DB::table('tbl_image')
+            ->select('image_path')
+            ->where('item_type_id', 17)
+            ->where('user_id', $id)
+            ->first();
+        return view('newdesign.training_video', compact('user', 'image', 'video', 'title', 'description'));
     }
 }

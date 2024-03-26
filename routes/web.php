@@ -49,5 +49,8 @@ Route::group(['prefix' => 'reading-portal'], function () {
         Route::get('/dashboard/step6', [UserController::class, 'step6'])->name('sixth-step');
         Route::post('/dashboard/step6/update', [UserController::class, 'updateStep6'])->name('sixth-step-update');
 
+        Route::get('/dashboard/training', [UserController::class, 'training'])->name('training');
+        Route::get('/dashboard/training/video/{id}', [UserController::class, 'trainingVideo'])->name('training-video');
+
     });
 });

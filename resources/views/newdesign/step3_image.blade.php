@@ -1,132 +1,105 @@
 @extends('newdesign.layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <!-- ========== title-wrapper start ========== -->
-    <div class="title-wrapper pt-30">
-        <div class="row align-items-center">
-            <div class="col-12 d-flex justify-content-between align-items-center">
-                <div class="menu-toggle-btn mr-15 d-flex align-items-center">
-                    <button id="menu-toggle" class="main-btn rounded-circle primary-btn btn-hover">
-                        <i class="lni lni-chevron-left me-2"></i>
-                    </button>
-                    <h1 class="title-header">READING SESSION</h1>
-                </div>
-                <form action="{{route('reading-portal-logout')}}" method="post">
-                    @csrf
-                    <button type="submit" style="background: none; border: none;">
-                        <i class="bi bi-power fs-1 rounded-circle"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <div class="mt-3 text-light title-header title">
-                    <h3>Pending Student Assignment</h3>
-                </div>
+
+<form action="{{route('third-step-update')}}" method="post" enctype="multipart/form-data">
+    @csrf
+
+    <div class="row">
+        <div class="col-12 d-flex ">
+            <div class="breadcrumb-wrapper">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#0">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/firstpage.html">Onboarding Process</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            For Your Student
+                        </li>
+                    </ol>
+                </nav>
             </div>
         </div>
-        <!-- end row -->
     </div>
-    <!-- ========== title-wrapper end ========== -->
-    <form action="{{route('third-step-update')}}" method="post" class="content-container" enctype="multipart/form-data">
-        @csrf
 
-        <div class="row">
-            <div class="col-12 d-flex ">
-                <div class="breadcrumb-wrapper">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="#0">Home</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="/firstpage.html">Onboarding Process</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                For Your Student
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
+
+    <div class="row">
+        <div class="col-15 p-4 px-0">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">STEP 3 OF 6: PROVIDE INFORMATION ABOUT YOURSELF FOR YOUR STUDENT</h4>
             </div>
         </div>
+    </div>
 
 
-        <div class="row">
-            <div class="col-15 p-4 px-0">
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">STEP 3 OF 6: PROVIDE INFORMATION ABOUT YOURSELF FOR YOUR STUDENT</h4>
-                </div>
-            </div>
+    <div class="row align-items-center">
+        <div class="col-12">
+            <h3 class="fw-bold my-3">UPLOAD PHOTO/HEADSHOT</h3>
         </div>
+        <div class="col-sm-12 col-md-6 mb-4">
+            <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+        </div>
+        <div class="button-wrapper col-sm-12 col-md-6">
+            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                <span class="d-sm-block">Upload new photo</span>
+                <i class="bx bx-upload d-block "></i>
+                <input type="file" id="upload" name="picture" class="account-file-input @error('picture') is-invalid @enderror" hidden accept="image/png, image/jpeg" />
+            </label>
+            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                <i class="bx bx-reset d-block "></i>
+                <span class="d-sm-block">Reset</span>
+            </button>
+            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+            @error('picture')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
 
 
-        <div class="row align-items-center">
-            <div class="col-12">
-                <h3 class="fw-bold my-3">UPLOAD PHOTO/HEADSHOT</h3>
-            </div>
-            <div class="col-sm-12 col-md-6 mb-4">
-                <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
-            </div>
-            <div class="button-wrapper col-sm-12 col-md-6">
-                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                    <span class="d-sm-block">Upload new photo</span>
-                    <i class="bx bx-upload d-block "></i>
-                    <input type="file" id="upload" name="picture" class="account-file-input @error('picture') is-invalid @enderror" hidden accept="image/png, image/jpeg" />
+    <div class="row">
+        <div class="col-12">
+            <h3 class="fw-bold my-3">TELL YOUR STUDENT ABOUT YOURSELF</h3>
+        </div>
+        <div class="col-12">
+            <div class="input-style-1">
+                <label for="describe1" class="fw-bold bg-secondary text-white p-2 rounded">
+                    (DESCRIBE YOUR FAMILY, SOME OF YOUR FAVORITE BOOKS, ACTIVITIES, PETS OR OTHER DETAILS ABOUT YOURSELF THAT YOU FEEL COMFORTABLE SHARING)
                 </label>
-                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                    <i class="bx bx-reset d-block "></i>
-                    <span class="d-sm-block">Reset</span>
-                </button>
-                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                @error('picture')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
+                <input name='user_other_activities' id="describe1" type="text" value="{{$profile->user_other_activities}}" placeholder="..." />
+                @error('user_other_activities')
+                <div class="text-danger">{{$message}}</div>
                 @enderror
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-12">
-                <h3 class="fw-bold my-3">TELL YOUR STUDENT ABOUT YOURSELF</h3>
-            </div>
-            <div class="col-12">
-                <div class="input-style-1">
-                    <label for="describe1" class="fw-bold bg-secondary text-white p-2 rounded">
-                        (DESCRIBE YOUR FAMILY, SOME OF YOUR FAVORITE BOOKS, ACTIVITIES, PETS OR OTHER DETAILS ABOUT YOURSELF THAT YOU FEEL COMFORTABLE SHARING)
-                    </label>
-                    <input name='user_other_activities' id="describe1" type="text" value="{{$profile->user_other_activities}}" placeholder="..." />
-                    @error('user_other_activities')
-                    <div class="text-danger">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="input-style-1">
-                    <label for="describe2" class="fw-bold bg-secondary text-white p-2 rounded">
-                        LET YOU STUDENT KNOW WHY YOU THINK READING IS IMPORTANT:
-                    </label>
-                    <input name='user_think' id="describe2" type="text" value="{{$profile->user_think}}" placeholder="..." />
-                    @error('user_think')
-                    <div class="text-danger">{{$message}}</div>
-                    @enderror
-                </div>
+        <div class="col-12">
+            <div class="input-style-1">
+                <label for="describe2" class="fw-bold bg-secondary text-white p-2 rounded">
+                    LET YOU STUDENT KNOW WHY YOU THINK READING IS IMPORTANT:
+                </label>
+                <input name='user_think' id="describe2" type="text" value="{{$profile->user_think}}" placeholder="..." />
+                @error('user_think')
+                <div class="text-danger">{{$message}}</div>
+                @enderror
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" id='nextButton' class="my-btn light-btn py-3  rounded-full px-5 btn-hover">
-                    Submit
-                </button>
+    <div class="row">
+        <div class="col-12">
+            <button type="submit" id='nextButton' class="my-btn light-btn py-3  rounded-full px-5 btn-hover">
+                Submit
+            </button>
 
-            </div>
         </div>
-    </form>
+    </div>
+</form>
 
-</div>
 <script>
     $(document).ready(function() {
         // Listen for change event on file input

@@ -75,6 +75,7 @@
             background: #C4E8E0;
             color: #004750;
         }
+
         ul .row:hover {
             background: none;
         }
@@ -144,8 +145,8 @@
             background-color: transparent;
             display: none;
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 5px;
+            right: 5px;
             z-index: 30;
         }
 
@@ -278,6 +279,8 @@
                 width: 100%;
                 height: 100%;
                 z-index: 10;
+                overflow-y: scroll;
+                top: 0px;
             }
         }
 
@@ -383,7 +386,7 @@
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/traning_w.png">
                                 <img src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning" />
                             </span>
-                            Training
+                            <a href="{{route('training')}}">Training</a>
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png">
@@ -516,6 +519,15 @@
             var sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('hidden');
             sidebar.classList.add("full")
+            var htmlBody = document.querySelectorAll('body');
+            htmlBody.forEach(function(element) {
+                if (!sidebar.classList.contains('hidden')) {
+                    element.style.overflow = 'hidden';
+                } else {
+                    element.style.overflow = '';
+                }
+            });
+
         }
 
         function handleResize() {

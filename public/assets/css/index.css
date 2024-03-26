@@ -211,7 +211,26 @@
     /* background: linear-gradient(to right, #f30000, #fdb03c); */
     background-color: #c5e8e1;
 }
-
+.video-length{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    color: white;
+    background: #00000082;
+    border-radius: 5px;
+    padding: 5px 20px;
+    text-align: center;
+}
+.video-container{
+    position:relative;
+}
+.card-style-2{
+    transition:0.3s;
+    cursor:pointer;
+}
+.card-style-2:hover{
+    scale:1.03
+}
 @media only screen and (max-width: 767px) {
     .tl-container .circle {
         font-size: 18px;

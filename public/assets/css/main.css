@@ -1279,6 +1279,9 @@ h6,
 .card-style-2 .card-image img {
   width: 100%;
 }
+.card-style-2 .card-image video {
+  width: 100%;
+}
 .card-style-2 .card-content {
   padding: 0px 10px;
 }
