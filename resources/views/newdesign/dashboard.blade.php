@@ -383,7 +383,7 @@
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/traning_w.png">
                                 <img src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning" />
                             </span>
-                            Traning
+                            Training
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png">
