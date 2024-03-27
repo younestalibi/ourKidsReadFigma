@@ -52,6 +52,7 @@
             font-size: 1.6rem;
             transition: all 0.3s ease;
             background: #004750;
+            position: relative;
         }
 
         .sidebar.hidden {
@@ -144,10 +145,10 @@
         .hambuger span {
             background-color: transparent;
             display: none;
-            position: absolute;
+            /* position: absolute;
             top: 5px;
-            right: 5px;
-            z-index: 30;
+            right: 5px; */
+            /* z-index: 30; */
         }
 
         .dashboard_profile {
@@ -274,6 +275,10 @@
                 display: flex;
             }
 
+            #newHanburger {
+                display: flex !important;
+            }
+
             .sidebar.full {
                 position: fixed;
                 width: 100%;
@@ -335,6 +340,20 @@
             height: 90px;
             object-fit: cover;
         }
+
+        #newHanburger {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 5px;
+
+        }
+
+        #newHanburger img {
+            filter: brightness(0) invert(1);
+
+
+        }
     </style>
 
 </head>
@@ -347,9 +366,10 @@
                 <div class="logo">
                     <img src="https://www.ourkidsreadinc.org/public/new/assets/images/logo.svg" alt="logo" />
                 </div>
-                <!--<div class="hamburger" onClick="toggleSidebar()">-->
-                <!--    <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="50 136 21 16"><image width="21" height="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAQCAYAAAD52jQlAAAAAXNSR0IArs4c6QAAASZJREFUOE+11DtKBEEQxvHf+gJFfIuZggZGiiabGXmTPYSBF/AChl5AEBREr2AkYrBGCoIgBr5AWHyvFLTJsDs7s2hD0dBT/e+vq77pSqN5Xx2qTO1gHg00lRsVDOANJ6jHwgHWMVyO1TL7FGcB3cQKZvGO75LwYPThFee4ioUJjGEEX11eP3TE3qcoYUD/fPxCY+7NURnfP4ueHsmDGE/x0QLcg4hHPBSBB3QDS5hOTcpaKnIi7nCEw2SftsIj+RhrBSz1jG1sJT/nQsNSVSwkBVmlUes4/BJ72E/Wy4UupquPpnploVHPgIbSG9x28vK/WqqoWwrlhdLJdP2YC3sxQ48ShR3DIS8BrWEZc20a1Uld9t+/joVdrGImdbWbp68/7a3j4gfK+EGkiHmJQAAAAABJRU5ErkJggg==" data-name="Layer 2" transform="translate(50 136)"/></svg></span>Menu-->
-                <!--</div>-->
+
+                <div id="newHanburger" class="hamburger">
+                    <span><img onClick="toggleSidebar()" src="https://www.ourkidsreadinc.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
+                </div>
                 <div class="menu">
                     <ul>
                         <li class="row gap-10">
@@ -434,15 +454,16 @@
             </div>
             <div class="main">
 
-                <div class="hambuger">READING SESSIONS
+                <div class="hambuger">
                     <span><img onClick="toggleSidebar()" src="https://www.ourkidsreadinc.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
-                    <form action="{{route('reading-portal-logout')}}" method="post">
+                    <form class="ml-auto" action="{{route('reading-portal-logout')}}" method="post">
                         @csrf
                         <button type="submit" style="background: none; border: none;">
                             <i class="bi bi-power fs-1 rounded-circle"></i>
                         </button>
                     </form>
                 </div>
+                <div class="hambuger">READING SESSIONS</div>
                 <div class="profile-announce" style="display: flex; gap: 30px; flex: 1">
                     <div class="dashboard_profile">
                         <div class="banner"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/anna_banner.png" alt="banner" /></div>
