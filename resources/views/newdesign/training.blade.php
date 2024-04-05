@@ -73,7 +73,7 @@
                         <div class="list-icon">
                             <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
                         </div>
-                        <div class="list-text"><a href="{{route('home')}}"><b>Home</b></a></div>
+                        <div class="list-text"><a href="{{route('home-dashboard')}}"><b>Home</b></a></div>
                     </div>
                 </li>
                 <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">

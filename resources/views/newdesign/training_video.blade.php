@@ -73,7 +73,7 @@
                         <div class="list-icon">
                             <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
                         </div>
-                        <div class="list-text"><a href="{{route('home')}}"><b>Home</b></a></div>
+                        <div class="list-text"><a href="{{route('home-dashboard')}}"><b>Home</b></a></div>
                     </div>
                 </li>
                 <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
@@ -203,7 +203,7 @@
                         <div class="col-md-4 col-sm-12 p-3">
                             <div class="mb-3 text-dark">{{ $description }}</div>
                             <a style="text-decoration: underline;" class="my-2 d-block" href="{{route('training')}}">Return to Training Home</a>
-                            <a style="text-decoration: underline;" class="d-block" href="{{route('home')}}">Return to My Dashboard</a>
+                            <a style="text-decoration: underline;" class="d-block" href="{{route('home-dashboard')}}">Return to My Dashboard</a>
                         </div>
 
 

@@ -375,33 +375,33 @@
                                         <label for="field-okr_student" class="form__label">I am an ...</label>
 
                                         <div class="form__controls">
-                                        <div class="">
-											<input type="radio" name="okr_student" id="ess" value="1" {{ optional($data1)['okr_student'] && old('okr_student', optional($data1)['okr_student']) == 1 ? 'checked' : '' }}>
-                                            <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Elementary School Student</label>
-                                        </div>
-                                        <div class="">
-                                            <input type="radio" name="okr_student" id="hss" value="2" {{ old('okr_student', $data1['okr_student']) == 2 ? 'checked' : '' }}> <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Adult/High School Student (Prospective Reading Buddy)</label>
-                                        </div>
+                                            <div class="">
+                                                <input type="radio" name="okr_student" id="ess" value="1" {{ optional($data1)['okr_student'] && old('okr_student', optional($data1)['okr_student']) == 1 ? 'checked' : '' }}>
+                                                <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Elementary School Student</label>
+                                            </div>
+                                            <div class="">
+                                                <input type="radio" name="okr_student" id="hss" value="2" {{ old('okr_student', $data1['okr_student']) == 2 ? 'checked' : '' }}> <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Adult/High School Student (Prospective Reading Buddy)</label>
+                                            </div>
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
 
 
-                                    <div id="val_okr_student" class="validation_err"></div>
+                                        <div id="val_okr_student" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
 
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="field-fname" class="form__label">First Name*</label>
+                                        <label for="field-fname" class="form__label">First Name*</label>
 
 
 
@@ -409,19 +409,19 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="text" class="form__field" name="fname" id="field-fname" value="{{ old('fname', $data1['user_name_first']) }}" placeholder="">
+                                            <input type="text" class="form__field" name="fname" id="field-fname" value="{{ old('fname', $data1['user_name_first']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
-                                    <div id="val_fname" class="validation_err"></div>
+                                        <div id="val_fname" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
@@ -429,11 +429,11 @@
 
 
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="field-lname" class="form__label">Last Name*</label>
+                                        <label for="field-lname" class="form__label">Last Name*</label>
 
 
 
@@ -441,19 +441,19 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="text" class="form__field" name="lname" id="field-lname" value="{{ old('lname', $data1['user_name_last']) }}" placeholder="">
+                                            <input type="text" class="form__field" name="lname" id="field-lname" value="{{ old('lname', $data1['user_name_last']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
-                                    <div id="val_lname" class="validation_err"></div>
+                                        <div id="val_lname" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
@@ -461,11 +461,11 @@
 
 
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="field-regemail" class="form__label">Email Address*</label>
+                                        <label for="field-regemail" class="form__label">Email Address*</label>
 
 
 
@@ -473,34 +473,35 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="email" class="form__field" name="email" id="field-regemail" value="{{ old('email', $data1['user_email']) }}" placeholder="">
+                                            <input type="email" class="form__field" name="email" id="field-regemail" value="{{ old('email', $data1['user_email']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
 
-                                    <div id="val_email" class="validation_err"></div>
+                                        <div id="val_email" class="validation_err"></div>
 
 
-                                    @if(isset ($error_message_email))
-                                    <div class="validation_err">{{ $error_message_email }}</div>
+                                        
+                                        @error('email')
+                                        <div class="validation_err">{{ $message }}</div>
+                                        @enderror
 
 
-                                    @endif
 
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="field-regemail" class="form__label">Password*</label>
+                                        <label for="field-regemail" class="form__label">Password*</label>
 
 
 
@@ -508,19 +509,19 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="password" maxlength="16" class="form__field" name="password" id="field-regpassword" value="{{ old('password', $data1['user_password']) }}" placeholder="">
+                                            <input type="password" maxlength="16" class="form__field" name="password" id="field-regpassword" value="{{ old('password', $data1['user_password']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
-                                    <div id="val_password" class="validation_err"></div>
+                                        <div id="val_password" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
@@ -528,11 +529,11 @@
 
 
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="cfield-password" class="form__label">Confirm Password*</label>
+                                        <label for="cfield-password" class="form__label">Confirm Password*</label>
 
 
 
@@ -540,19 +541,19 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="password" maxlength="16" class="form__field" name="cpassword" id="field-cpassword" value="{{ old('password', $data1['user_password']) }}" placeholder="">
+                                            <input type="password" maxlength="16" class="form__field" name="cpassword" id="field-cpassword" value="{{ old('password', $data1['user_password']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
-                                    <div id="val_cpassword" class="validation_err"></div>
+                                        <div id="val_cpassword" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
@@ -560,11 +561,11 @@
 
 
 
-                                <div class="form__row">
+                                    <div class="form__row">
 
 
 
-                                    <label for="field-zip" class="form__label">Zip Code*</label>
+                                        <label for="field-zip" class="form__label">Zip Code*</label>
 
 
 
@@ -572,23 +573,23 @@
 
 
 
-                                    <div class="form__controls">
+                                        <div class="form__controls">
 
 
 
-                                        <input type="text" class="form__field" maxlength="5" name="zip" id="field-zip" value="{{ old('zip', $data1['user_profile_address_zip']) }}" placeholder="">
+                                            <input type="text" class="form__field" maxlength="5" name="zip" id="field-zip" value="{{ old('zip', $data1['user_profile_address_zip']) }}" placeholder="">
 
 
 
-                                    </div><!-- /.form__controls -->
+                                        </div><!-- /.form__controls -->
 
-                                    <div id="val_zip" class="validation_err"></div>
+                                        <div id="val_zip" class="validation_err"></div>
 
-                                </div><!-- /.form__row -->
+                                    </div><!-- /.form__row -->
 
 
 
-                        </div><!-- /.form__body -->
+                                </div><!-- /.form__body -->
 
 
 
@@ -596,196 +597,196 @@
 
 
 
-                        <div class="form__actions">
-                            <!-- <input type="button" class="btn" id="register_now" onclick="validateRegistrationForm()" name="submit" value="Submit"> -->
-                            <input type="button" id="register_now" class="form__btn btn btn--secondary" value="Submit" onclick="validateRegistrationForm()">
-                        </div><!-- /.form__actions -->
+                                <div class="form__actions">
+                                    <!-- <input type="button" class="btn" id="register_now" onclick="validateRegistrationForm()" name="submit" value="Submit"> -->
+                                    <input type="button" id="register_now" class="form__btn btn btn--secondary" value="Submit" onclick="validateRegistrationForm()">
+                                </div><!-- /.form__actions -->
 
-                        </form>
+                            </form>
 
 
 
 
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                // Object to store old input values
-                                let oldValues = {};
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Object to store old input values
+                                    let oldValues = {};
 
-                                // Populate form fields with old values
-                                Object.keys(oldValues).forEach(function(name) {
-                                    document.getElementById('field-' + name).value = oldValues[name];
-                                });
-
-                                // Listen for form submission
-                                document.getElementById('registration_form').addEventListener('submit', function() {
-                                    // Store form values in the oldValues object before submission
-                                    document.querySelectorAll('.field').forEach(function(input) {
-                                        oldValues[input.name] = input.value;
-                                    });
-                                    console.log('Old Input Values:', oldValues);
-
-                                    // Re-populate form fields with old values before submission
+                                    // Populate form fields with old values
                                     Object.keys(oldValues).forEach(function(name) {
                                         document.getElementById('field-' + name).value = oldValues[name];
                                     });
-                                });
-                            });
 
+                                    // Listen for form submission
+                                    document.getElementById('registration_form').addEventListener('submit', function() {
+                                        // Store form values in the oldValues object before submission
+                                        document.querySelectorAll('.field').forEach(function(input) {
+                                            oldValues[input.name] = input.value;
+                                        });
+                                        console.log('Old Input Values:', oldValues);
 
-
-
-
-
-
-                            function validateRegistrationForm() {
-                                let oldValues = {};
-                                var studentType = document.querySelector('input[name="okr_student"]:checked');
-                                var firstName = document.getElementById('field-fname').value;
-                                var lastName = document.getElementById('field-lname').value;
-                                var email = document.getElementById('field-regemail').value;
-                                var password = document.getElementById('field-regpassword').value;
-                                var confirmPassword = document.getElementById('field-cpassword').value;
-                                var zipCode = document.getElementById('field-zip').value;
-
-                                // Reset previous error messages
-                                document.getElementById('val_okr_student').innerHTML = '';
-                                document.getElementById('val_fname').innerHTML = '';
-                                document.getElementById('val_lname').innerHTML = '';
-                                document.getElementById('val_email').innerHTML = '';
-                                document.getElementById('val_password').innerHTML = '';
-                                document.getElementById('val_cpassword').innerHTML = '';
-                                document.getElementById('val_zip').innerHTML = '';
-
-                                var hasError = false;
-
-                                Object.keys(oldValues).forEach(function(name) {
-                                    document.getElementById('field-' + name).value = oldValues[name];
+                                        // Re-populate form fields with old values before submission
+                                        Object.keys(oldValues).forEach(function(name) {
+                                            document.getElementById('field-' + name).value = oldValues[name];
+                                        });
+                                    });
                                 });
 
-                                if (!studentType) {
-                                    document.getElementById('val_okr_student').innerHTML = 'Please select your role';
-                                    hasError = true;
+
+
+
+
+
+
+                                function validateRegistrationForm() {
+                                    let oldValues = {};
+                                    var studentType = document.querySelector('input[name="okr_student"]:checked');
+                                    var firstName = document.getElementById('field-fname').value;
+                                    var lastName = document.getElementById('field-lname').value;
+                                    var email = document.getElementById('field-regemail').value;
+                                    var password = document.getElementById('field-regpassword').value;
+                                    var confirmPassword = document.getElementById('field-cpassword').value;
+                                    var zipCode = document.getElementById('field-zip').value;
+
+                                    // Reset previous error messages
+                                    document.getElementById('val_okr_student').innerHTML = '';
+                                    document.getElementById('val_fname').innerHTML = '';
+                                    document.getElementById('val_lname').innerHTML = '';
+                                    document.getElementById('val_email').innerHTML = '';
+                                    document.getElementById('val_password').innerHTML = '';
+                                    document.getElementById('val_cpassword').innerHTML = '';
+                                    document.getElementById('val_zip').innerHTML = '';
+
+                                    var hasError = false;
+
+                                    Object.keys(oldValues).forEach(function(name) {
+                                        document.getElementById('field-' + name).value = oldValues[name];
+                                    });
+
+                                    if (!studentType) {
+                                        document.getElementById('val_okr_student').innerHTML = 'Please select your role';
+                                        hasError = true;
+                                    }
+
+                                    if (firstName.trim() === '') {
+                                        document.getElementById('val_fname').innerHTML = 'First Name is required';
+                                        hasError = true;
+                                    }
+
+                                    if (lastName.trim() === '') {
+                                        document.getElementById('val_lname').innerHTML = 'Last Name is required';
+                                        hasError = true;
+                                    }
+
+                                    if (email.trim() === '') {
+                                        document.getElementById('val_email').innerHTML = 'Email Address is required';
+                                        hasError = true;
+                                    } else if (!isValidEmail(email)) {
+                                        document.getElementById('val_email').innerHTML = 'Please Enter a valid Email';
+                                        hasError = true;
+                                    }
+
+                                    if (password.length < 8) {
+                                        document.getElementById('val_password').innerHTML = 'Password must be at least 8 characters long';
+                                        hasError = true;
+                                    }
+
+                                    if (password.trim() === '') {
+                                        document.getElementById('val_password').innerHTML = 'Password is required';
+                                        hasError = true;
+                                    }
+
+                                    if (confirmPassword.trim() === '') {
+                                        document.getElementById('val_cpassword').innerHTML = 'Re Enter Your Password';
+                                        hasError = true;
+                                    } else if (password !== confirmPassword) {
+                                        document.getElementById('val_cpassword').innerHTML = 'Confirm Password not match';
+                                        hasError = true;
+                                    }
+
+                                    if (zipCode.trim() === '') {
+                                        document.getElementById('val_zip').innerHTML = 'Zip Code is required';
+                                        hasError = true;
+                                    }
+
+
+
+
+                                    if (hasError) {
+                                        return;
+                                    }
+
+                                    document.getElementById('registration_form').submit();
                                 }
 
-                                if (firstName.trim() === '') {
-                                    document.getElementById('val_fname').innerHTML = 'First Name is required';
-                                    hasError = true;
+                                function isValidEmail(email) {
+                                    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                    return emailRegex.test(email);
                                 }
+                            </script>
 
-                                if (lastName.trim() === '') {
-                                    document.getElementById('val_lname').innerHTML = 'Last Name is required';
-                                    hasError = true;
-                                }
 
-                                if (email.trim() === '') {
-                                    document.getElementById('val_email').innerHTML = 'Email Address is required';
-                                    hasError = true;
-                                } else if (!isValidEmail(email)) {
-                                    document.getElementById('val_email').innerHTML = 'Please Enter a valid Email';
-                                    hasError = true;
-                                }
 
-                                if (password.length < 8) {
-                                    document.getElementById('val_password').innerHTML = 'Password must be at least 8 characters long';
-                                    hasError = true;
-                                }
+                        </div><!-- /.form-donations -->
+                    </div><!-- /.section__form -->
 
-                                if (password.trim() === '') {
-                                    document.getElementById('val_password').innerHTML = 'Password is required';
-                                    hasError = true;
-                                }
-
-                                if (confirmPassword.trim() === '') {
-                                    document.getElementById('val_cpassword').innerHTML = 'Re Enter Your Password';
-                                    hasError = true;
-                                } else if (password !== confirmPassword) {
-                                    document.getElementById('val_cpassword').innerHTML = 'Confirm Password not match';
-                                    hasError = true;
-                                }
-
-                                if (zipCode.trim() === '') {
-                                    document.getElementById('val_zip').innerHTML = 'Zip Code is required';
-                                    hasError = true;
-                                }
+                </div><!-- /.section__inner -->
+            </div><!-- /.shell -->
+        </div><!-- /.section-forms -->
 
 
 
 
-                                if (hasError) {
-                                    return;
-                                }
+        <!--<div class="section">-->
+        <!--    <div class="shell">-->
+        <!--        <div class="section__head">-->
+        <!--            <h2>donate</h2>-->
+        <!--        </div><!-- /.section__head -->
 
-                                document.getElementById('registration_form').submit();
-                            }
+        <!--        <div class="grid">-->
+        <!--            <div class="grid__col grid__col--6of12">-->
+        <!--                <div class="callout">-->
+        <!--                    <div class="callout__image">-->
+        <!--                        <img src="{{ asset('new/assets/images/svg/illustration_heart.svg  ')}} " alt="" width="260" height="232">-->
+        <!--                    </div><!-- /.callout__image -->
 
-                            function isValidEmail(email) {
-                                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                return emailRegex.test(email);
-                            }
-                        </script>
+        <!--                    <div class="callout__content">-->
+        <!--                        <h4>Make a Dollar Donation</h4>-->
 
+        <!--                        <p>-->
+        <!--                            Semper sed in massa ornare mattis turpis aliquam tellus augue. Morbi rutrum egestas parturient massa justo, convallis ornare. Vulputate nunc.-->
+        <!--                        </p>-->
+        <!--                    </div><!-- /.callout__content -->
 
+        <!--                    <div class="callout__actions">-->
+        <!--                        <a href="https://laravel.techizebuilder.net/donate-now" class="btn btn--primary">Give Money</a>-->
+        <!--                    </div><!-- /.callout__actions -->
+        <!--                </div><!-- /.callout -->
+        <!--            </div><!-- /.grid__col -->
 
-                    </div><!-- /.form-donations -->
-                </div><!-- /.section__form -->
-
-            </div><!-- /.section__inner -->
-        </div><!-- /.shell -->
-    </div><!-- /.section-forms -->
-
-
-
-
-    <!--<div class="section">-->
-    <!--    <div class="shell">-->
-    <!--        <div class="section__head">-->
-    <!--            <h2>donate</h2>-->
-    <!--        </div><!-- /.section__head -->
-
-    <!--        <div class="grid">-->
-    <!--            <div class="grid__col grid__col--6of12">-->
-    <!--                <div class="callout">-->
-    <!--                    <div class="callout__image">-->
-    <!--                        <img src="{{ asset('new/assets/images/svg/illustration_heart.svg  ')}} " alt="" width="260" height="232">-->
-    <!--                    </div><!-- /.callout__image -->
-
-    <!--                    <div class="callout__content">-->
-    <!--                        <h4>Make a Dollar Donation</h4>-->
-
-    <!--                        <p>-->
-    <!--                            Semper sed in massa ornare mattis turpis aliquam tellus augue. Morbi rutrum egestas parturient massa justo, convallis ornare. Vulputate nunc.-->
-    <!--                        </p>-->
-    <!--                    </div><!-- /.callout__content -->
-
-    <!--                    <div class="callout__actions">-->
-    <!--                        <a href="https://laravel.techizebuilder.net/donate-now" class="btn btn--primary">Give Money</a>-->
-    <!--                    </div><!-- /.callout__actions -->
-    <!--                </div><!-- /.callout -->
-    <!--            </div><!-- /.grid__col -->
-
-    <!--<div class="grid__col grid__col--6of12">
+        <!--<div class="grid__col grid__col--6of12">
                     <!--    <div class="callout">-->
-    <!--        <div class="callout__image">-->
-    <!--            <img src="{{ asset('new/assets/images/svg/illustration_books.svg  ')}}  " alt="" width="200" height="232">-->
-    <!--        </div><-->
+        <!--        <div class="callout__image">-->
+        <!--            <img src="{{ asset('new/assets/images/svg/illustration_books.svg  ')}}  " alt="" width="200" height="232">-->
+        <!--        </div><-->
 
-    <!--        <div class="callout__content">-->
-    <!--            <h4>Donate Diverse Books</h4>
+        <!--        <div class="callout__content">-->
+        <!--            <h4>Donate Diverse Books</h4>
     
                     <!--            <p>-->
-    <!--                Semper sed in massa ornare mattis turpis aliquam tellus augue. Morbi rutrum egestas parturient massa justo, convallis ornare. Vulputate nunc.-->
-    <!--            </p>-->
-    <!--        </div>-->
+        <!--                Semper sed in massa ornare mattis turpis aliquam tellus augue. Morbi rutrum egestas parturient massa justo, convallis ornare. Vulputate nunc.-->
+        <!--            </p>-->
+        <!--        </div>-->
 
-    <!--        <div class="callout__actions">
+        <!--        <div class="callout__actions">
                     <!--            <a href=" #" class="btn btn--primary">Give Books</a>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
-    <!--        </div><!-- /.grid -->
-    <!--    </div><!-- /.shell -->
-    <!--</div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <!--        </div><!-- /.grid -->
+        <!--    </div><!-- /.shell -->
+        <!--</div>-->
     </div>
     <footer class="footer">
         <div class="shell">

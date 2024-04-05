@@ -394,7 +394,7 @@
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png">
                                 <img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" />
                             </span>
-                            <a href="{{route('home')}}">Home</a>
+                            <a href="{{route('home-dashboard')}}">Home</a>
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png">

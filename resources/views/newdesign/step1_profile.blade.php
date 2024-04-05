@@ -31,21 +31,21 @@
         <div class="col-md-4 col-sm-6">
             <input name='id' type="hidden" value="{{$user->user_id}}" />
             <div class="input-style-1">
-                <input name='email' type="text" value="{{$user->user_email}}" placeholder="E-mail address" />
+                <input name='email' type="text" value="{{ old('email',$user->user_email)}}" placeholder="E-mail address" />
                 @error('email')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <!-- end input -->
             <div class="input-style-1">
-                <input name='student_first_name' type="text" value="{{$user->student_fname}}" placeholder="Student first name" />
+                <input name='student_first_name' type="text" value="{{ old('student_first_name',$user->student_fname)}}" placeholder="Student first name" />
                 @error('student_first_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <!-- end input -->
             <div class="input-style-1">
-                <input name='last_name' type="text" value="{{$user->user_name_last}}" placeholder="Last Name" />
+                <input name='last_name' type="text" value="{{ old('last_name',$user->user_name_last)}}" placeholder="Last Name" />
                 @error('last_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -54,14 +54,14 @@
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="input-style-1">
-                <input name='parent_first_name' type="text" value="{{$user->parent_fname}}" placeholder="Parent first name" />
+                <input name='parent_first_name' type="text" value="{{ old('parent_first_name',$user->parent_fname)}}" placeholder="Parent first name" />
                 @error('parent_first_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <!-- end input -->
             <div class="input-style-1">
-                <input name='student_last_name' type="text" value="{{$user->student_lname}}" placeholder="Student last name" />
+                <input name='student_last_name' type="text" value="{{ old('student_last_name',$user->student_lname)}}" placeholder="Student last name" />
                 @error('student_last_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -70,14 +70,14 @@
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="input-style-1">
-                <input name='parent_last_name' type="text" value="{{$user->parent_lname}}" placeholder="Parent last name" />
+                <input name='parent_last_name' type="text" value="{{ old('parent_last_name',$user->parent_lname)}}" placeholder="Parent last name" />
                 @error('parent_last_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <!-- end input -->
             <div class="input-style-1">
-                <input name='first_name' type="text" value="{{$user->user_name_first}}" placeholder="First name" />
+                <input name='first_name' type="text" value="{{ old('first_name',$user->user_name_first)}}" placeholder="First name" />
                 @error('first_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -91,7 +91,7 @@
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
-                <input name='address' type="text" value="{{$profile->user_profile_address_01}}" placeholder="Street address" />
+                <input name='address' type="text" value="{{ old('address',$profile->user_profile_address_01)}}" placeholder="Street address" />
                 @error('address')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -100,7 +100,7 @@
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
-                <input name='city' type="text" value="{{$profile->city_name}}" placeholder="City" />
+                <input name='city' type="text" value="{{ old('city',$profile->city_name)}}" placeholder="City" />
                 @error('city')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -114,8 +114,10 @@
                     <select name="state">
                         <option value="" disabled>State</option>
                         @foreach ($countries as $country)
-                        <option value="{{ $country->country_id }}" {{ $country->country_id == $profile->country_id ? 'selected' : '' }}>
+                        <option value="{{ $country->country_id }}" {{ old('state',$profile->country_id)==$country->country_id  ? 'selected' : '' }}>
                             {{ $country->country_name }}
+                            {{ old("state",$country->country_id) == $profile->country_id ? 'selected' : '' }}
+
                         </option>
                         @endforeach
                     </select>
@@ -128,7 +130,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="input-style-1">
-                <input name='zip' type="text" value="{{$profile->user_profile_address_zip}}" placeholder="Zip" />
+                <input name='zip' type="text" value="{{ old('zip',$profile->user_profile_address_zip)}}" placeholder="Zip" />
                 @error('zip')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -137,7 +139,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="input-style-1">
-                <input name='phone' type="text" value="{{$user->cell_phone}}" placeholder="Cell phone" />
+                <input name='phone' type="text" value="{{ old('phone',$user->cell_phone)}}" placeholder="Cell phone" />
                 @error('phone')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -150,25 +152,25 @@
         <div class="col-12 d-md-flex align-items-center">
             <h6 class="mb-2 ">Time Zone : </h6>
             <div class="form-check radio-style mb-20">
-                <input class="form-check-input" type="radio" name="timezone" value="EST" id="radio-1" {{ $profile->time_zone == 'EST' ? 'checked' : '' }} />
+                <input class="form-check-input" type="radio" name="timezone" value="EST" id="radio-1" {{ old('timezone',$profile->time_zone) == 'EST' ? 'checked' : '' }} />
                 <label class="form-check-label" for="radio-1">
                     EST</label>
             </div>
             <!-- end radio -->
             <div class="form-check radio-style mb-20">
-                <input class="form-check-input" type="radio" name="timezone" value="CST" id="radio-2" {{ $profile->time_zone == 'CST' ? 'checked' : '' }} />
+                <input class="form-check-input" type="radio" name="timezone" value="CST" id="radio-2" {{ old('timezone',$profile->time_zone) == 'CST' ? 'checked' : '' }} />
                 <label class="form-check-label" for="radio-2">
                     CST</label>
             </div>
             <!-- end radio -->
             <div class="form-check radio-style mb-20">
-                <input class="form-check-input" type="radio" name="timezone" value="PST" id="radio-3" {{ $profile->time_zone == 'PST' ? 'checked' : '' }} />
+                <input class="form-check-input" type="radio" name="timezone" value="PST" id="radio-3" {{ old('timezone',$profile->time_zone) == 'PST' ? 'checked' : '' }} />
                 <label class="form-check-label" for="radio-3">
                     PST</label>
             </div>
             <!-- end radio -->
             <div class="form-check radio-style mb-20">
-                <input class="form-check-input" type="radio" name="timezone" value="MST" id="radio-4" {{ $profile->time_zone == 'MST' ? 'checked' : '' }} />
+                <input class="form-check-input" type="radio" name="timezone" value="MST" id="radio-4" {{ old('timezone',$profile->time_zone) == 'MST' ? 'checked' : '' }} />
                 <label class="form-check-label" for="radio-4">
                     MST</label>
             </div>
@@ -191,7 +193,7 @@
                         <select name="employment">
                             <option value="" disabled>Employment</option>
                             @foreach ($employers as $employer)
-                            <option value="{{ $employer->employer_id }}" {{ $employer->employer_id == $profile->employer_id ? 'selected' : '' }}>
+                            <option value="{{ $employer->employer_id }}" {{ old('employment',$profile->employer_id)==$employer->employer_id ? 'selected' : '' }}>
                                 {{ $employer->employer_name }}
                             </option>
                             @endforeach
@@ -205,7 +207,7 @@
         </div>
         <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
-                <input name='other_employer' value="{{$profile->other_employer}}" type="text" placeholder="Other employer" />
+                <input name='other_employer' value="{{ old('other_employer',$profile->other_employer)}}" type="text" placeholder="Other employer" />
                 @error('other_employer')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror

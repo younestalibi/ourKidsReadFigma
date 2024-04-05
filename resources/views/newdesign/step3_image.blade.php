@@ -71,7 +71,7 @@
                 <label for="describe1" class="fw-bold bg-secondary text-white p-2 rounded">
                     (DESCRIBE YOUR FAMILY, SOME OF YOUR FAVORITE BOOKS, ACTIVITIES, PETS OR OTHER DETAILS ABOUT YOURSELF THAT YOU FEEL COMFORTABLE SHARING)
                 </label>
-                <input name='user_other_activities' id="describe1" type="text" value="{{$profile->user_other_activities}}" placeholder="..." />
+                <input name='user_other_activities' id="describe1" type="text" value="{{old('user_other_activities',$profile->user_other_activities)}}" placeholder="..." />
                 @error('user_other_activities')
                 <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -82,7 +82,7 @@
                 <label for="describe2" class="fw-bold bg-secondary text-white p-2 rounded">
                     LET YOU STUDENT KNOW WHY YOU THINK READING IS IMPORTANT:
                 </label>
-                <input name='user_think' id="describe2" type="text" value="{{$profile->user_think}}" placeholder="..." />
+                <input name='user_think' id="describe2" type="text" value="{{old('user_think',$profile->user_think)}}" placeholder="..." />
                 @error('user_think')
                 <div class="text-danger">{{$message}}</div>
                 @enderror

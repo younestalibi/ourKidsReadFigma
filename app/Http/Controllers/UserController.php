@@ -31,6 +31,10 @@ class UserController extends Controller
         // } 
         // else {
 
+        $request->validate([
+            'email' => 'required|email|unique:tbl_user,user_email',
+        ]);
+
         $allFieldsFilled = true;
 
         $fieldsToCheck = ['fname', 'lname', 'email', 'password', 'cpassword', 'zip'];
@@ -157,7 +161,7 @@ class UserController extends Controller
 
             session(['user' => $user]);
 
-            return redirect()->route('home');
+            return redirect()->route('home-dashboard');
 
             return redirect()->route('main-dashboard');
 
@@ -223,7 +227,7 @@ class UserController extends Controller
         if ($user) {
             session(['user' => $user]);
             session(['id' => $user->user_id]);
-            return redirect()->route('home');
+            return redirect()->route('home-dashboard');
 
             return redirect()->route('main-dashboard');
         } else {
@@ -369,12 +373,11 @@ class UserController extends Controller
     }
     public function updateStep1(Request $request)
     {
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         $id = $user->user_id;
         $inputs = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:tbl_user,user_email,' . $user->user_id . ',user_id',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'parent_first_name' => 'required|string',
@@ -723,7 +726,7 @@ class UserController extends Controller
             ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step6_status' => 1]);
 
-        return redirect()->route('home');
+        return redirect()->route('home-dashboard');
     }
 
     public function home()
@@ -798,6 +801,30 @@ class UserController extends Controller
             ->where('item_type_id', 17)
             ->where('user_id', $id)
             ->first();
+
+        if ($this->Checkerstep1($id)) {
+            if ($this->Checkerstep2($id)) {
+                if ($this->Checkerstep3($id)) {
+                    if ($this->Checkerstep4($id)) {
+                        if ($this->Checkerstep5($id)) {
+                            if (!$this->Checkerstep6($id)) {
+                                return redirect()->route('main-dashboard');
+                            }
+                        } else {
+                            return redirect()->route('main-dashboard');
+                        }
+                    } else {
+                        return redirect()->route('main-dashboard');
+                    }
+                } else {
+                    return redirect()->route('main-dashboard');
+                }
+            } else {
+                return redirect()->route('main-dashboard');
+            }
+        } else {
+            return redirect()->route('main-dashboard');
+        }
         return view('newdesign.training', compact('user', 'image'));
     }
     public function trainingVideo(Request $request, $id)
@@ -825,7 +852,7 @@ class UserController extends Controller
             ]
         ];
 
-    
+
         if (!array_key_exists($id, $data)) {
             return redirect()->route('training');
         }
@@ -842,6 +869,30 @@ class UserController extends Controller
             ->where('item_type_id', 17)
             ->where('user_id', $id)
             ->first();
+
+        if ($this->Checkerstep1($id)) {
+            if ($this->Checkerstep2($id)) {
+                if ($this->Checkerstep3($id)) {
+                    if ($this->Checkerstep4($id)) {
+                        if ($this->Checkerstep5($id)) {
+                            if (!$this->Checkerstep6($id)) {
+                                return redirect()->route('main-dashboard');
+                            }
+                        } else {
+                            return redirect()->route('main-dashboard');
+                        }
+                    } else {
+                        return redirect()->route('main-dashboard');
+                    }
+                } else {
+                    return redirect()->route('main-dashboard');
+                }
+            } else {
+                return redirect()->route('main-dashboard');
+            }
+        } else {
+            return redirect()->route('main-dashboard');
+        }
         return view('newdesign.training_video', compact('user', 'image', 'video', 'title', 'description'));
     }
 }
