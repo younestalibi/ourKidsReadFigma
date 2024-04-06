@@ -523,11 +523,22 @@ class UserController extends Controller
     }
     public function updateStep3(Request $request)
     {
+        
         $request->validate([
-            'picture' => 'nullable|image|mimes:jpeg,png|max:800',
-            'user_other_activities' => 'required',
-            'user_think' => 'required',
+            'picture' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'user_other_activities' => 'required|min:100|max:1000',
+            'user_think' => 'required|min:100|max:1000',
+        ], [
+            'user_other_activities.required' => 'Please complete this field to let your students know a bit about yourself (100 characters or more)',
+            'user_other_activities.min' => 'Please provide at least 100 characters to let your students know a bit more about yourself (100 characters or more)',
+            'user_other_activities.max' => 'Please limit your description to a maximum of 1000 characters to let your students know a bit more about yourself (100-1000 characters)',
+            'user_think.required' => 'Please complete this field to let your student know why you think reading is important to you (100 characters or more)',
+            'user_think.min' => 'Please provide at least 100 characters to explain why you think reading is important to you (100 characters or more)',
+            'user_think.max' => 'Please limit your explanation to a maximum of 1000 characters to explain why you think reading is important to you (100-1000 characters)',
         ]);
+        
+        
+
 
         // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
@@ -666,8 +677,8 @@ class UserController extends Controller
             ->where('item_type_id', 17)
             ->where('user_id', $user->user_id)
             ->first();
-
-        return view('newdesign.step5_responsibilites', compact('user', 'image'));
+        $checked=$this->Checkerstep5($user->user_id);
+        return view('newdesign.step5_responsibilites', compact('user', 'image','checked'));
     }
     public function updateStep5(Request $request)
     {
@@ -688,7 +699,9 @@ class UserController extends Controller
             ->where('item_type_id', 17)
             ->where('user_id', $user->user_id)
             ->first();
-        return view('newdesign.step6_pleadge', compact('user', 'image'));
+        $signature=$user->user_name_first . ' ' . $user->user_name_last;
+        $checked=$this->Checkerstep6($user->user_id);
+        return view('newdesign.step6_pleadge', compact('user', 'image','signature','checked'));
     }
     public function updateStep6(Request $request)
     {

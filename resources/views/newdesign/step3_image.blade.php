@@ -40,7 +40,15 @@
             <h3 class="fw-bold my-3">UPLOAD PHOTO/HEADSHOT</h3>
         </div>
         <div class="col-sm-12 col-md-6 mb-4">
+            @if ($image)
+            @if ($image->image_path)
+            <img src="{{ $image->image_path }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+            @else
             <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+            @endif
+            @else
+            <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+            @endif
         </div>
         <div class="button-wrapper col-sm-12 col-md-6">
             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -52,9 +60,9 @@
                 <i class="bx bx-reset d-block "></i>
                 <span class="d-sm-block">Reset</span>
             </button>
-            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2048K</p>
             @error('picture')
-            <span class="invalid-feedback" role="alert">
+            <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
@@ -71,7 +79,7 @@
                 <label for="describe1" class="fw-bold bg-secondary text-white p-2 rounded">
                     (DESCRIBE YOUR FAMILY, SOME OF YOUR FAVORITE BOOKS, ACTIVITIES, PETS OR OTHER DETAILS ABOUT YOURSELF THAT YOU FEEL COMFORTABLE SHARING)
                 </label>
-                <input name='user_other_activities' id="describe1" type="text" value="{{old('user_other_activities',$profile->user_other_activities)}}" placeholder="..." />
+                <textarea name="user_other_activities" id="describe1" style="height: 200px;" placeholder="...">{{ old('user_other_activities', $profile->user_other_activities) }}</textarea>
                 @error('user_other_activities')
                 <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -82,7 +90,7 @@
                 <label for="describe2" class="fw-bold bg-secondary text-white p-2 rounded">
                     LET YOU STUDENT KNOW WHY YOU THINK READING IS IMPORTANT:
                 </label>
-                <input name='user_think' id="describe2" type="text" value="{{old('user_think',$profile->user_think)}}" placeholder="..." />
+                <textarea name="user_think" id="describe2" style="height: 200px;" placeholder="...">{{ old('user_think', $profile->user_think) }}</textarea>
                 @error('user_think')
                 <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -128,4 +136,5 @@
         });
     });
 </script>
+
 @endsection

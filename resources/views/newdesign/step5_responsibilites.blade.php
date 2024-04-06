@@ -38,31 +38,31 @@
     </div>
     <div class="row p-3 fw-bold">
         <div class="form-check checkbox-style ">
-            <input class="form-check-input" type="checkbox" value="" id="checkbox-1" required />
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-1" required {{ $checked ? 'checked' : '' }} />
             <label class="form-check-label" for="checkbox-1">
                 ATTENDING EIGHT SESSIONS OVER THE COURSE OF THE 12 WEEK SEMESTER</label>
             <div class="invalid-feedback" style="display: none;">This checkbox must be checked to proceed.</div>
         </div>
         <div class="form-check checkbox-style mb-20">
-            <input class="form-check-input" type="checkbox" value="" id="checkbox-2" required />
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-2" required {{ $checked ? 'checked' : '' }} />
             <label class="form-check-label" for="checkbox-2">
                 SHOWING UP 5 MINUTES BEFORE THE START OF YOUR SESSION</label>
             <div class="invalid-feedback" style="display: none;">This checkbox must be checked to proceed.</div>
         </div>
         <div class="form-check checkbox-style mb-20">
-            <input class="form-check-input" type="checkbox" value="" id="checkbox-3" required />
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-3" required {{ $checked ? 'checked' : '' }} />
             <label class="form-check-label" for="checkbox-3">
                 COMMUNICATING IN A POSITIVE AND SUPPORTIVE TONE DURING SESSIONS</label>
             <div class="invalid-feedback" style="display: none;">This checkbox must be checked to proceed.</div>
         </div>
         <div class="form-check checkbox-style mb-20">
-            <input class="form-check-input" type="checkbox" value="" id="checkbox-4" required />
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-4" required {{ $checked ? 'checked' : '' }} />
             <label class="form-check-label" for="checkbox-4">
                 CANCELLING MY SESSION AT LEAST ONE BUSSINESS DAY IN ADVANCE IF I AM UNABLE TO MAKE IT</label>
             <div class="invalid-feedback" style="display: none;">This checkbox must be checked to proceed.</div>
         </div>
         <div class="form-check checkbox-style mb-20">
-            <input class="form-check-input" type="checkbox" value="" id="checkbox-5" required />
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-5" required {{ $checked ? 'checked' : '' }} />
             <label class="form-check-label" for="checkbox-5">
                 ONLY COMMUNICATING WITH MY ASSIGNED STUDENT WITHIN THIS PORTAL</label>
             <div class="invalid-feedback" style="display: none;">This checkbox must be checked to proceed.</div>

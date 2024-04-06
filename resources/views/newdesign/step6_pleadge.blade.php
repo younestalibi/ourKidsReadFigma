@@ -65,7 +65,7 @@
         <form id="myForm" method="post" action="{{ route('sixth-step-update') }}" class="input-style-1">
             @csrf
             <label for="signature">Signature <code>(TYPE YOUR FULL NAME)</code></label>
-            <input name='signature' required class="w-25" id="signature" type="text" placeholder="Signature" />
+            <input name='signature' value="{{ $checked ? old('signature', $signature) : old('signature') }}" required class="w-25" id="signature" type="text" placeholder="Signature" />
             <div class="invalid-feedback" style="display: none;">Signature is required.</div>
         </form>
     </div>
