@@ -26,9 +26,36 @@
 
     <div class="row">
         <div class="col-12">
-            <h6 class="mb-25">Name</h6>
+            <h6 class="mb-25">Parent Information</h6>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-6 col-sm-6">
+            <input name='parent_last_name' type="hidden" value="_" />
+            <!-- end input -->
+            <div class="input-style-1">
+                <input name='first_name' type="text" value="{{ old('first_name',$user->user_name_first)}}" placeholder="Parent First name" />
+                @error('first_name')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <!-- end input -->
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <input name='parent_first_name' type="hidden" value="_" />
+            <!-- end input -->
+            <input name='student_last_name' type="hidden" value="_" />
+            <div class="input-style-1">
+                <input name='last_name' type="text" value="{{ old('last_name',$user->user_name_last)}}" placeholder="Parent Last Name" />
+                @error('last_name')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <!-- end input -->
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
             <input name='id' type="hidden" value="{{$user->user_id}}" />
             <div class="input-style-1">
                 <input name='email' type="text" value="{{ old('email',$user->user_email)}}" placeholder="E-mail address" />
@@ -37,54 +64,32 @@
                 @enderror
             </div>
             <!-- end input -->
-            <div class="input-style-1">
-                <input name='student_first_name' type="text" value="{{ old('student_first_name',$user->student_fname)}}" placeholder="Student first name" />
-                @error('student_first_name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
+            <input name='student_first_name' type="hidden" value="_" />
+
             <!-- end input -->
+
+            <!-- end input -->
+        </div>
+        <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
-                <input name='last_name' type="text" value="{{ old('last_name',$user->user_name_last)}}" placeholder="Last Name" />
-                @error('last_name')
+                <input name='phone' type="text" value="{{ old('phone',$user->cell_phone)}}" placeholder="Cell phone" />
+                @error('phone')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <!-- end input -->
         </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="input-style-1">
-                <input name='parent_first_name' type="text" value="{{ old('parent_first_name',$user->parent_fname)}}" placeholder="Parent first name" />
-                @error('parent_first_name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- end input -->
-            <div class="input-style-1">
-                <input name='student_last_name' type="text" value="{{ old('student_last_name',$user->student_lname)}}" placeholder="Student last name" />
-                @error('student_last_name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- end input -->
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="input-style-1">
-                <input name='parent_last_name' type="text" value="{{ old('parent_last_name',$user->parent_lname)}}" placeholder="Parent last name" />
-                @error('parent_last_name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- end input -->
-            <div class="input-style-1">
-                <input name='first_name' type="text" value="{{ old('first_name',$user->user_name_first)}}" placeholder="First name" />
-                @error('first_name')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- end input -->
-        </div>
+
     </div>
+
+
+
+
+
+
+
+
+
     <div class="row">
         <div class="col-12">
             <h6 class="mb-25">Address</h6>
@@ -108,7 +113,7 @@
             <!-- end input -->
 
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-6 col-sm-6">
             <div class="select-style-1">
                 <div class="select-position">
                     <select name="state">
@@ -128,7 +133,7 @@
             <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
                 <input name='zip' type="text" value="{{ old('zip',$profile->user_profile_address_zip)}}" placeholder="Zip" />
                 @error('zip')
@@ -137,16 +142,13 @@
             </div>
             <!-- end input -->
         </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="input-style-1">
-                <input name='phone' type="text" value="{{ old('phone',$user->cell_phone)}}" placeholder="Cell phone" />
-                @error('phone')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- end input -->
-        </div>
+        
     </div>
+
+
+
+
+
 
     <div class="row">
         <div class="col-12 d-md-flex align-items-center">

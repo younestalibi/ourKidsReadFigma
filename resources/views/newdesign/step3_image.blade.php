@@ -2,55 +2,56 @@
 
 @section('content')
 
-<form action="{{route('third-step-update')}}" method="post" enctype="multipart/form-data">
-    @csrf
 
-    <div class="row">
-        <div class="col-12 d-flex ">
-            <div class="breadcrumb-wrapper">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="#0">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="/firstpage.html">Onboarding Process</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            For Your Student
-                        </li>
-                    </ol>
-                </nav>
-            </div>
+
+<div class="row">
+    <div class="col-12 d-flex ">
+        <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#0">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/firstpage.html">Onboarding Process</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        For Your Student
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
+</div>
 
 
-    <div class="row">
-        <div class="col-15 p-4 px-0">
-            <div class="alert alert-success" role="alert">
-                <h4 class="alert-heading">STEP 3 OF 6: PROVIDE INFORMATION ABOUT YOURSELF FOR YOUR STUDENT</h4>
-            </div>
+<div class="row">
+    <div class="col-15 p-4 px-0">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">STEP 3 OF 6: PROVIDE INFORMATION ABOUT YOURSELF FOR YOUR STUDENT</h4>
         </div>
     </div>
+</div>
 
 
-    <div class="row align-items-center">
-        <div class="col-12">
-            <h3 class="fw-bold my-3">UPLOAD PHOTO/HEADSHOT</h3>
-        </div>
-        <div class="col-sm-12 col-md-6 mb-4">
-            @if ($image)
-            @if ($image->image_path)
-            <img src="{{ $image->image_path }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
-            @else
-            <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
-            @endif
-            @else
-            <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
-            @endif
-        </div>
-        <div class="button-wrapper col-sm-12 col-md-6">
+<div class="row align-items-center">
+    <div class="col-12">
+        <h3 class="fw-bold my-3">UPLOAD PHOTO/HEADSHOT</h3>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-4">
+        @if ($image)
+        @if ($image->image_path)
+        <img src="{{ $image->image_path }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+        @else
+        <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+        @endif
+        @else
+        <img src="{{ asset('assets/images/placeholder.png') }}" alt="user-avatar" class="d-block border rounded img-fluid" id="uploadedAvatar" />
+        @endif
+    </div>
+    <div class="button-wrapper col-sm-12 col-md-6">
+        <form method="post" action="{{route('third-step-update-image')}}"  enctype="multipart/form-data">
+            @csrf
             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                 <span class="d-sm-block">Upload new photo</span>
                 <i class="bx bx-upload d-block "></i>
@@ -60,16 +61,22 @@
                 <i class="bx bx-reset d-block "></i>
                 <span class="d-sm-block">Reset</span>
             </button>
-            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2048K</p>
+            <button type="submit" class="btn btn-success text-white btn-outline-secondary mb-4">
+                <span>Submit</span>
+            </button>
+
+            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2MB</p>
             @error('picture')
             <span class="text-danger" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
-        </div>
+        </form>
     </div>
+</div>
 
-
+<form action="{{route('third-step-update')}}" method="post">
+    @csrf
     <div class="row">
         <div class="col-12">
             <h3 class="fw-bold my-3">TELL YOUR STUDENT ABOUT YOURSELF</h3>

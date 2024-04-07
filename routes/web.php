@@ -41,6 +41,7 @@ Route::group(['prefix' => 'reading-portal'], function () {
 
         Route::get('/dashboard/step3', [UserController::class, 'step3'])->name('third-step');
         Route::post('/dashboard/step3/update', [UserController::class, 'updateStep3'])->name('third-step-update');
+        Route::post('/dashboard/step3/update/image', [UserController::class, 'updateStep3Image'])->name('third-step-update-image');
 
         Route::get('/dashboard/step4', [UserController::class, 'step4'])->name('forth-step');
         Route::post('/dashboard/step4/update', [UserController::class, 'updateStep4'])->name('forth-step-update');

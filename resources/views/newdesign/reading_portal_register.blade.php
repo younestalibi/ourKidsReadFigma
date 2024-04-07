@@ -376,11 +376,11 @@
 
                                         <div class="form__controls">
                                             <div class="">
-                                                <input type="radio" name="okr_student" id="ess" value="1" {{ optional($data1)['okr_student'] && old('okr_student', optional($data1)['okr_student']) == 1 ? 'checked' : '' }}>
+                                                <input type="radio" name="okr_student" id="ess" value="1" {{old("okr_student")==1 ? 'checked' : '' }} {{ optional($data1)['okr_student'] && old('okr_student', optional($data1)['okr_student']) == 1 ? 'checked' : '' }}>
                                                 <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Elementary School Student</label>
                                             </div>
                                             <div class="">
-                                                <input type="radio" name="okr_student" id="hss" value="2" {{ old('okr_student', $data1['okr_student']) == 2 ? 'checked' : '' }}> <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Adult/High School Student (Prospective Reading Buddy)</label>
+                                                <input type="radio" name="okr_student" id="hss" value="2" {{old("okr_student")==2 ? 'checked' : '' }} {{ old('okr_student', $data1['okr_student']) == 2 ? 'checked' : '' }}> <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Adult/High School Student (Prospective Reading Buddy)</label>
                                             </div>
 
 
@@ -401,7 +401,7 @@
 
 
 
-                                        <label for="field-fname" class="form__label">First Name*</label>
+                                        <label for="field-fname" class="form__label">Parent First Name*</label>
 
 
 
@@ -430,53 +430,16 @@
 
 
                                     <div class="form__row">
-
-
-
-                                        <label for="field-lname" class="form__label">Last Name*</label>
-
-
-
-
-
-
-
+                                        <label for="field-lname" class="form__label">Parent Last Name*</label>
                                         <div class="form__controls">
-
-
-
                                             <input type="text" class="form__field" name="lname" id="field-lname" value="{{ old('lname', $data1['user_name_last']) }}" placeholder="">
-
-
-
                                         </div><!-- /.form__controls -->
-
                                         <div id="val_lname" class="validation_err"></div>
-
                                     </div><!-- /.form__row -->
-
-
-
-
-
-
-
                                     <div class="form__row">
-
-
-
                                         <label for="field-regemail" class="form__label">Email Address*</label>
 
-
-
-
-
-
-
                                         <div class="form__controls">
-
-
-
                                             <input type="email" class="form__field" name="email" id="field-regemail" value="{{ old('email', $data1['user_email']) }}" placeholder="">
 
 
@@ -601,6 +564,9 @@
                                     <!-- <input type="button" class="btn" id="register_now" onclick="validateRegistrationForm()" name="submit" value="Submit"> -->
                                     <input type="button" id="register_now" class="form__btn btn btn--secondary" value="Submit" onclick="validateRegistrationForm()">
                                 </div><!-- /.form__actions -->
+                                <div>
+                                    <button><a href="{{route('reading-portal-login-form')}}">Already have account?</a></button>
+                                </div>
 
                             </form>
 

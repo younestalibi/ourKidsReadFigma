@@ -43,21 +43,24 @@
         <h6>How many times per week would you like to read with a student?</h6>
         <div class="d-flex flex-wrap">
             <div class="form-check radio-style">
-                <input class="form-check-input" @if($profile->week_time == 'once_per_week') checked @endif value="once_per_week" type="radio" name="week_time" id="radio-1" />
-                <label class="form-check-label" for="radio-1">
-                    Once per week</label>
+                <input class="form-check-input" type="radio" name="week_time" id="radio-1" value="once_per_week" {{ old('week_time', $profile->week_time) === 'once_per_week' ? 'checked' : '' }}>
+                <label class="form-check-label" for="radio-1">Once per week</label>
             </div>
             <div class="form-check radio-style">
-                <input class="form-check-input" @if($profile->week_time == 'twice_per_week') checked @endif value="twice_per_week" type="radio" name="week_time" id="radio-2" />
-                <label class="form-check-label" for="radio-2">
-                    Twice per week</label>
+                <input class="form-check-input" type="radio" name="week_time" id="radio-2" value="twice_per_week" {{ old('week_time', $profile->week_time) === 'twice_per_week' ? 'checked' : '' }}>
+                <label class="form-check-label" for="radio-2">Twice per week</label>
             </div>
             <div class="form-check radio-style">
-                <input class="form-check-input" @if($profile->week_time == 'three_times_per_week') checked @endif value="three_times_per_week" type="radio" name="week_time" id="radio-3" />
-                <label class="form-check-label" for="radio-3">
-                    Three times per week</label>
+                <input class="form-check-input" type="radio" name="week_time" id="radio-3" value="three_times_per_week" {{ old('week_time', $profile->week_time) === 'three_times_per_week' ? 'checked' : '' }}>
+                <label class="form-check-label" for="radio-3">Three times per week</label>
             </div>
         </div>
+
+        @error('week_time')
+        <span class="text-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
 
 
@@ -65,7 +68,8 @@
         <h6>Select languages you speak at an Intermediate Level or better:</h6>
         <div class="d-flex flex-wrap">
             @php
-            $languagesArray = json_decode($profile->speak_language?? '[]', true);
+            $languagesArray = old('languages', json_decode($profile->speak_language ?? '[]', true));
+
             @endphp
 
             <div class="form-check checkbox-style">
@@ -94,6 +98,11 @@
                     Amharic</label>
             </div>
         </div>
+        @error('languages')
+        <span class="text-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
 
     <div class="row">
@@ -104,12 +113,11 @@
         <h6 class="row">{{ $day }}:</h6>
         <div class="row mb-3">
             @foreach ($times as $index => $time)
-            <div class=" col-md-4 col-6">
-
+            <div class="col-md-4 col-6">
                 <div class="form-check form-switch toggle-switch">
-                    <input class="form-check-input" type="checkbox" name="scheduale[]" value="{{ $time->sched_availability_id }}" @if(in_array($time->sched_availability_id, $selectedItemIds)) checked @endif
-                    id="{{'toggleSwitch'.$time->sched_availability_id}}" />
-                    <label class="form-check-label" for="{{'toggleSwitch'.$time->sched_availability_id}}"> {{ $time->sched_availability_time }}&nbsp;
+                    <input class="form-check-input" type="checkbox" name="scheduale[]" value="{{ $time->sched_availability_id }}" id="{{ 'toggleSwitch'.$time->sched_availability_id }}" {{ in_array($time->sched_availability_id, old('scheduale', $selectedItemIds)) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="{{ 'toggleSwitch'.$time->sched_availability_id }}">
+                        {{ $time->sched_availability_time }}&nbsp;
                     </label>
                 </div>
             </div>
@@ -117,6 +125,11 @@
         </div>
         @endforeach
 
+        @error('scheduale')
+        <span class="text-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
 
 

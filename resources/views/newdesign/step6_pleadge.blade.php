@@ -4,7 +4,7 @@
 @if(session('error'))
 <script>
     Swal.fire({
-        title: 'Wrong Signatrue!',
+        title: 'Signature mismatch!',
         text: @json(session('error')),
         icon: 'error',
         confirmButtonText: 'OK'
@@ -64,7 +64,7 @@
     <div class="col-12">
         <form id="myForm" method="post" action="{{ route('sixth-step-update') }}" class="input-style-1">
             @csrf
-            <label for="signature">Signature <code>(TYPE YOUR FULL NAME)</code></label>
+            <label for="signature">Signature <code>(TYPE YOUR FIRST & LAST NAME. Example- Micle Jone) </code></label>
             <input name='signature' value="{{ $checked ? old('signature', $signature) : old('signature') }}" required class="w-25" id="signature" type="text" placeholder="Signature" />
             <div class="invalid-feedback" style="display: none;">Signature is required.</div>
         </form>
