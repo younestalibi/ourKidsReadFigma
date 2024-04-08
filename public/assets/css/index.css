@@ -39,6 +39,14 @@
 .nav-item:hover .list-img {
     filter: invert(100%);
 }
+.nav-item-active {
+    background-color: #c0e3dc;
+    color: black;
+    .list-img{
+        filter: invert(100%);
+    }
+
+}
 .live-chat {
     background-color: #c4e8e0;
     padding: 15px 20px;

@@ -68,7 +68,7 @@
           </div>
         </li>
 
-        <li class="nav-item d-flex border-secondary justify-content-between p-3">
+        <li class="nav-item d-flex border-secondary justify-content-between p-3 {{ request()->routeIs(['home-dashboard']) ? 'nav-item-active' : '' }}">
           <div class="d-flex align-items-center w-100">
             <div class="list-icon">
               <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
@@ -76,22 +76,23 @@
             <div class="list-text"><a href="{{route('home-dashboard')}}"><b>Home</b></a></div>
           </div>
         </li>
-        <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
+        <li class="nav-item  d-flex border-secondary justify-content-between p-3 {{ request()->routeIs(['main-dashboard','first-step','second-step','third-step','forth-step','fifth-step','sixth-step']) ? 'nav-item-active' : '' }}">
 
-          <div class="d-flex align-items-center  w-100">
+          <div class="d-flex align-items-center  w-100 ">
             <div class="list-icon">
               <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="onBoarding">
             </div>
             <div class="list-text"><a href="{{route('main-dashboard')}}">OnBoarding</a></div>
           </div>
         </li>
-        <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
+        <li class=" nav-item d-flex border-secondary justify-content-between p-3 {{ request()->routeIs('training') ? 'nav-item-active' : '' }} ">
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
               <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning">
             </div>
-            <div class="list-text"><a href="{{route('training')}}">Training</a></div>
+            <div class="list-text"><a href="{{route('training')}}">Training
+          </a></div>
           </div>
         </li>
         <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">

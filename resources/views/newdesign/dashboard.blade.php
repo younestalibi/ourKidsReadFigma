@@ -76,6 +76,15 @@
             background: #C4E8E0;
             color: #004750;
         }
+        ul .nav-item-active {
+            background: #C4E8E0;
+            color: black;
+
+            .list-img {
+                filter: invert(100%);
+            }
+
+        }
 
         ul .row:hover {
             background: none;
@@ -390,7 +399,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
+                        <li class="{{ request()->routeIs(['home-dashboard']) ? 'nav-item-active' : '' }}"  onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
                             <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png">
                                 <img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" />
                             </span>

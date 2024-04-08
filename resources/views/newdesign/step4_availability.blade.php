@@ -36,7 +36,7 @@
 
     <div class="row">
         <h3 class="fw-bold mt-3 ">(PLEASE SELECT AT LEAST TWO BLOCKS TO ENSURE A MATCH WITH A STUDENT)</h3>
-        <h4 class="fw-bold text-danger my-3">NOTE: THE DURATION OF ALL SESSIONS IS 45 MINUTES</h4>
+        <h4 class="fw-bold my-3"><em>NOTE: THE DURATION OF ALL SESSIONS IS 45 MINUTES</em></h4>
     </div>
 
     <div class="row">
@@ -69,9 +69,16 @@
         <div class="d-flex flex-wrap">
             @php
             $languagesArray = old('languages', json_decode($profile->speak_language ?? '[]', true));
-
+            $default=true;
+            if (count($languagesArray) > 0) {
+            $default=false;
+            }
             @endphp
-
+            <div class="form-check checkbox-style">
+                <input class="form-check-input" {{ $default?'checked':'' }} @if(in_array('English', $languagesArray)) checked @endif type="checkbox" name='languages[]' value="Amharic" id="checkbox-5" />
+                <label class="form-check-label" for="checkbox-5">
+                    English</label>
+            </div>
             <div class="form-check checkbox-style">
                 <input class="form-check-input" @if(in_array('Spanish', $languagesArray)) checked @endif type="checkbox" name='languages[]' value="Spanish" id="checkbox-1" />
                 <label class="form-check-label" for="checkbox-1">
@@ -92,11 +99,7 @@
                 <label class="form-check-label" for="checkbox-4">
                     Tigrinya</label>
             </div>
-            <div class="form-check checkbox-style">
-                <input class="form-check-input" @if(in_array('Amharic', $languagesArray)) checked @endif type="checkbox" name='languages[]' value="Amharic" id="checkbox-5" />
-                <label class="form-check-label" for="checkbox-5">
-                    Amharic</label>
-            </div>
+
         </div>
         @error('languages')
         <span class="text-danger" role="alert">
@@ -108,7 +111,11 @@
     <div class="row">
 
 
-
+        @error('scheduale')
+        <span class="text-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
         @foreach ($days as $day => $times)
         <h6 class="row">{{ $day }}:</h6>
         <div class="row mb-3">
@@ -125,11 +132,7 @@
         </div>
         @endforeach
 
-        @error('scheduale')
-        <span class="text-danger" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+
     </div>
 
 
@@ -138,8 +141,8 @@
 
     <div class="row">
         <div class="col-12">
-            <button type="submit" class="my-btn light-btn py-3  rounded-full px-5 btn-hover">
-                Submit
+            <button type="submit" class="my-btn light-btn py-3 text-danger rounded-full px-5 btn-hover">
+            CONTINUE
             </button>
 
         </div>

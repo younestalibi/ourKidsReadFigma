@@ -219,7 +219,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <button type="submit" class="my-btn py-3 light-btn  rounded-full px-5 btn-hover">CONTINUE</button>
+            <button type="submit" class="my-btn py-3 light-btn text-danger rounded-full px-5 btn-hover">CONTINUE</button>
         </div>
     </div>
 </form>

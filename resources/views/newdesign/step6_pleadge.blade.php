@@ -73,7 +73,7 @@
 
 <div class="row">
     <div class="col-12">
-        <button id="nextButton" class="my-btn light-btn py-3 rounded-full px-5 btn-hover">Submit</button>
+        <button id="nextButton" class="my-btn text-danger light-btn py-3 rounded-full px-5 btn-hover">CONTINUE</button>
     </div>
 </div>
 
