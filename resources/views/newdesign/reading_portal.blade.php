@@ -161,8 +161,7 @@
 
         <div class="shell header__shell">
 
-            {{--<a href="{{ route('home') }}" class="logo">--}}
-            <a href="" class="logo">
+            <a href="{{ route('home') }}" class="logo">
 
                 <img src="{{ asset('new/assets/images/logo.svg  ')}}  " alt="">
 
@@ -173,42 +172,37 @@
                 <nav class="nav-secondary">
                     <ul>
                         <li>
-                            {{--<a href="{{ route('free_book_festivals') }}">--}}
-                            <a href="">
+                            <a href="{{ route('free_book_festivals') }}">
                                 Free Book Festivals
                             </a>
                         </li>
                         <li>
-                            {{--<a href="{{ route('newsletter_24_feb') }}">--}}
-                            <a href="">
+                            <a href="{{ route('newsletter_24_feb') }}">
                                 <i class="ico-arrow-right"></i>
                                 Newsletter
                             </a>
                         </li>
                         <li>
-                            <a href="/reading-buddies">
+                            <a href="/reading-portal">
                                 <i class="ico-arrow-right"></i>
-                                Reading Buddies
+                                Reading Portal
                             </a>
                         </li>
 
                         <li>
-                            {{--<a href="{{ route('volunteer') }}">--}}
-                            <a href="">
+                            <a href="{{ route('volunteer') }}">
                                 <i class="ico-arrow-right"></i>
                                 Volunteer
                             </a>
                         </li>
                         <li>
-                            {{--<a href="{{ route('faq') }}">--}}
-                            <a href="">
+                            <a href="{{ route('faq') }}">
                                 <i class="ico-arrow-right"></i>
                                 FAQ
                             </a>
                         </li>
                         <li>
-                            {{--<a href="{{ route('contact_us') }}">--}}
-                            <a href=" ">
+                            <a href="{{ route('contact_us') }}">
                                 <i class="ico-arrow-right"></i>
                                 Contact Us
                             </a>
@@ -219,51 +213,46 @@
                 <nav class="nav">
                     <ul>
                         <li>
-                            {{--<a href="{{ route('home') }}">--}}
-                            <a href=" ">
+                            <a href="{{ route('home') }}">
                                 <i class="ico-arrow-right"></i>
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href=" ">
-                                {{--<a href="{{ route('about') }}">--}}
+                            <a href="{{ route('about') }}">
                                 <i class="ico-arrow-right"></i>
                                 About
                             </a>
                         </li>
                         <li>
-                            <a href=" ">
-                                {{--<a href="{{ route('mission') }}">--}}
+                            <a href="{{ route('mission') }}">
                                 <i class="ico-arrow-right"></i>
                                 Mission
                             </a>
                         </li>
 
                         <li>
-                            <a href="">
-                                {{--<a href="{{ route('succes_stories') }}">--}}
+                            <a href="{{ route('succes_stories') }}">
                                 <i class="ico-arrow-right"></i>
                                 Success Stories
                             </a>
                         </li>
                         <li>
-                            <a href="">
-                                {{--<a href="{{ route('sponsors') }}">--}}
+                            <a href="{{ route('sponsors') }}">
                                 <i class="ico-arrow-right"></i>
                                 Sponsors
                             </a>
                         </li>
                         <li>
-                            <a href="">
-                                {{--<a href="{{ route('new_letter_sign_up') }}">--}}
+                            <a href="{{ route('new_letter_sign_up') }}">
                                 <i class="ico-arrow-right"></i>
                                 Newsletter Sign-up
                             </a>
                         </li>
                         <li>
-                            {{-- <ahref="route('donate_now') --}}
-                            <a href=" ">Donate Now</a>
+                        <a href="{{route('donate_now')}}">
+                            Donate Now
+                        </a>
                         </li>
 
                     </ul>
@@ -583,7 +572,7 @@
         <div class="shell">
             <div class="grid grid--align-center">
                 <div class="grid__col grid__col--6of12">
-                    <a href="home.html" class="logo logo--footer">
+                    <a href="{{route('home')}}" class="logo logo--footer">
                         <img src="{{ asset('new/assets/images/svg/logo-compact.svg  ')}}  " alt="">
                     </a><!-- /.logo -->
 
@@ -602,7 +591,7 @@
                             </li>-->
 
                             <li>
-                                <a href="https://www.ourkidsreadinc.org/contact-us">Contact Us</a>
+                                <a href="https://www.ourkidsread.org/contact-us">Contact Us</a>
 
                                 <span class="hidden">Tax ID: XXXXXXXXXXXXXX</span>
                             </li>

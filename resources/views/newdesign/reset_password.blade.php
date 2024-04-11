@@ -195,9 +195,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/reading-buddies">
+                            <a href="/reading-portal">
                                 <i class="ico-arrow-right"></i>
-                                Reading Buddies
+                                Reading Portal
                             </a>
                         </li>
 
@@ -586,7 +586,7 @@
                             </li>-->
 
                             <li>
-                                <a href="https://www.ourkidsreadinc.org/contact-us">Contact Us</a>
+                                <a href="https://www.ourkidsread.org/contact-us">Contact Us</a>
 
                                 <span class="hidden">Tax ID: XXXXXXXXXXXXXX</span>
                             </li>

@@ -75,7 +75,7 @@
             }
             @endphp
             <div class="form-check checkbox-style">
-                <input class="form-check-input" {{ $default?'checked':'' }} @if(in_array('English', $languagesArray)) checked @endif type="checkbox" name='languages[]' value="Amharic" id="checkbox-5" />
+                <input class="form-check-input" {{ $default?'checked':'' }} @if(in_array('English', $languagesArray)) checked @endif type="checkbox" name='languages[]' value="English" id="checkbox-5" />
                 <label class="form-check-label" for="checkbox-5">
                     English</label>
             </div>
@@ -141,9 +141,10 @@
 
     <div class="row">
         <div class="col-12">
-            <button type="submit" class="my-btn light-btn py-3 text-danger rounded-full px-5 btn-hover">
-            CONTINUE
-            </button>
+            
+            <button type="submit" style="color: red;" class="my-btn py-3 light-btn rounded-full px-5 btn-hover">CONTINUE</button>
+            
+            <!--<button type="submit" class="my-btn light-btn py-3  rounded-full px-5 btn-hover">CONTINUE</button>-->
 
         </div>
     </div>

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +57,17 @@ Route::group(['prefix' => 'reading-portal'], function () {
 
     });
 });
+
+Route::get('/ddsa', function(){})->name('home');
+Route::get('/dddsa', function(){})->name('free_book_festivals');
+Route::get('/ddssa', function(){})->name('newsletter_24_feb');
+Route::get('/daasdsa', function(){})->name('volunteer');
+Route::get('/d=asdsa', function(){})->name('faq');
+Route::get('/dsa', function(){})->name('contact_us');
+Route::get('/aboutsd', function(){})->name('about');
+Route::get('/dasdsmissiona', function(){})->name('mission');
+Route::get('/dsucces_storiessa', function(){})->name('succes_stories');
+Route::get('/dsponsorsdsa', function(){})->name('sponsors');
+Route::get('/dnew_letter_sign_uprsdsa', function(){})->name('new_letter_sign_up');
+Route::get('/dndonate_nwdsa', function(){})->name('donate_now');
+

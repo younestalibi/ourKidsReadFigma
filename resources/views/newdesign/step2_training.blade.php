@@ -11,7 +11,7 @@
             <a href="#0">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="/firstpage.html">Onboarding Process</a>
+            <a href="{{route('main-dashboard')}}">Onboarding Process</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             Training Videos
@@ -62,8 +62,12 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <button id='nextButton' class="my-btn light-btn py-3 text-danger rounded-full px-5 btn-hover">PROCEED TO NEXT
-      VIDEO</button>
+      
+      <button id='nextButton' style="color: red;" class="my-btn light-btn py-3 rounded-full px-5 btn-hover">PROCEED TO NEXT
+VIDEO</button>
+      
+    <!---<button id='nextButton' class="my-btn light-btn py-3  rounded-full px-5 btn-hover">PROCEED TO NEXT
+      VIDEO</button>-->
 
   </div>
 </div>

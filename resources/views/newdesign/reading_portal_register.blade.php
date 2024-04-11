@@ -190,9 +190,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/reading-buddies">
+                            <a href="/reading-portal">
                                 <i class="ico-arrow-right"></i>
-                                Reading Buddies
+                                Reading Portal
                             </a>
                         </li>
 

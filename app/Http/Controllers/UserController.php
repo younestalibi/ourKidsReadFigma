@@ -369,10 +369,13 @@ class UserController extends Controller
             ->where('user_id', $user->user_id)
             ->first();
 
-        return view('newdesign.step1_profile', compact('user', 'image', 'profile', 'employers', 'countries'));
+            $child=DB::table('tbl_child')->where('user_id',$user->user_id)->get();
+
+        return view('newdesign.step1_profile', compact('user','child', 'image', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
+        // dd($request->all());
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         $id = $user->user_id;
@@ -391,8 +394,50 @@ class UserController extends Controller
             'phone' => 'required|string',
             'timezone' => 'required|string',
             'employment' => 'required|string',
-            'other_employer' => 'nullable|string', // Assuming other_employer is optional
+            'other_employer' => 'nullable|string',
+            'child' => "required|array|min:1",
+            'child.*.child_name_first' => 'required|string|max:128',
+            'child.*.child_name_last' => 'required|string|max:128',
+            'child.*.child_grade' => 'required|integer|min:0|max:100',
+            'child.*.child_school' => 'required|string|max:255',
+        ], [
+            'child' => [
+                'required' => 'You Have Not Added Any Children to Your Profile, You must add at least one child to your profile before you can proceed with your registration.',
+                'array' => 'Child information must be provided as an array.',
+                'min:1' => 'You must add at least one child.',
+            ],
+            'child.*.child_name_first' => 'Please enter a first name for child.',
+            'child.*.child_name_last' => 'Please enter a last name for child.',
+            'child.*.child_grade' => 'Please enter the grade for child.',
+            'child.*.child_school' => 'Please enter the school name for child.',
+
         ]);
+
+
+        // foreach($inputs['child'] as $child){
+        //     DB::table('tbl_child')->updateOrInsert(
+        //         ['user_id' => $user->user_id],
+        //         ['child_school' => $child['child_school'],
+        //         'child_grade' => $child['child_grade'],
+        //         'child_name_first' => $child['child_name_first'],
+        //         'child_name_last' => $child['child_name_last']]
+        //     );
+
+        // };
+
+        DB::table('tbl_child')->where('user_id', $user->user_id)->delete();
+
+        foreach ($inputs['child'] as $child) {
+            DB::table('tbl_child')->insert([
+                'user_id' => $user->user_id,
+                'child_school' => $child['child_school'],
+                'child_grade' => $child['child_grade'],
+                'child_name_first' => $child['child_name_first'],
+                'child_name_last' => $child['child_name_last'],
+            ]);
+        }
+
+
 
 
         DB::table('tbl_user')
@@ -587,7 +632,7 @@ class UserController extends Controller
                 ['image_path' => $filePath, 'image_name' => $fileName]
             );
         }
-       
+
         return redirect()->back();
     }
     public function step4(Request $request)

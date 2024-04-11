@@ -79,9 +79,10 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <button id="nextButton" class="my-btn light-btn py-3 text-danger rounded-full px-5 btn-hover">
-            CONTINUE
-            </button>
+            
+            <button type="submit" style="color: red;" class="my-btn py-3 light-btn rounded-full px-5 btn-hover">CONTINUE</button>
+            
+            <!--<button id="nextButton" class="my-btn light-btn py-3  rounded-full px-5 btn-hover">CONTINUE</button>-->
 
         </div>
     </div>
