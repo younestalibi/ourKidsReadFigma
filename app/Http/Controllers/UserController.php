@@ -369,14 +369,18 @@ class UserController extends Controller
             ->where('user_id', $user->user_id)
             ->first();
 
-            $child=DB::table('tbl_child')->where('user_id',$user->user_id)->get();
+        $child = DB::table('tbl_child')->where('user_id', $user->user_id)->get();
 
-        return view('newdesign.step1_profile', compact('user','child', 'image', 'profile', 'employers', 'countries'));
+        return view('newdesign.step1_profile', compact('user', 'child', 'image', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
-        // dd($request->all());
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $childIds = collect($request->child)->pluck('id')->toArray();
+        DB::table('tbl_child')->where('user_id', $user->user_id)   
+        ->whereNotIn('child_id', $childIds)
+        ->delete();
+        // dd($request->all());
 
         $id = $user->user_id;
         $inputs = $request->validate([
@@ -400,7 +404,9 @@ class UserController extends Controller
             'child.*.child_name_last' => 'required|string|max:128',
             'child.*.child_grade' => 'required|integer|min:0|max:100',
             'child.*.child_school' => 'required|string|max:255',
-        ], [
+            'child.*.id'=>'nullable'
+        ], 
+        [
             'child' => [
                 'required' => 'You Have Not Added Any Children to Your Profile, You must add at least one child to your profile before you can proceed with your registration.',
                 'array' => 'Child information must be provided as an array.',
@@ -425,16 +431,27 @@ class UserController extends Controller
 
         // };
 
-        DB::table('tbl_child')->where('user_id', $user->user_id)->delete();
 
         foreach ($inputs['child'] as $child) {
-            DB::table('tbl_child')->insert([
-                'user_id' => $user->user_id,
-                'child_school' => $child['child_school'],
-                'child_grade' => $child['child_grade'],
-                'child_name_first' => $child['child_name_first'],
-                'child_name_last' => $child['child_name_last'],
-            ]);
+            if(is_null($child['id'])){
+                DB::table('tbl_child')->insert([
+                    'user_id' => $user->user_id,
+                    'child_school' => $child['child_school'],
+                    'child_grade' => $child['child_grade'],
+                    'child_name_first' => $child['child_name_first'],
+                    'child_name_last' => $child['child_name_last'],
+                ]);
+            }else{
+                DB::table('tbl_child')->where('user_id',$user->user_id)
+                ->where('child_id',$child['id'])
+                ->update([
+                    'user_id' => $user->user_id,
+                    'child_school' => $child['child_school'],
+                    'child_grade' => $child['child_grade'],
+                    'child_name_first' => $child['child_name_first'],
+                    'child_name_last' => $child['child_name_last'],
+                ]);
+            }
         }
 
 
@@ -637,22 +654,36 @@ class UserController extends Controller
     }
     public function step4(Request $request)
     {
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+
+        $childAvailability = DB::table('tbl_child')
+            ->leftJoin('tbl_availability_child', 'tbl_child.child_id', '=', 'tbl_availability_child.child_id')
+            ->where('tbl_child.user_id', $user->user_id)
+            ->select('tbl_child.*', 'tbl_availability_child.language','tbl_availability_child.week_time')
+            ->get();
+
+        foreach ($childAvailability as $key => $child) {
+            $selectedItemIds = DB::table('tbl_item_user')
+                ->where('user_id', $child->child_id)
+                ->where('item_type_id', 11)
+                ->pluck('item_id')
+                ->toArray();
+            $childAvailability[$key]->selectedItems = $selectedItemIds;
+        }
+
+
+
         $profile = DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
             ->first();
         $scheduale = DB::table('tbl_sched_availability')->get();
+
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
             ->where('user_id', $user->user_id)
             ->first();
-        $selectedItemIds = DB::table('tbl_item_user')
-            ->where('user_id', $user->user_id)
-            ->where('item_type_id', 11)
-            ->pluck('item_id')
-            ->toArray();
+
 
         $days = [];
 
@@ -667,64 +698,56 @@ class UserController extends Controller
             $days[$day][] = $item;
         }
 
-        return view('newdesign.step4_availability', compact('user', 'image', 'profile', 'selectedItemIds', 'days'));
+
+        return view('newdesign.step4_availability', compact('user', 'childAvailability', 'image', 'days'));
     }
     public function updateStep4(Request $request)
     {
-        // dd($request->all());
+
+
         $request->validate([
-            'week_time' => 'required|string',
-            'languages' => 'required|array',
-            'scheduale' => 'required|array',
+            'child' => 'required',
+            'child.*.week_time' => 'required|string',
+            'child.*.languages' => 'required|array',
+            'child.*.scheduale' => 'required|array',
         ], [
-            'week_time.required' => 'Please provide the week time.',
-            'languages.required' => 'Please select at least one language.',
-            'scheduale.required' => 'Please select at least one day/time that you are available to participate in the program (ideally 5-10 session times that work with your schedule).',
+            'child.*.week_time.required' => 'Please provide the week time.',
+            'child.*.languages.required' => 'Please select at least one language.',
+            'child.*.scheduale.required' => 'Please select at least one day/time that you are available to participate in the program (ideally 5-10 session times that work with your schedule).',
         ]);
 
 
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
-        // Update week time if present in the request
-        if ($request->has('week_time')) {
-            $weekTime = $request->input('week_time');
-            DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
-                ->update(['week_time' => $weekTime]);
-        } else {
-            DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
-                ->update(['week_time' => null]);
-        }
-        if ($request->has('languages')) {
-            $speakLanguageString = json_encode($request->input('languages'));
-            DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
-                ->update(['speak_language' => $speakLanguageString]);
-        } else {
-            DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
-                ->update(['speak_language' => null]);
-        }
-        // Delete existing records for the user ID
-        DB::table('tbl_item_user')
-            ->where('user_id', $user->user_id)
-            ->where('item_type_id', 11)
-            ->delete();
 
-        // Insert new schedule items if present in the request
-        if ($request->has('scheduale')) {
-            foreach ($request->scheduale as $itemId) {
+        foreach ($request->child as $child) {
+            $weekTime = $child["week_time"];
+            $child_id = $child['child_id'];
+            $speakLanguageString = json_encode($child['languages']);
+            $scheduales = $child['scheduale'];
+
+            DB::table('tbl_availability_child')->updateOrInsert(
+                ['child_id' => $child_id, 'user_id' => $user->user_id],
+                ['week_time' => $weekTime, 'language' => $speakLanguageString]
+            );
+
+            DB::table('tbl_item_user')
+                ->where('user_id', $child_id)
+                ->where('item_type_id', 11)
+                ->delete();
+
+            foreach ($scheduales as $itemId) {
                 DB::table('tbl_item_user')->insert([
                     'item_id' => $itemId,
                     'item_type_id' => 11,
-                    'user_id' => $user->user_id
+                    'user_id' => $child_id
                 ]);
             }
         }
+
+
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
+            ->where('user_profile_id', $user->user_id) 
             ->update(['step4_status' => 1]);
 
         return redirect()->route('fifth-step');

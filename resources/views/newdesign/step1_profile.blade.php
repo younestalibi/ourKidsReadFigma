@@ -93,8 +93,9 @@
 
     <div class="feature-extra"></div>
     @for ($i = 0; $i < count(old('child',$child)) ; $i++) <div class="row feature-extra">
-        <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">{{$i==0?'':'Remove'}}</b></small>
+        <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
         <div class="col-md-6 col-sm-6">
+            <input name='child[{{$i}}][id]' type="hidden" value="{{(isset($child[$i]) ? $child[$i]->child_id : '')}}" />
             <div class="input-style-1">
                 <input name='child[{{$i}}][child_name_first]' type="text" value="{{ old('child.' . $i . '.child_name_first',(isset($child[$i]) ? $child[$i]->child_name_first : ''))}}" placeholder="Child First Name" />
                 @error('child.' . $i . '.child_name_first')
@@ -128,9 +129,7 @@
         </div>
         </div>
         @endfor
-        @error('child')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
+
 
         <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -138,7 +137,11 @@
                     <input id="featureInputs" type="button" value="Add New Child" />
                 </div>
             </div>
+            @error('child')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
+
 
 
 
@@ -282,7 +285,8 @@
             
 
             <div class="row feature-extra">
-            <small>child: <b class='removeFeature text-danger' style="cursor: pointer;">${childCount==0?'':'Remove'}</b></small>
+            <small>child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
+            <input name='child[${childCount}][id]' type="hidden" value="" />
         <div class="col-md-6 col-sm-6">
             <div class="input-style-1">
                 <input name='child[${childCount}][child_name_first]' type="text" class="child_name_first" placeholder="Child First Name" />
@@ -316,7 +320,7 @@
         $(document).on('click', '.removeFeature', function() {
             $(this).parent().parent().remove()
             $('.row.feature-extra').each(function(index) {
-                $(this).find('input[type=text], input[type=number]').each(function() {
+                $(this).find('input[type=text], input[type=number], , input[type=hidden]').each(function() {
                     $(this).attr('name', $(this).attr('name').replace(/\[(\d+)\]/, '[' + index + ']'));
                 });
             });
