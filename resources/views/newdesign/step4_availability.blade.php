@@ -207,7 +207,7 @@
 
         // If there are multiple elements with class 'error1' with the 'active' class, keep only the first one
         if ($('.error1.active').length > 1) {
-            $('.error1').removeClass('active').first().addClass('active');
+            $('.error1.active').slice(1).removeClass('active');
             $('.error1.active').first().attr('aria-selected', 'true');
         }
 
@@ -218,7 +218,7 @@
 
         // If there are multiple elements with class 'error2' with the 'active' class, keep only the first one
         if ($('.error2.active').length > 1) {
-            $('.error2').removeClass('active').first().addClass('active');
+            $('.error2.active').slice(1).removeClass('active');
         }
     });
 </script>

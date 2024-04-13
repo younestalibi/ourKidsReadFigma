@@ -420,18 +420,6 @@ class UserController extends Controller
         ]);
 
 
-        // foreach($inputs['child'] as $child){
-        //     DB::table('tbl_child')->updateOrInsert(
-        //         ['user_id' => $user->user_id],
-        //         ['child_school' => $child['child_school'],
-        //         'child_grade' => $child['child_grade'],
-        //         'child_name_first' => $child['child_name_first'],
-        //         'child_name_last' => $child['child_name_last']]
-        //     );
-
-        // };
-
-
         foreach ($inputs['child'] as $child) {
             if(is_null($child['id'])){
                 DB::table('tbl_child')->insert([
@@ -453,9 +441,6 @@ class UserController extends Controller
                 ]);
             }
         }
-
-
-
 
         DB::table('tbl_user')
             ->where('user_id', $id)
@@ -663,8 +648,8 @@ class UserController extends Controller
             ->get();
 
         foreach ($childAvailability as $key => $child) {
-            $selectedItemIds = DB::table('tbl_item_user')
-                ->where('user_id', $child->child_id)
+            $selectedItemIds = DB::table('tbl_child_schedule')
+                ->where('child_id', $child->child_id)
                 ->where('item_type_id', 11)
                 ->pluck('item_id')
                 ->toArray();
@@ -731,16 +716,16 @@ class UserController extends Controller
                 ['week_time' => $weekTime, 'language' => $speakLanguageString]
             );
 
-            DB::table('tbl_item_user')
-                ->where('user_id', $child_id)
+            DB::table('tbl_child_schedule')
+                ->where('child_id', $child_id)
                 ->where('item_type_id', 11)
                 ->delete();
 
             foreach ($scheduales as $itemId) {
-                DB::table('tbl_item_user')->insert([
+                DB::table('tbl_child_schedule')->insert([
                     'item_id' => $itemId,
                     'item_type_id' => 11,
-                    'user_id' => $child_id
+                    'child_id' => $child_id
                 ]);
             }
         }
