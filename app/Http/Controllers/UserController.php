@@ -697,7 +697,7 @@ class UserController extends Controller
             'child.*.scheduale' => 'required|array',
         ], [
             'child.*.week_time.required' => 'Please provide the week time.',
-            'child.*.languages.required' => 'Please select at least one language.',
+            'child.*.languages.required' => 'Please select a reading frequency for your student.',
             'child.*.scheduale.required' => 'Please select at least one day/time that you are available to participate in the program (ideally 5-10 session times that work with your schedule).',
         ]);
 
