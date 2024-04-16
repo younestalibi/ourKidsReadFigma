@@ -50,7 +50,7 @@
         @endif
     </div>
     <div class="button-wrapper col-sm-12 col-md-6">
-        <form method="post" action="{{route('third-step-update-image')}}"  enctype="multipart/form-data">
+        <form method="post" action="{{route('third-step-update-image')}}" enctype="multipart/form-data">
             @csrf
             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                 <span class="d-sm-block">Upload new photo</span>
@@ -79,7 +79,11 @@
     @csrf
     <div class="row">
         <div class="col-12">
+            @if($userType=='student')
+            <h3 class="fw-bold my-3">TELL YOUR READING BUDDY A LITTLE BIT ABOUT YOURSELF</h3>
+            @else
             <h3 class="fw-bold my-3">TELL YOUR STUDENT ABOUT YOURSELF</h3>
+            @endif
         </div>
         <div class="col-12">
             <div class="input-style-1">
@@ -107,10 +111,10 @@
 
     <div class="row">
         <div class="col-12">
-            
-           <button type="submit" style="color: red;" class="my-btn py-3 light-btn rounded-full px-5 btn-hover">CONTINUE</button>
 
-           <!-- <button type="submit" id='nextButton' class="my-btn light-btn py-3  rounded-full px-5 btn-hover">
+            <button type="submit" style="color: red;" class="my-btn py-3 light-btn rounded-full px-5 btn-hover">CONTINUE</button>
+
+            <!-- <button type="submit" id='nextButton' class="my-btn light-btn py-3  rounded-full px-5 btn-hover">
             CONTINUE
             </button>-->
 

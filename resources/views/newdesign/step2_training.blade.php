@@ -148,7 +148,7 @@ VIDEO</button>
         updateWatchedVideo(currentIndex - 1);
         nextButton.innerText = 'Done';
         nextButton.disabled = true;
-        window.location.href = '/reading-portal/dashboard/step3';
+        window.location.href = '/reading-portal/dashboard/reader/step3';
 
       }
     });

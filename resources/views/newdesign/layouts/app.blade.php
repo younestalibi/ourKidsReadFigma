@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -76,7 +75,7 @@
             <div class="list-text"><a href="{{route('home-dashboard')}}"><b>Home</b></a></div>
           </div>
         </li>
-        <li class="nav-item  d-flex border-secondary justify-content-between p-3 {{ request()->routeIs(['main-dashboard','first-step','second-step','third-step','forth-step','fifth-step','sixth-step']) ? 'nav-item-active' : '' }}">
+        <li class="nav-item  d-flex border-secondary justify-content-between p-3 {{ request()->routeIs(['main-dashboard','student.first-step','student.second-step','student.third-step','reader.first-step','reader.second-step','reader.third-step','reader.forth-step','reader.fifth-step','reader.sixth-step']) ? 'nav-item-active' : '' }}">
 
           <div class="d-flex align-items-center  w-100 ">
             <div class="list-icon">
