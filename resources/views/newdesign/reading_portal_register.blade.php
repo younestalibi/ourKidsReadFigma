@@ -401,7 +401,7 @@
 
 
 
-                                        <label for="field-fname" class="form__label">Parent First Name*</label>
+                                        <label for="field-fname" id='firstName' class="form__label">Parent First Name*</label>
 
 
 
@@ -430,7 +430,7 @@
 
 
                                     <div class="form__row">
-                                        <label for="field-lname" class="form__label">Parent Last Name*</label>
+                                        <label for="field-lname" id="lastName" class="form__label">Parent Last Name*</label>
                                         <div class="form__controls">
                                             <input type="text" class="form__field" name="lname" id="field-lname" value="{{ old('lname', $data1['user_name_last']) }}" placeholder="">
                                         </div><!-- /.form__controls -->
@@ -450,7 +450,7 @@
                                         <div id="val_email" class="validation_err"></div>
 
 
-                                        
+
                                         @error('email')
                                         <div class="validation_err">{{ $message }}</div>
                                         @enderror
@@ -570,6 +570,29 @@
 
                             </form>
 
+
+                            <script>
+                                // Get the radio buttons
+                                const elementaryRadio = document.getElementById('ess');
+                                const highSchoolRadio = document.getElementById('hss');
+
+                                const NameSpan = document.getElementById('firstName');
+                                const lastSpan = document.getElementById('lastName');
+
+                                elementaryRadio.addEventListener('change', function() {
+                                    if (this.checked) {
+                                        NameSpan.textContent = "Student First Name*";
+                                        lastSpan.textContent = "Student Last Name*";
+                                    }
+                                });
+
+                                highSchoolRadio.addEventListener('change', function() {
+                                    if (this.checked) {
+                                        NameSpan.textContent = "Parent First Name*";
+                                        lastSpan.textContent = "Parent Last Name*";
+                                    }
+                                });
+                            </script>
 
 
 

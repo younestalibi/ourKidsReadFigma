@@ -248,7 +248,7 @@ class UserController extends Controller
         }
     }
 
-private function userType()
+public function userType()
 {
     $item = DB::table('tbl_item_user')
             ->where('user_id', session('id'))
@@ -258,7 +258,7 @@ private function userType()
     return $item->item_id == 2 ? 'reader' : 'student';
 }
 
-    private function getSteps($id)
+    public function getSteps($id)
     {
         $typeUser=$this->userType();
         if($typeUser=='reader'){
@@ -323,7 +323,7 @@ private function userType()
     }
 
     
-    private function Checkerstep1($id)
+    public function Checkerstep1($id)
     {
         $step1Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -331,7 +331,7 @@ private function userType()
 
         return $step1Status === 1;
     }
-    private function Checkerstep2($id)
+    public function Checkerstep2($id)
     {
         $step2Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -339,7 +339,7 @@ private function userType()
 
         return $step2Status === 1;
     }
-    private function Checkerstep3($id)
+    public function Checkerstep3($id)
     {
         $step3Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -347,7 +347,7 @@ private function userType()
 
         return $step3Status === 1;
     }
-    private function Checkerstep4($id)
+    public function Checkerstep4($id)
     {
         $step4Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -355,7 +355,7 @@ private function userType()
 
         return $step4Status === 1;
     }
-    private function Checkerstep6($id)
+    public function Checkerstep6($id)
     {
         $step6Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -363,7 +363,7 @@ private function userType()
 
         return $step6Status === 1;
     }
-    private function Checkerstep5($id)
+    public function Checkerstep5($id)
     {
         $step5Status = DB::table('tbl_complete_step')
             ->where('user_profile_id', $id)
@@ -373,7 +373,6 @@ private function userType()
     }
     public function step1(Request $request)
     {
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
         $profile = DB::table('tbl_user_profile')
@@ -382,7 +381,6 @@ private function userType()
 
         $employers = DB::table('tbl_employer')->get();
 
-        // Retrieve all records from tbl_country
         $countries = DB::table('tbl_country')->get();
 
         $image = DB::table('tbl_image')
@@ -393,7 +391,8 @@ private function userType()
 
         $child = DB::table('tbl_child')->where('user_id', $user->user_id)->get();
 
-        return view('newdesign.step1_profile', compact('user', 'child', 'image', 'profile', 'employers', 'countries'));
+        $userType=$this->userType();
+        return view('newdesign.step1_profile', compact('user', 'userType','child', 'image', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
@@ -402,7 +401,6 @@ private function userType()
         DB::table('tbl_child')->where('user_id', $user->user_id)   
         ->whereNotIn('child_id', $childIds)
         ->delete();
-        // dd($request->all());
 
         $id = $user->user_id;
         $inputs = $request->validate([
@@ -440,7 +438,6 @@ private function userType()
             'child.*.child_school' => 'Please enter the school name for child.',
 
         ]);
-
 
         foreach ($inputs['child'] as $child) {
             if(is_null($child['id'])){
@@ -536,10 +533,7 @@ private function userType()
     public function updateStep2(Request $request)
     {
         $videoId = $request->videoId;
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
-        // return response()->json(['success' => $videoId]);
-
         switch ($videoId) {
             case 1:
                 DB::table('tbl_user_profile')
@@ -574,7 +568,6 @@ private function userType()
 
     public function step3(Request $request)
     {
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
         $profile = DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
@@ -603,13 +596,8 @@ private function userType()
             'user_think.max' => 'Please limit your explanation to a maximum of 1000 characters to explain why you think reading is important to you (100-1000 characters)',
         ]);
 
-
-
-
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
-        // Update other profile information
         DB::table('tbl_user_profile')
             ->where('user_profile_id', $user->user_id)
             ->update([
@@ -635,10 +623,8 @@ private function userType()
         ], [
             'picture.max' => 'The picture must not be greater than 2MB.',
         ]);
-        // $user = session('user');
         $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
 
-        // Delete the existing picture if it exists
         $existingImage = DB::table('tbl_image')->where('user_id', $user->user_id)->first();
         if ($request->hasFile('picture')) {
             if ($existingImage) {
@@ -778,11 +764,7 @@ private function userType()
             ->where('user_id', $user->user_id)
             ->first();
         $checked = $this->Checkerstep5($user->user_id);
-        if($this->userType()=='student'){
-            return view('newdesign.step4_thank_you', compact('user', 'image'));
-        }else{
-            return view('newdesign.step5_responsibilites', compact('user', 'image', 'checked'));
-        }
+        return view('newdesign.step5_responsibilites', compact('user', 'image', 'checked'));
     }
     public function updateStep5(Request $request)
     {
@@ -851,7 +833,9 @@ private function userType()
             ->where('item_type_id', 17)
             ->where('user_id', $id)
             ->first();
-        $this->checkStepsVideo($id);
+            if($this->checkStepsVideo($id)){
+                return redirect()->route('main-dashboard');
+            }
         return view('newdesign.dashboard', compact('image', 'user'));
     }
 
@@ -892,10 +876,12 @@ private function userType()
             ->where('user_id', $id)
             ->first();
 
-        $this->checkStepsVideo($id);
+        if($this->checkStepsVideo($id)){
+            return redirect()->route('main-dashboard');
+        }
         return view('newdesign.training', compact('user', 'image'));
     }
-    private function checkStepsVideo($id){
+    public function checkStepsVideo($id){
         if($this->userType()=='reader'){
             if ($this->Checkerstep1($id)) {
                 if ($this->Checkerstep2($id)) {
@@ -903,40 +889,42 @@ private function userType()
                         if ($this->Checkerstep4($id)) {
                             if ($this->Checkerstep5($id)) {
                                 if (!$this->Checkerstep6($id)) {
-                                    return redirect()->route('main-dashboard');
+                                    return true;
                                 }
                             } else {
-                                return redirect()->route('main-dashboard');
+                                return true;
                             }
                         } else {
-                            return redirect()->route('main-dashboard');
+                            return true;
                         }
                     } else {
-                        return redirect()->route('main-dashboard');
+                        return true;
                     }
                 } else {
-                    return redirect()->route('main-dashboard');
+                    return true;
                 }
             } else {
-                return redirect()->route('main-dashboard');
+                return true;
             }
+            return false;
         }else{
             if ($this->Checkerstep1($id)) {
                 if ($this->Checkerstep3($id)) {
                     if ($this->Checkerstep4($id)) {
                         if (!$this->Checkerstep5($id)) {
-                            return redirect()->route('main-dashboard');
+                            return true;
                         }
                     } else {
-                        return redirect()->route('main-dashboard');
+                        return true;
                     }
                 } else {
-                    return redirect()->route('main-dashboard');
+                    return true;
                 }
              
             } else {
-                return redirect()->route('main-dashboard');
+                return true;
             }
+            return false;
         }
     }
     public function trainingVideo(Request $request, $id)
@@ -982,7 +970,9 @@ private function userType()
             ->where('user_id', $id)
             ->first();
 
-        $this->checkStepsVideo($id);
+            if($this->checkStepsVideo($id)){
+                return redirect()->route('main-dashboard');
+            }
         return view('newdesign.training_video', compact('user', 'image', 'video', 'title', 'description'));
     }
 }

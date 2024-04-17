@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::group(['prefix' => 'reading-portal'], function () {
         Route::post('/logout', [UserController::class, 'our_kids_logout'])->name('reading-portal-logout');
         Route::get('/onboarding', [UserController::class, 'dashboard'])->name('main-dashboard');
         Route::get('/home', [UserController::class, 'home'])->name('home-dashboard');
+        
         Route::post('/dashboard/step1/update', [UserController::class, 'updateStep1'])->name('first-step-update');
         Route::post('/dashboard/step2/update', [UserController::class, 'updateStep2'])->name('second-step-update');
         Route::post('/dashboard/step3/update', [UserController::class, 'updateStep3'])->name('third-step-update');
@@ -44,10 +46,10 @@ Route::group(['prefix' => 'reading-portal'], function () {
         Route::get('/dashboard/training/video/{id}', [UserController::class, 'trainingVideo'])->name('training-video');
 
         Route::prefix('dashboard/student')->middleware(['student'])->group(function () {
-            Route::get('step1', [UserController::class, 'step1'])->name('student.first-step');
-            Route::get('step2', [UserController::class, 'step3'])->name('student.second-step');
-            Route::get('step3', [UserController::class, 'step4'])->name('student.third-step');
-            Route::get('step4', [UserController::class, 'step5'])->name('student.fifth-step');
+            Route::get('step1', [StudentController::class, 'StudentStep1'])->name('student.first-step');
+            Route::get('step2', [StudentController::class, 'StudentStep2'])->name('student.second-step');
+            Route::get('step3', [StudentController::class, 'StudentStep3'])->name('student.third-step');
+            Route::get('step4', [StudentController::class, 'StudentStep4'])->name('student.fifth-step');
         });
         Route::prefix('dashboard/reader')->middleware(['reader'])->group(function () {
             Route::get('step1', [UserController::class, 'step1'])->name('reader.first-step');
