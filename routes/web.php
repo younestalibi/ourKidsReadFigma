@@ -47,6 +47,7 @@ Route::group(['prefix' => 'reading-portal'], function () {
             Route::get('step1', [UserController::class, 'step1'])->name('student.first-step');
             Route::get('step2', [UserController::class, 'step3'])->name('student.second-step');
             Route::get('step3', [UserController::class, 'step4'])->name('student.third-step');
+            Route::get('step4', [UserController::class, 'step5'])->name('student.fifth-step');
         });
         Route::prefix('dashboard/reader')->middleware(['reader'])->group(function () {
             Route::get('step1', [UserController::class, 'step1'])->name('reader.first-step');

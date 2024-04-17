@@ -13,7 +13,7 @@
                         <a href="#0">Home</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="/firstpage.html">Onboarding Process</a>
+                        <a href="{{ route('main-dashboard') }}">Onboarding Process</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         For Your Student

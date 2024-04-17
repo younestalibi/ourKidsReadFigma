@@ -6,6 +6,7 @@ if ($typeUser === 'student') {
 $firstStep=route('student.first-step');
 $secondStep=route('student.second-step');
 $thirdStep=route('student.third-step');
+$forthStep=route('student.fifth-step');
 
 } elseif ($typeUser === 'reader') {
 $firstStep=route('reader.first-step');
@@ -175,7 +176,25 @@ $sixthStep=route('reader.sixth-step');
       <a href="{{$thirdStep}}" class="{{$step3 =='default'? 'disabled-link':''}}">
         <div class="arrow-text {{ $step3 == 'finished' ? 'arrow-finished' : '' }}
                   {{ $step3 == 'current' ? 'arrow-current' : '' }}
-                  {{ $step3 == 'default' ? 'arrow-default' : '' }}">here will show the video right </div>
+                  {{ $step3 == 'default' ? 'arrow-default' : '' }}">Availability</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="tl-container ">
+    <div class="circle {{ $step4 == 'current' || $step4 == 'finished' ? 'active-circle' : ''}} d-flex justify-content-center align-items-center">
+      @if($step4 == 'finished')
+      <i class="bi bi-check-lg fs-1 text-success"></i>
+      @else
+      04
+      @endif
+    </div>
+    <div class="arrow-container">
+      <div class="arrow">STEP 04</div>
+      <a href="{{$forthStep}}" class="{{$step4 =='default'? 'disabled-link':''}}">
+        <div class="arrow-text {{ $step4 == 'finished' ? 'arrow-finished' : '' }}
+                  {{ $step4 == 'current' ? 'arrow-current' : '' }}
+                  {{ $step4 == 'default' ? 'arrow-default' : '' }}">Completion Reward</div>
       </a>
     </div>
   </div>
