@@ -28,7 +28,7 @@
         <div class="col-12">
             @if($userType=='student')
             <h6 class="mb-25">Student Information</h6>
-            @else 
+            @else
             <h6 class="mb-25">Parent Information</h6>
             @endif
         </div>
@@ -88,52 +88,52 @@
 
 
 
+    @if($userType=='student')
+        <div class="row">
+            <div class="col-12">
+                <h6 class="mb-25">Child Information</h6>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-12">
-            <h6 class="mb-25">Child Information</h6>
-        </div>
-    </div>
-
-    <div class="feature-extra"></div>
-    @for ($i = 0; $i < count(old('child',$child)) ; $i++) <div class="row feature-extra">
-        <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
-        <div class="col-md-6 col-sm-6">
-            <input name='child[{{$i}}][id]' type="hidden" value="{{(isset($child[$i]) ? $child[$i]->child_id : '')}}" />
-            <div class="input-style-1">
-                <input name='child[{{$i}}][child_name_first]' type="text" value="{{ old('child.' . $i . '.child_name_first',(isset($child[$i]) ? $child[$i]->child_name_first : ''))}}" placeholder="Child First Name" />
-                @error('child.' . $i . '.child_name_first')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+        <div class="feature-extra"></div>
+        @for ($i = 0; $i < count(old('child',$child)) ; $i++) 
+            <div class="row feature-extra">
+            <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
+            <div class="col-md-6 col-sm-6">
+                <input name='child[{{$i}}][id]' type="hidden" value="{{(isset($child[$i]) ? $child[$i]->child_id : '')}}" />
+                <div class="input-style-1">
+                    <input name='child[{{$i}}][child_name_first]' type="text" value="{{ old('child.' . $i . '.child_name_first',(isset($child[$i]) ? $child[$i]->child_name_first : ''))}}" placeholder="Child First Name" />
+                    @error('child.' . $i . '.child_name_first')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <div class="input-style-1">
-                <input name='child[{{$i}}][child_name_last]' type="text" value="{{ old('child.' . $i . '.child_name_last', (isset($child[$i]) ? $child[$i]->child_name_last : ''))}}" placeholder="Child Last Name" />
-                @error('child.' . $i . '.child_name_last')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+            <div class="col-md-6 col-sm-6">
+                <div class="input-style-1">
+                    <input name='child[{{$i}}][child_name_last]' type="text" value="{{ old('child.' . $i . '.child_name_last', (isset($child[$i]) ? $child[$i]->child_name_last : ''))}}" placeholder="Child Last Name" />
+                    @error('child.' . $i . '.child_name_last')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <div class="input-style-1">
-                <input name='child[{{$i}}][child_grade]' type="number" min="1" value="{{ old('child.' . $i . '.child_grade',(isset($child[$i]) ? $child[$i]->child_grade : ''))}}" placeholder="Grade" />
-                @error('child.' . $i . '.child_grade')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+            <div class="col-md-6 col-sm-6">
+                <div class="input-style-1">
+                    <input name='child[{{$i}}][child_grade]' type="number" min="1" value="{{ old('child.' . $i . '.child_grade',(isset($child[$i]) ? $child[$i]->child_grade : ''))}}" placeholder="Grade" />
+                    @error('child.' . $i . '.child_grade')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <div class="input-style-1">
-                <input name='child[{{$i}}][child_school]' type="text" value="{{ old('child.' . $i . '.child_school',(isset($child[$i]) ? $child[$i]->child_school : ''))}}" placeholder="School" />
-                @error('child.' . $i . '.child_school')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+            <div class="col-md-6 col-sm-6">
+                <div class="input-style-1">
+                    <input name='child[{{$i}}][child_school]' type="text" value="{{ old('child.' . $i . '.child_school',(isset($child[$i]) ? $child[$i]->child_school : ''))}}" placeholder="School" />
+                    @error('child.' . $i . '.child_school')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
-        </div>
+            </div>
         @endfor
-
 
         <div class="row">
             <div class="col-md-6 col-sm-6">
@@ -145,7 +145,7 @@
             <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-
+    @endif
 
 
 

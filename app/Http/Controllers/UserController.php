@@ -838,8 +838,6 @@ public function userType()
             }
         return view('newdesign.dashboard', compact('image', 'user'));
     }
-
-
     public function ResetPassword(Request $request)
     {
         $email = $request->input('email');
