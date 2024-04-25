@@ -38,7 +38,6 @@ Route::group(['prefix' => 'reading-portal'], function () {
         Route::post('/dashboard/step2/update', [UserController::class, 'updateStep2'])->name('second-step-update');
         Route::post('/dashboard/step3/update', [UserController::class, 'updateStep3'])->name('third-step-update');
         Route::post('/dashboard/step3/update/image', [UserController::class, 'updateStep3Image'])->name('third-step-update-image');
-        Route::post('/dashboard/step4/update', [UserController::class, 'updateStep4'])->name('forth-step-update');
         Route::post('/dashboard/step5/update', [UserController::class, 'updateStep5'])->name('fifth-step-update');
         Route::post('/dashboard/step6/update', [UserController::class, 'updateStep6'])->name('sixth-step-update');
 
@@ -50,6 +49,8 @@ Route::group(['prefix' => 'reading-portal'], function () {
             Route::get('step2', [StudentController::class, 'StudentStep2'])->name('student.second-step');
             Route::get('step3', [StudentController::class, 'StudentStep3'])->name('student.third-step');
             Route::get('step4', [StudentController::class, 'StudentStep4'])->name('student.fifth-step');
+            Route::post('step4/update', [StudentController::class, 'updateStep4'])->name('student.forth-step-update');
+
         });
         Route::prefix('dashboard/reader')->middleware(['reader'])->group(function () {
             Route::get('step1', [UserController::class, 'step1'])->name('reader.first-step');
@@ -58,6 +59,9 @@ Route::group(['prefix' => 'reading-portal'], function () {
             Route::get('step4', [UserController::class, 'step4'])->name('reader.forth-step');
             Route::get('step5', [UserController::class, 'step5'])->name('reader.fifth-step');
             Route::get('step6', [UserController::class, 'step6'])->name('reader.sixth-step');
+        
+            Route::post('step4/update', [UserController::class, 'updateStep4'])->name('reader.forth-step-update');
+
         });
     });
 });
