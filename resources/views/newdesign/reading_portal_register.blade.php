@@ -335,12 +335,66 @@
 
                             <div id="Eligibility" class="tabcontent">
 
-                                <p>Our Reading Portal is a unique online resource for children, teens and adults. The Reading Rortal allows</p>
+                                <p style="margin-bottom:10px!important;">
+                                
+                                
+                                
+                                
+                                The following are eligibility requirements for the Our Kids Read Reading Buddies program:</p>
+<p style="margin-bottom:10px!important;margin-top:10px!important">
+<b>For Reading Buddies (adults/high school students):</b></p>
+<ul>
+<li>a PC or Mac with a functioning camera and microphone</li>
+<li>45 minutes once per week between 4:30 PM EST and 7:45 PM EST to read with a K-5th grade student</li>
+<li>ability to pass a criminal background screening</li>
+<li>willingness to complete the Reading Buddy training process</li>
+<li>a positive, nurturing, fun attitude!</li>
+</ul>
+<p style="margin-bottom:10px!important;margin-top:10px!important">
+<b>For Elementary School participants:</b>
+</p>
+<ul>
+<li>a PC or Mac with a functioning camera and microphone</li>
+<li>45 minutes once per week between 4:30 PM EST and 7:45 PM EST to read with their Reading Buddy</li>
+<li>willingness to participate in a 30-minute on-boarding session</li>
+<li>complete the Reading Buddy program registration process</li>
+               </ul>                 
+                                
+                                
                             </div>
 
                             <div id="Onboarding_process" class="tabcontent">
 
-                                <p>Our Reading Portal is a unique online resource for children, teens and adults. The Reading Rortal allows</p>
+                                <p style="margin-bottom:10px!important;">
+                                
+                                The onboarding process for adult/high school Reading Buddies and the students they serve is outlined below.
+</p>
+<p style="margin-bottom:10px!important;margin-top:10px!important">
+<b>For Reading Buddies (adults/high school students):</b></p>
+<ul>
+<li>complete the online registration process</li>
+<li>participate in a 30-minute onboarding video interview (camera-on)</li>
+<li>successfully complete a criminal background check</li>
+<li>complete a review of the Our Kids Read training videos</li>
+
+</ul>
+<p style="margin-bottom:10px!important;margin-top:10px!important">
+<b>For Elementary School participants:</b>
+</p>
+<ul>
+<li>complete the online registration process</li>
+<li>participate in a 30-minute orientation video interview (camera-on)</li>
+<li>successfully complete a technology check to confirm that the PC or Mac being used meets minimum technical requirements</li>
+
+               </ul>                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                             </div>
                         </div>
                     </div><!-- /.section__content -->
@@ -518,48 +572,14 @@
 
                                     </div><!-- /.form__row -->
 
-
-
-
-
-
-
                                     <div class="form__row">
-
-
-
                                         <label for="field-zip" class="form__label">Zip Code*</label>
-
-
-
-
-
-
-
                                         <div class="form__controls">
-
-
-
                                             <input type="text" class="form__field" maxlength="5" name="zip" id="field-zip" value="{{ old('zip', $data1['user_profile_address_zip']) }}" placeholder="">
-
-
-
                                         </div><!-- /.form__controls -->
-
                                         <div id="val_zip" class="validation_err"></div>
-
                                     </div><!-- /.form__row -->
-
-
-
                                 </div><!-- /.form__body -->
-
-
-
-
-
-
-
                                 <div class="form__actions">
                                     <!-- <input type="button" class="btn" id="register_now" onclick="validateRegistrationForm()" name="submit" value="Submit"> -->
                                     <input type="button" id="register_now" class="form__btn btn btn--secondary" value="Submit" onclick="validateRegistrationForm()">
@@ -581,15 +601,15 @@
 
                                 elementaryRadio.addEventListener('change', function() {
                                     if (this.checked) {
-                                        NameSpan.textContent = "Student First Name*";
-                                        lastSpan.textContent = "Student Last Name*";
+                                        NameSpan.textContent = "Parent First Name*";
+                                        lastSpan.textContent = "Parent Last Name*";
                                     }
                                 });
 
                                 highSchoolRadio.addEventListener('change', function() {
                                     if (this.checked) {
-                                        NameSpan.textContent = "Parent First Name*";
-                                        lastSpan.textContent = "Parent Last Name*";
+                                        NameSpan.textContent = "Reader First Name*";
+                                        lastSpan.textContent = "Reader Last Name*";
                                     }
                                 });
                             </script>

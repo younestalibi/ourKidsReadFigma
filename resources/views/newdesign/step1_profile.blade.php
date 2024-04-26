@@ -27,16 +27,16 @@
     <div class="row">
         <div class="col-12">
             @if($userType=='student')
-            <h6 class="mb-25">Student Information</h6>
-            @else
             <h6 class="mb-25">Parent Information</h6>
+            @else
+            <h6 class="mb-25">Reader Information</h6>
             @endif
         </div>
         <div class="col-md-6 col-sm-6">
             <input name='parent_last_name' type="hidden" value="_" />
             <!-- end input -->
             <div class="input-style-1">
-                <input name='first_name' type="text" value="{{ old('first_name',$user->user_name_first)}}" placeholder="{{$userType=='student'?'Student':'Parent'}} First name" />
+                <input name='first_name' type="text" value="{{ old('first_name',$user->user_name_first)}}" placeholder="{{$userType=='student'?'Parent':'Reader'}} First name" />
                 @error('first_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -48,7 +48,7 @@
             <!-- end input -->
             <input name='student_last_name' type="hidden" value="_" />
             <div class="input-style-1">
-                <input name='last_name' type="text" value="{{ old('last_name',$user->user_name_last)}}" placeholder="{{$userType=='student'?'Student':'Parent'}} Last Name" />
+                <input name='last_name' type="text" value="{{ old('last_name',$user->user_name_last)}}" placeholder="{{$userType=='student'?'Parent':'Reader'}} Last Name" />
                 @error('last_name')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
