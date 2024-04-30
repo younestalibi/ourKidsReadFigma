@@ -823,9 +823,9 @@ public function userType()
             ->where('item_type_id', 17)
             ->where('user_id', $id)
             ->first();
-            if($this->checkStepsVideo($id)){
-                return redirect()->route('main-dashboard');
-            }
+            // if($this->checkStepsVideo($id)){
+            //     return redirect()->route('main-dashboard');
+            // }
         return view('newdesign.dashboard', compact('image', 'user'));
     }
     public function ResetPassword(Request $request)
@@ -864,11 +864,12 @@ public function userType()
             ->where('user_id', $id)
             ->first();
 
-        if($this->checkStepsVideo($id)){
-            return redirect()->route('main-dashboard');
-        }
+        // if($this->checkStepsVideo($id)){
+        //     return redirect()->route('main-dashboard');
+        // }
         return view('newdesign.training', compact('user', 'image'));
     }
+    
     public function checkStepsVideo($id){
         if($this->userType()=='reader'){
             if ($this->Checkerstep1($id)) {
@@ -958,9 +959,9 @@ public function userType()
             ->where('user_id', $id)
             ->first();
 
-            if($this->checkStepsVideo($id)){
-                return redirect()->route('main-dashboard');
-            }
+            // if($this->checkStepsVideo($id)){
+            //     return redirect()->route('main-dashboard');
+            // }
         return view('newdesign.training_video', compact('user', 'image', 'video', 'title', 'description'));
     }
 }

@@ -61,7 +61,7 @@
             @endif
 
             <div class="p-3 d-flex text-sm-left text-md-left justify-content-center flex-column ">
-              <b class="text-white">{{ $user->user_username }}</b>
+              <b class="text-white">{{ $user->user_name_first . ' ' . $user->user_name_last }}</b>
               <div class="text-light">{{ $user->user_email }}</div>
             </div>
           </div>

@@ -419,7 +419,6 @@
                                     </h3>
                                     @endif
 
-
                                     <div class="form__row">
                                         @if(isset ($error_message))
                                         <h5 class="validation" style="font-size:30px; color: red;">
@@ -436,52 +435,17 @@
                                             <div class="">
                                                 <input type="radio" name="okr_student" id="hss" value="2" {{old("okr_student")==2 ? 'checked' : '' }} {{ old('okr_student', $data1['okr_student']) == 2 ? 'checked' : '' }}> <label for="field-okr_student" style="font-size: 2rem; margin-bottom: 0.9rem;">Adult/High School Student (Prospective Reading Buddy)</label>
                                             </div>
-
-
-
                                         </div><!-- /.form__controls -->
-
-
-
                                         <div id="val_okr_student" class="validation_err"></div>
-
                                     </div><!-- /.form__row -->
-
-
-
-
 
                                     <div class="form__row">
-
-
-
                                         <label for="field-fname" id='firstName' class="form__label">Parent First Name*</label>
-
-
-
-
-
-
-
                                         <div class="form__controls">
-
-
-
                                             <input type="text" class="form__field" name="fname" id="field-fname" value="{{ old('fname', $data1['user_name_first']) }}" placeholder="">
-
-
-
                                         </div><!-- /.form__controls -->
-
                                         <div id="val_fname" class="validation_err"></div>
-
                                     </div><!-- /.form__row -->
-
-
-
-
-
-
 
                                     <div class="form__row">
                                         <label for="field-lname" id="lastName" class="form__label">Parent Last Name*</label>
@@ -539,39 +503,14 @@
                                         <div id="val_password" class="validation_err"></div>
 
                                     </div><!-- /.form__row -->
-
-
-
-
-
-
-
                                     <div class="form__row">
-
-
-
                                         <label for="cfield-password" class="form__label">Confirm Password*</label>
-
-
-
-
-
-
-
                                         <div class="form__controls">
-
-
-
                                             <input type="password" maxlength="16" class="form__field" name="cpassword" id="field-cpassword" value="{{ old('password', $data1['user_password']) }}" placeholder="">
-
-
-
                                         </div><!-- /.form__controls -->
-
                                         <div id="val_cpassword" class="validation_err"></div>
-
                                     </div><!-- /.form__row -->
-
+                                    
                                     <div class="form__row">
                                         <label for="field-zip" class="form__label">Zip Code*</label>
                                         <div class="form__controls">

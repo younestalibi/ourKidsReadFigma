@@ -176,11 +176,11 @@
                 <div class="select-style-1">
                     <div class="select-position">
                         <select name="state">
-                            <option value="" disabled>State</option>
+                            <option value="" selected>--Select State--</option>
                             @foreach ($countries as $country)
                             <option value="{{ $country->country_id }}" {{ old('state',$profile->country_id)==$country->country_id  ? 'selected' : '' }}>
                                 {{ $country->country_name }}
-                                {{ old("state",$country->country_id) == $profile->country_id ? 'selected' : '' }}
+                                {{-- {{ old("state",$country->country_id) == $profile->country_id ? 'selected' : '' }} --}}
 
                             </option>
                             @endforeach
@@ -248,7 +248,7 @@
                     <div class="select-style-1">
                         <div class="select-position">
                             <select name="employment">
-                                <option value="" disabled>Employment</option>
+                                <option value="" selected>--Select Employment--</option>
                                 @foreach ($employers as $employer)
                                 <option value="{{ $employer->employer_id }}" {{ old('employment',$profile->employer_id)==$employer->employer_id ? 'selected' : '' }}>
                                     {{ $employer->employer_name }}
