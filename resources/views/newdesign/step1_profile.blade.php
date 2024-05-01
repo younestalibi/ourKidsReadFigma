@@ -29,7 +29,7 @@
             @if($userType=='student')
             <h6 class="mb-25">Parent Information</h6>
             @else
-            <h6 class="mb-25">Reader Information</h6>
+            <h6 class="mb-25">General Information</h6>
             @endif
         </div>
         <div class="col-md-6 col-sm-6">
@@ -89,50 +89,49 @@
 
 
     @if($userType=='student')
-        <div class="row">
-            <div class="col-12">
-                <h6 class="mb-25">Child Information</h6>
+    <div class="row">
+        <div class="col-12">
+            <h6 class="mb-25">Child Information</h6>
+        </div>
+    </div>
+
+    <div class="feature-extra"></div>
+    @for ($i = 0; $i < count(old('child',$child)) ; $i++) <div class="row feature-extra">
+        <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
+        <div class="col-md-6 col-sm-6">
+            <input name='child[{{$i}}][id]' type="hidden" value="{{(isset($child[$i]) ? $child[$i]->child_id : '')}}" />
+            <div class="input-style-1">
+                <input name='child[{{$i}}][child_name_first]' type="text" value="{{ old('child.' . $i . '.child_name_first',(isset($child[$i]) ? $child[$i]->child_name_first : ''))}}" placeholder="Child First Name" />
+                @error('child.' . $i . '.child_name_first')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
-
-        <div class="feature-extra"></div>
-        @for ($i = 0; $i < count(old('child',$child)) ; $i++) 
-            <div class="row feature-extra">
-            <small>Child: <b class='removeFeature text-danger' style="cursor: pointer;">Remove</b></small>
-            <div class="col-md-6 col-sm-6">
-                <input name='child[{{$i}}][id]' type="hidden" value="{{(isset($child[$i]) ? $child[$i]->child_id : '')}}" />
-                <div class="input-style-1">
-                    <input name='child[{{$i}}][child_name_first]' type="text" value="{{ old('child.' . $i . '.child_name_first',(isset($child[$i]) ? $child[$i]->child_name_first : ''))}}" placeholder="Child First Name" />
-                    @error('child.' . $i . '.child_name_first')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="input-style-1">
+                <input name='child[{{$i}}][child_name_last]' type="text" value="{{ old('child.' . $i . '.child_name_last', (isset($child[$i]) ? $child[$i]->child_name_last : ''))}}" placeholder="Child Last Name" />
+                @error('child.' . $i . '.child_name_last')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="input-style-1">
-                    <input name='child[{{$i}}][child_name_last]' type="text" value="{{ old('child.' . $i . '.child_name_last', (isset($child[$i]) ? $child[$i]->child_name_last : ''))}}" placeholder="Child Last Name" />
-                    @error('child.' . $i . '.child_name_last')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="input-style-1">
+                <input name='child[{{$i}}][child_grade]' type="number" min="1" value="{{ old('child.' . $i . '.child_grade',(isset($child[$i]) ? $child[$i]->child_grade : ''))}}" placeholder="Grade" />
+                @error('child.' . $i . '.child_grade')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="input-style-1">
-                    <input name='child[{{$i}}][child_grade]' type="number" min="1" value="{{ old('child.' . $i . '.child_grade',(isset($child[$i]) ? $child[$i]->child_grade : ''))}}" placeholder="Grade" />
-                    @error('child.' . $i . '.child_grade')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="input-style-1">
+                <input name='child[{{$i}}][child_school]' type="text" value="{{ old('child.' . $i . '.child_school',(isset($child[$i]) ? $child[$i]->child_school : ''))}}" placeholder="School" />
+                @error('child.' . $i . '.child_school')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="input-style-1">
-                    <input name='child[{{$i}}][child_school]' type="text" value="{{ old('child.' . $i . '.child_school',(isset($child[$i]) ? $child[$i]->child_school : ''))}}" placeholder="School" />
-                    @error('child.' . $i . '.child_school')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
-            </div>
+        </div>
+        </div>
         @endfor
 
         <div class="row">
@@ -145,7 +144,7 @@
             <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-    @endif
+        @endif
 
 
 
@@ -247,13 +246,15 @@
                     <!--<input name='employent' type="text" placeholder="Employent" />-->
                     <div class="select-style-1">
                         <div class="select-position">
-                            <select name="employment">
+                            <select name="employment" id="employment">
                                 <option value="" selected>--Select Employment--</option>
                                 @foreach ($employers as $employer)
                                 <option value="{{ $employer->employer_id }}" {{ old('employment',$profile->employer_id)==$employer->employer_id ? 'selected' : '' }}>
                                     {{ $employer->employer_name }}
                                 </option>
                                 @endforeach
+
+                                <option id="option-other" value='0' {{ old('other_employer',!$profile->other_employer)?'':'selected' }}>Other Employer</option>
                             </select>
                         </div>
                     </div>
@@ -263,8 +264,8 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">
-                <div class="input-style-1">
-                    <input name='other_employer' value="{{ old('other_employer',$profile->other_employer)}}" type="text" placeholder="Other employer" />
+                <div class="input-style-1" id="other-employment-div" style="{{old('other_employer',!$profile->other_employer)?'display: none;':''}}">
+                    <input name='other_employer' value="{{ old('other_employer',$profile->other_employer)}}" type="text" placeholder="Other Employer" />
                     @error('other_employer')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -281,6 +282,24 @@
 </form>
 
 <script>
+    document.getElementById('employment').addEventListener('change', function() {
+    const otherEmploymentDiv = document.getElementById('other-employment-div');
+    const optionOther = document.getElementById('option-other');
+    
+    // Check if the "Other" option is selected
+    if (this.selectedOptions[0].id === 'option-other') {
+        otherEmploymentDiv.style.display = 'block';
+        // Set the value of the employment field to null (empty string)
+        // this.value = '';
+    } else {
+        otherEmploymentDiv.style.display = 'none';
+        // Clear the other employment input when other is not selected
+        document.getElementById('other_employment').value = '';
+    }
+});
+
+
+
     $(() => {
 
         $(document).on('click', '#featureInputs', function() {

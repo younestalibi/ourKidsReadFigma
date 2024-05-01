@@ -417,8 +417,10 @@ public function userType()
             'zip' => 'required|string',
             'phone' => 'required|string',
             'timezone' => 'required|string',
-            'employment' => 'required|string',
-            'other_employer' => 'nullable|string',
+            'employment' => 'required',
+            'other_employer' => 'nullable|string|required_if:employment,0',
+        ],[
+            'other_employer'=>'The other employer field is required'
         ]);
 
         if($this->userType()=='student'){
@@ -478,7 +480,8 @@ public function userType()
                 'user_name_last' => $inputs['last_name'],
                 'cell_phone' => $inputs['phone']
             ]);
-
+// dd($request->all());
+// dd($inputs);
         DB::table('tbl_user_profile')
             ->where('user_profile_id', $id)
             ->update([
