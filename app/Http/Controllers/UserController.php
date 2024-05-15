@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\Register;
 use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -148,6 +149,11 @@ class UserController extends Controller
                 ->first();
 
             session(['user' => $user]);
+            try {
+                Mail::to($request->input('email'))->bcc(["reading@ourkidsread.org"])->send(new Register($request->input('fname'),$request->input('lname'),now()));
+            } catch (\Exception $e) {
+                return redirect()->route('home-dashboard');
+            }
 
             return redirect()->route('home-dashboard');
 
@@ -164,7 +170,7 @@ class UserController extends Controller
             return Redirect::away($externalLink);
 
             // Send a POST request to the CodeIgniter controller
-            $response = Http::post('https://www.ourkidsreadinc.org/our_kids/static_page/portal/handleLogin', $credentials);
+            $response = Http::post('https://www.ourkidsread.org/our_kids/static_page/portal/handleLogin', $credentials);
 
 
             $responseData = $response->json();
@@ -189,7 +195,7 @@ class UserController extends Controller
             //         $item_id = $firstRow->item_id;
 
             //         if ($item_id == 1) {
-            //             return redirect('https://www.ourkidsreadinc.org/our_kids/student_access/student/dashboard');
+            //             return redirect('https://www.ourkidsread.org/our_kids/student_access/student/dashboard');
             //         }
             //     }
 
@@ -482,6 +488,9 @@ public function userType()
             ]);
 // dd($request->all());
 // dd($inputs);
+        if($inputs['employment']!=0){
+            $inputs['other_employer']=null;
+        }
         DB::table('tbl_user_profile')
             ->where('user_profile_id', $id)
             ->update([
@@ -923,7 +932,7 @@ public function userType()
     {
         $data = [
             1 => [
-                'video' => 'https://www.ourkidsreadinc.org/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
+                'video' => 'https://www.ourkidsread.org/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
                 'title' => '1. READING BUDDIES WELCOME!',
                 'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
             ],
