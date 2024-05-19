@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\Register;
 use App\Mail\ResetPassword;
-use App\Mail\ParentRegister;
-use App\Mail\ReaderRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -34,7 +33,7 @@ class UserController extends Controller
         // else {
 
         $request->validate([
-            'email' => 'required|email|unique:tbl_user,user_email',
+            'email' => 'required|email|unique:tbl_user,email',
         ]);
 
         $allFieldsFilled = true;
@@ -58,20 +57,20 @@ class UserController extends Controller
 
             $data1['item_type_id'] = $item_types[0]['item_type_id'];
 
-            $data1['user_username'] = $request->input('fname') . '' . $request->input('lname');
-            $data1['user_email'] = $request->input('email');
-            $data1['user_password'] = $request->input('password');
+            $data1['name'] = $request->input('fname') . '' . $request->input('lname');
+            $data1['email'] = $request->input('email');
+            $data1['password'] = $request->input('password');
             $data1['user_name_first'] = $request->input('fname');
             $data1['user_name_last'] = $request->input('lname');
 
 
 
-            $email_exists = $userModel->checkEmailExists($data1['user_email']);
+            $email_exists = $userModel->checkEmailExists($data1['email']);
 
             if ($email_exists) {
-                $data1['user_username'] = $request->input('fname') . '' . $request->input('lname');
-                $data1['user_email'] = $request->input('email');
-                $data1['user_password'] = $request->input('password');
+                $data1['name'] = $request->input('fname') . '' . $request->input('lname');
+                $data1['email'] = $request->input('email');
+                $data1['password'] = $request->input('password');
                 $data1['user_name_first'] = $request->input('fname');
                 $data1['user_name_last'] = $request->input('lname');
                 $data1['user_profile_address_zip'] = $request->input('zip');
@@ -114,7 +113,6 @@ class UserController extends Controller
 
 
                 $student = $request->input('okr_student');
-                
                 $item_user_type = $userModel->getItemUserType('tbl_item_type');
 
                 $data2['item_type_id'] = $item_user_type[0]['item_type_id'];
@@ -128,7 +126,7 @@ class UserController extends Controller
                 $data3['signature'] = '';
                 $userModel->storedata($data3, 'tbl_complete_profile');
 
-                $registeredUser = DB::table('tbl_user')->where('user_id', $last_id)->first();
+                $registeredUser = DB::table('tbl_user')->where('id', $last_id)->first();
                 session(['user' => $registeredUser]);
                 session(['id' => $last_id]);
             }
@@ -137,36 +135,33 @@ class UserController extends Controller
             session()->flash('flash_msg_text', 'Successfully registered');
 
             // Login the user
-            //$user_data = $userModel->loginCredentials('tbl_user',$data1['user_email'], $data1['user_password']);
+            //$user_data = $userModel->loginCredentials('tbl_user',$data1['email'], $data1['password']);
 
 
             $credentials = [
-                'user_email' => $data1['user_email'],
-                'user_password' => $data1['user_password'],
+                'email' => $data1['email'],
+                'password' => $data1['password'],
             ];
 
             $user = DB::table('tbl_user')
-                ->where('user_email', $data1['user_email'])
-                ->where('user_password', $data1['user_password'])
+                ->where('email', $data1['email'])
+                ->where('password', $data1['password'])
                 ->first();
 
             session(['user' => $user]);
             try {
-                if($request->input('okr_student')=="1"){
-                    Mail::to($request->input('email'))->bcc(["reading@ourkidsread.org"])->send(new ParentRegister($request->input('fname'),$request->input('lname'),now()));
-                }else if($request->input('okr_student')=="2"){
-                    Mail::to($request->input('email'))->bcc(["reading@ourkidsread.org"])->send(new ReaderRegister($request->input('fname'),$request->input('lname'),now()));
-                }
+                Mail::to($request->input('email'))->send(new Register($request->input('fname'),$request->input('lname'),now()));
             } catch (\Exception $e) {
-            return redirect()->route('main-dashboard');
+                return redirect()->route('home-dashboard');
             }
 
+            return redirect()->route('home-dashboard');
+
             return redirect()->route('main-dashboard');
 
-
             return Redirect::route('reading-portal-login')->with([
-                'email' => $credentials['user_email'],
-                'password' => $credentials['user_password']
+                'email' => $credentials['email'],
+                'password' => $credentials['password']
             ]);
 
             $externalLink = 'https://ourkidsreadinc.org/our_kids/ourkids_login?uid=' . $last_id;
@@ -184,7 +179,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Data sent successfully']);
 
             // if ($user_data) {
-            //     session(['user_id' => $user_data['user_id'], 'user_email' => $user_data['user_email']]);
+            //     session(['user_id' => $user_data['user_id'], 'email' => $user_data['email']]);
 
 
             //  $userId = $user_data['user_id'];
@@ -219,13 +214,13 @@ class UserController extends Controller
         $password = $request->password;
 
         $user = DB::table('tbl_user')
-            ->where('user_email', $email)
-            ->where('user_password', $password)
+            ->where('email', $email)
+            ->where('password', $password)
             ->first();
 
         if ($user) {
             session(['user' => $user]);
-            session(['id' => $user->user_id]);
+            session(['id' => $user->id]);
             return redirect()->route('home-dashboard');
 
             return redirect()->route('main-dashboard');
@@ -241,8 +236,8 @@ class UserController extends Controller
     public function dashboard()
     {
 
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
-        $id = $user->user_id;
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
+        $id = $user->id;
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
@@ -265,7 +260,6 @@ public function userType()
             ->where('user_id', session('id'))
             ->where('item_type_id', 12)
             ->first();
-            
 
     return $item->item_id == 2 ? 'reader' : 'student';
 }
@@ -385,11 +379,13 @@ public function userType()
     }
     public function step1(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
 
         $profile = DB::table('tbl_user_profile')
-            ->where('user_profile_id', $user->user_id)
+            ->where('user_profile_id', $user->id)
             ->first();
+
+            
 
         $employers = DB::table('tbl_employer')->get();
 
@@ -398,25 +394,25 @@ public function userType()
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
 
-        $child = DB::table('tbl_child')->where('user_id', $user->user_id)->get();
+        $child = DB::table('tbl_child')->where('user_id', $user->id)->get();
 
         $userType=$this->userType();
         return view('newdesign.step1_profile', compact('user', 'userType','child', 'image', 'profile', 'employers', 'countries'));
     }
     public function updateStep1(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $childIds = collect($request->child)->pluck('id')->toArray();
-        DB::table('tbl_child')->where('user_id', $user->user_id)   
+        DB::table('tbl_child')->where('user_id', $user->id)   
         ->whereNotIn('child_id', $childIds)
         ->delete();
 
-        $id = $user->user_id;
+        $id = $user->id;
         $inputs = $request->validate([
-            'email' => 'required|email|unique:tbl_user,user_email,' . $user->user_id . ',user_id',
+            'email' => 'required|email|unique:tbl_user,email,' . $user->id . ',id',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'parent_first_name' => 'required|string',
@@ -459,17 +455,17 @@ public function userType()
             foreach ($data['child'] as $child) {
                 if(is_null($child['id'])){
                     DB::table('tbl_child')->insert([
-                        'user_id' => $user->user_id,
+                        'user_id' => $user->id,
                         'child_school' => $child['child_school'],
                         'child_grade' => $child['child_grade'],
                         'child_name_first' => $child['child_name_first'],
                         'child_name_last' => $child['child_name_last'],
                     ]);
                 }else{
-                    DB::table('tbl_child')->where('user_id',$user->user_id)
+                    DB::table('tbl_child')->where('user_id',$user->id)
                     ->where('child_id',$child['id'])
                     ->update([
-                        'user_id' => $user->user_id,
+                        'user_id' => $user->id,
                         'child_school' => $child['child_school'],
                         'child_grade' => $child['child_grade'],
                         'child_name_first' => $child['child_name_first'],
@@ -481,9 +477,9 @@ public function userType()
 
 
         DB::table('tbl_user')
-            ->where('user_id', $id)
+            ->where('id', $id)
             ->update([
-                'user_email' => $inputs['email'],
+                'email' => $inputs['email'],
                 'parent_fname' => $inputs['parent_first_name'],
                 'parent_lname' => $inputs['parent_last_name'],
                 'student_fname' => $inputs['student_first_name'],
@@ -494,9 +490,6 @@ public function userType()
             ]);
 // dd($request->all());
 // dd($inputs);
-        if($inputs['employment']!=0){
-            $inputs['other_employer']=null;
-        }
         DB::table('tbl_user_profile')
             ->where('user_profile_id', $id)
             ->update([
@@ -545,37 +538,37 @@ public function userType()
     public function step2(Request $request)
     {
         // $user = session('user');
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
         return view('newdesign.step2_training', compact('user', 'image'));
     }
     public function updateStep2(Request $request)
     {
         $videoId = $request->videoId;
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         switch ($videoId) {
             case 1:
                 DB::table('tbl_user_profile')
-                    ->where('user_profile_id', $user->user_id)
+                    ->where('user_profile_id', $user->id)
                     ->update(['video_1_completed' => 1]);
                 break;
             case 2:
                 DB::table('tbl_user_profile')
-                    ->where('user_profile_id', $user->user_id)
+                    ->where('user_profile_id', $user->id)
                     ->update(['video_2_completed' => 1]);
                 break;
             case 3:
                 DB::table('tbl_user_profile')
-                    ->where('user_profile_id', $user->user_id)
+                    ->where('user_profile_id', $user->id)
                     ->update(['video_3_completed' => 1]);
                 break;
             case 4:
                 DB::table('tbl_user_profile')
-                    ->where('user_profile_id', $user->user_id)
+                    ->where('user_profile_id', $user->id)
                     ->update(['video_4_completed' => 1]);
                 break;
             default:
@@ -584,22 +577,22 @@ public function userType()
         }
 
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
+            ->where('user_profile_id', $user->id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step2_status' => 1]);
         return response()->json(['success' => true]);
     }
 
     public function step3(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $profile = DB::table('tbl_user_profile')
-            ->where('user_profile_id', $user->user_id)
+            ->where('user_profile_id', $user->id)
             ->first();
 
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
         $userType=$this->userType();
         return view('newdesign.step3_image', compact('user', 'userType','profile', 'image'));
@@ -619,17 +612,17 @@ public function userType()
             'user_think.max' => 'Please limit your explanation to a maximum of 1000 characters to explain why you think reading is important to you (100-1000 characters)',
         ]);
 
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
 
         DB::table('tbl_user_profile')
-            ->where('user_profile_id', $user->user_id)
+            ->where('user_profile_id', $user->id)
             ->update([
                 'user_other_activities' => $request->user_other_activities,
                 'user_think' => $request->user_think
             ]);
 
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) 
+            ->where('user_profile_id', $user->id) 
             ->update(['step3_status' => 1]);
 
 
@@ -646,9 +639,9 @@ public function userType()
         ], [
             'picture.max' => 'The picture must not be greater than 2MB.',
         ]);
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
 
-        $existingImage = DB::table('tbl_image')->where('user_id', $user->user_id)->first();
+        $existingImage = DB::table('tbl_image')->where('user_id', $user->id)->first();
         if ($request->hasFile('picture')) {
             if ($existingImage) {
                 $existingImagePath = $existingImage->image_path;
@@ -657,7 +650,7 @@ public function userType()
                 if (file_exists($pathWithoutStorage)) {
                     unlink($pathWithoutStorage);
                 }
-                DB::table('tbl_image')->where('user_id', $user->user_id)->delete();
+                DB::table('tbl_image')->where('user_id', $user->id)->delete();
             }
 
 
@@ -665,7 +658,7 @@ public function userType()
             $fileName = pathinfo($path, PATHINFO_BASENAME);
             $filePath = asset('storage/' . $path);
             DB::table('tbl_image')->updateOrInsert(
-                ['user_id' => $user->user_id],
+                ['user_id' => $user->id],
                 ['image_path' => $filePath, 'image_name' => $fileName]
             );
         }
@@ -674,18 +667,18 @@ public function userType()
     }
     public function step4(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $profile = DB::table('tbl_user_profile')
-            ->where('user_profile_id', $user->user_id)
+            ->where('user_profile_id', $user->id)
             ->first();
         $scheduale = DB::table('tbl_sched_availability')->get();
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
         $selectedItemIds = DB::table('tbl_item_user')
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->where('item_type_id', 11)
             ->pluck('item_id')
             ->toArray();
@@ -719,31 +712,31 @@ public function userType()
             'scheduale.required' => 'Please select at least one day/time that you are available to participate in the program (ideally 5-10 session times that work with your schedule).',
         ]);
 
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
 
         if ($request->has('week_time')) {
             $weekTime = $request->input('week_time');
             DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
+                ->where('user_profile_id', $user->id)
                 ->update(['week_time' => $weekTime]);
         } else {
             DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
+                ->where('user_profile_id', $user->id)
                 ->update(['week_time' => null]);
         }
         if ($request->has('languages')) {
             $speakLanguageString = json_encode($request->input('languages'));
             DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
+                ->where('user_profile_id', $user->id)
                 ->update(['speak_language' => $speakLanguageString]);
         } else {
             DB::table('tbl_user_profile')
-                ->where('user_profile_id', $user->user_id)
+                ->where('user_profile_id', $user->id)
                 ->update(['speak_language' => null]);
         }
         // Delete existing records for the user ID
         DB::table('tbl_item_user')
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->where('item_type_id', 11)
             ->delete();
 
@@ -753,32 +746,32 @@ public function userType()
                 DB::table('tbl_item_user')->insert([
                     'item_id' => $itemId,
                     'item_type_id' => 11,
-                    'user_id' => $user->user_id
+                    'user_id' => $user->id
                 ]);
             }
         }
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
+            ->where('user_profile_id', $user->id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step4_status' => 1]);
 
         return redirect()->route('reader.fifth-step');
     }
     public function step5(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
-        $checked = $this->Checkerstep5($user->user_id);
+        $checked = $this->Checkerstep5($user->id);
         return view('newdesign.step5_responsibilites', compact('user', 'image', 'checked'));
     }
     public function updateStep5(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id)
+            ->where('user_profile_id', $user->id)
             ->update(['step5_status' => 1]);
 
             if($this->userType()=='student'){
@@ -789,14 +782,14 @@ public function userType()
     }
     public function step6(Request $request)
     {
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
         $image = DB::table('tbl_image')
             ->select('image_path')
             ->where('item_type_id', 17)
-            ->where('user_id', $user->user_id)
+            ->where('user_id', $user->id)
             ->first();
         $signature = $user->user_name_first . ' ' . $user->user_name_last;
-        $checked = $this->Checkerstep6($user->user_id);
+        $checked = $this->Checkerstep6($user->id);
         return view('newdesign.step6_pleadge', compact('user', 'image', 'signature', 'checked'));
     }
     public function updateStep6(Request $request)
@@ -806,12 +799,12 @@ public function userType()
         ]);
 
         $signature = $request->input('signature');
-        $user = DB::table('tbl_user')->where('user_id', session('id'))->first();
-        $userId = $user->user_id;
+        $user = DB::table('tbl_user')->where('id', session('id'))->first();
+        $userId = $user->id;
 
         $userProfile = DB::table('tbl_user')
             ->select('user_name_first', 'user_name_last')
-            ->where('user_id', $userId)
+            ->where('id', $userId)
             ->first();
         $fullName = $userProfile->user_name_first . ' ' . $userProfile->user_name_last;
 
@@ -825,7 +818,7 @@ public function userType()
         );
 
         DB::table('tbl_complete_step')
-            ->where('user_profile_id', $user->user_id) // Assuming you have a user_id column in tbl_complete_step
+            ->where('user_profile_id', $user->id) // Assuming you have a user_id column in tbl_complete_step
             ->update(['step6_status' => 1]);
 
         return redirect()->route('home-dashboard');
@@ -834,7 +827,7 @@ public function userType()
     public function home()
     {
         $id = session('id');
-        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+        $user = DB::table('tbl_user')->where('id', $id)->first();
 
         $image = DB::table('tbl_image')
             ->select('image_path')
@@ -851,18 +844,19 @@ public function userType()
         $email = $request->input('email');
 
         $user = DB::table('tbl_user')
-            ->where('user_email', $email)
-            ->whereNotNull('user_email')->first();
+            ->where('email', $email)
+            ->whereNotNull('email')->first();
 
         if (!$user) {
             return redirect()->back()->withErrors(['email' => 'Email address not found.'])->withInput();
         }
 
-        $password = $user->user_password; // Retrieve the password from the database
+        $password = $user->password; // Retrieve the password from the database
         try {
             Mail::to($email)->send(new ResetPassword($password));
             return redirect()->back()->with('success', 'Your password has been sent to your email address.');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Email sending failed, try later');
         }
     }
@@ -874,7 +868,7 @@ public function userType()
     public function training()
     {
         $id = session('id');
-        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+        $user = DB::table('tbl_user')->where('id', $id)->first();
 
         $image = DB::table('tbl_image')
             ->select('image_path')
@@ -938,22 +932,22 @@ public function userType()
     {
         $data = [
             1 => [
-                'video' => 'https://www.ourkidsread.org/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
+                'video' => '/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
                 'title' => '1. READING BUDDIES WELCOME!',
                 'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
             ],
             2 => [
-                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
+                'video' => '/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
                 'title' => '2. INTRODUCTION TO THE PROGRAM',
                 'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
             ],
             3 => [
-                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
+                'video' => '/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
                 'title' => '3. DIFFEENT STYLES OF READING',
                 'description' => 'Introduction to the Our Kids Read Reading Buddies program. Understand the time commitment, logistics and FAQs.'
             ],
             4 => [
-                'video' => 'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_getting_to_know_your_student3.mp4',
+                'video' => '/our_kids/assetsnew/videos/reading_buddies_training_-_getting_to_know_your_student3.mp4',
                 'title' => '4. UNDERSTANDING YOUR BUDDY’S READING PREFERENCES',
                 'description' => 'The first time you read with your student, the absolute most important objective (after developing rapport) is to understand your students interests. This will, in turn, help you identify books the she/he will enjoy.'
             ]
@@ -969,7 +963,7 @@ public function userType()
 
 
         $id = session('id');
-        $user = DB::table('tbl_user')->where('user_id', $id)->first();
+        $user = DB::table('tbl_user')->where('id', $id)->first();
 
         $image = DB::table('tbl_image')
             ->select('image_path')

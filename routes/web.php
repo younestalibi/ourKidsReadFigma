@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('newdesign.email.volunteerThanks');
+    return view('newdesign.email.ParentRegisterWelcome');
 });
 
 Route::group(['prefix' => 'reading-portal'], function () {

@@ -304,7 +304,7 @@
                                                                                         39
                                                                                     );
                                                                                     font-family: Arial;
-                                                                                "><strong>Thank you</strong></span>
+                                                                                "><strong></strong></span>
                                                                             </p>
                                                                             <p style="
                                                                                 line-height: 1.25;
@@ -319,7 +319,7 @@
                                                                                         39
                                                                                     );
                                                                                     font-family: Arial;
-                                                                                "><strong>For being part of Our Kids Read!</strong></span>
+                                                                                "><strong></strong></span>
                                                                             </p>
                                                                         </div>
                                                                     </td>
@@ -401,8 +401,22 @@
                                                                                         85
                                                                                     );
                                                                                     font-size: 15px;
-                                                                                ">Hi {{$firstname.' '.$lastname}}, <br>
-                                                                                    Welcome to OurKidsRead! We're thrilled to have you join our community of passionate readers and educators. Whether you're a parent, teacher, or someone who loves children's literature, you've found the right place!</span>
+                                                                                ">Hi <b>{{$firstname.' '.$lastname}}</b>, <br>
+                                                                                    Welcome to Our Kids Read! We're thrilled to have you join our community of passionate readers and educators. Whether you're a parent, teacher, or someone who loves children's literature, you've found the right place!
+                                                                                    <br>
+                                                                                    You have signed up to read with one of our students and we are excited to make a match!
+                                                                                    <br>
+                                                                                    One of our staff will be in touch with you within the next 1-2 business days to arrange an onboarding session for you.
+                                                                                    <br>
+                                                                                    Welcome to the Our Kids Read family!
+                                                                                    <br>
+                                                                                    Warmest Regards,
+                                                                                    <br><br>
+                                                                                    Our Kids Read Program Team
+                                                                                    <a href="https://www.ourkidsread.org">https://www.ourkidsread.org</a>
+                                                                                    reading@ourkidsread.org
+
+                                                                                </span>
                                                                             </p>
                                                                             <p style="
                                                                                 text-align: center;
