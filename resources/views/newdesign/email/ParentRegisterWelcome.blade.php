@@ -402,10 +402,13 @@
                                                                                     );
                                                                                     font-size: 15px;
                                                                                 ">Hi <b>{{$firstname.' '.$lastname}}</b>, <br>
-                                                                                    Welcome to Our Kids Read! We're thrilled to have you join our community of passionate readers and educators. Whether you're a parent, teacher, or someone who loves children's literature, you've found the right place!
+                                                                                    Welcome to Our Kids Read! <br>
                                                                                     <br>
+                                                                                     We're thrilled to have you join our community of passionate readers and educators. Whether you're a parent, teacher, or someone who loves children's literature, you've found the right place!
+                                                                                    <br><br>
                                                                                     You have signed your child up for our reading program and we are excited to match her/him with one of our Reading Buddies.
                                                                                     One of our staff will be in touch with you within the next 1-2 business days to arrange an onboarding session for you.
+                                                                                    <br>
                                                                                     <br>
                                                                                     Welcome to the Our Kids Read family!
                                                                                     <br>
@@ -414,6 +417,10 @@
                                                                                     Our Kids Read Program Team
                                                                                     <a href="https://www.ourkidsread.org">https://www.ourkidsread.org</a>
                                                                                     reading@ourkidsread.org
+                                                                                    <br>
+                                                                                    <a href="https://www.ourkidsread.org/make-a-donation">Donate</a>
+                                                                                    <br>
+                                                                                    <a href="https://ourkidsread.org/reading-portal/onboarding">To continue registration</a>
                                                                                 </span>
                                                                             </p>
                                                                             <p style="

@@ -402,11 +402,26 @@
                                                                                     );
                                                                                     font-size: 15px;
                                                                                 ">Hi <b>{{$firstname.' '.$lastname}}</b>, <br>
-                                                                                    Welcome to Our Kids Read! We're thrilled to have you join our community of passionate readers and educators. Whether you're a parent, teacher, or someone who loves children's literature, you've found the right place!
+                                                                                    Welcome to Our Kids Read!<br>
                                                                                     <br>
-                                                                                    You have signed up to read with one of our students and we are excited to make a match!
+                                                                                    We're thrilled to have you join
+                                                                                    our community of passionate readers
+                                                                                    and mentors. Whether you are a
+                                                                                    parent, teacher or someone who loves
+                                                                                    children and children's literature,
+                                                                                    you've come to the right place!
                                                                                     <br>
-                                                                                    One of our staff will be in touch with you within the next 1-2 business days to arrange an onboarding session for you.
+                                                                                    <br>
+                                                                                    You have signed up to read with one
+                                                                                    of our students and we are excited to
+                                                                                    make a match!
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    One of our staff will be in touch with
+                                                                                    you within the next 1-2 business days
+                                                                                    to arrange an onboarding session with
+                                                                                    you.
+                                                                                    <br>
                                                                                     <br>
                                                                                     Welcome to the Our Kids Read family!
                                                                                     <br>
@@ -415,6 +430,11 @@
                                                                                     Our Kids Read Program Team
                                                                                     <a href="https://www.ourkidsread.org">https://www.ourkidsread.org</a>
                                                                                     reading@ourkidsread.org
+                                                                                    <br>
+                                                                                    <a href="https://www.ourkidsread.org/make-a-donation">Donate</a>
+                                                                                    <br>
+                                                                                    <a href="https://ourkidsread.org/reading-portal/onboarding">To continue registration</a>
+
 
                                                                                 </span>
                                                                             </p>
