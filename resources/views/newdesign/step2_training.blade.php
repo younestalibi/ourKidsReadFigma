@@ -41,7 +41,7 @@
 
 
   <video id="myVideo" controls>
-    <source id="videoSource" src="https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4" type="video/mp4">
+    <source id="videoSource" src="https://ourkidsread.org/public/newdesign/videos/reading_buddies_training_-_student_led_learning4.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <!--<div class="embed-responsive embed-responsive-16by9 ">
@@ -77,10 +77,10 @@ VIDEO</button>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var videos = [
-      'https://www.ourkidsreadinc.org/our_kids/assetsnew/videos/reading_budies_training_-_welcome1.mp4',
-      'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_intro_to_the_program2.mp4',
-      'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_getting_to_know_your_student3.mp4',
-      'https://ourkidsreadinc.org/our_kids/assetsnew/videos/reading_buddies_training_-_student_led_learning4.mp4',
+      'https://ourkidsread.org/public/newdesign/videos/reading_budies_training_-_welcome1.mp4',
+      'https://ourkidsread.org/public/newdesign/videos/reading_buddies_training_-_intro_to_the_program2.mp4',
+      'https://ourkidsread.org/public/newdesign/videos/reading_buddies_training_-_getting_to_know_your_student3.mp4',
+      'https://ourkidsread.org/public/newdesign/videos/reading_buddies_training_-_student_led_learning4.mp4',
     ];
     var title1 = [
       "1. Video 1 of 4: Welcome to the Our Kids Read Reading Buddies Program",
