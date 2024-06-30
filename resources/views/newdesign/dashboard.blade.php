@@ -32,7 +32,7 @@
         body {
             font-family: Montserrat;
             /* height: 100vh; */
-            background-image: url("https://www.ourkidsreadinc.org/myimg/dashboard/bg.webp");
+            background-image: url("https://www.ourkidsread.org/myimg/dashboard/bg.webp");
             background-size: cover;
             background-color: inherit !important;
         }
@@ -76,6 +76,7 @@
             background: #C4E8E0;
             color: #004750;
         }
+
         ul .nav-item-active {
             background: #C4E8E0;
             color: black;
@@ -373,11 +374,11 @@
         <div class="contain">
             <div class="sidebar">
                 <div class="logo">
-                    <img src="https://www.ourkidsreadinc.org/public/new/assets/images/logo.svg" alt="logo" />
+                    <img src="https://www.ourkidsread.org/public/new/assets/images/logo.svg" alt="logo" />
                 </div>
 
                 <div id="newHanburger" class="hamburger">
-                    <span><img onClick="toggleSidebar()" src="https://www.ourkidsreadinc.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
+                    <span><img onClick="toggleSidebar()" src="https://www.ourkidsread.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
                 </div>
                 <div class="menu">
                     <ul>
@@ -395,76 +396,87 @@
 
                                 <div class="p-3 d-flex text-sm-left text-md-left justify-content-center flex-column ">
                                     <b class="text-white">{{ $user->user_name_first . ' ' . $user->user_name_last }}</b>
-                                    <div class="text-light">{{ $user->user_email }}</div>
+                                    <div class="text-light">{{ $user->email }}</div>
                                 </div>
                             </div>
                         </li>
-                        <li class="{{ request()->routeIs(['home-dashboard']) ? 'nav-item-active' : '' }}"  onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" />
+                        @if ($user->sms_opt_in_flag)
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            You are opted in for SMS alerts!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @else
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            You are still not opted in for SMS alerts!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+                        <li class="{{ request()->routeIs(['home-dashboard']) ? 'nav-item-active' : '' }}" onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/home_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/home_w.png" alt="home" />
                             </span>
                             <a href="{{route('home-dashboard')}}">Home</a>
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="onboarding" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/setting_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/setting_w.png" alt="onboarding" />
                             </span>
                             <a href="{{route('main-dashboard')}}">OnBoarding</a>
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/traning_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/traning_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/training_w.png" alt="traning" />
                             </span>
                             <a href="{{route('training')}}">Training</a>
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="setting" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/setting_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/setting_w.png" alt="setting" />
                             </span>
                             Surveys And Tools
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png" alt="puzzle" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png" alt="puzzle" />
                             </span>
                             Reading Library
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png" alt="puzzle" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png" alt="puzzle" />
                             </span>
                             Games
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/fantasy_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/fantasy_w.png" alt="fantasy" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/fantasy_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/fantasy_w.png" alt="fantasy" />
                             </span>
                             Animated Stories
                         </li>
                         <li onmouseover="changeImageSrc(this)" onmouseout="restoreImageSrc(this)">
-                            <span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/book_w.png">
-                                <img src="https://www.ourkidsreadinc.org/myimg/dashboard/book_w.png" alt="book" />
+                            <span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/book_w.png">
+                                <img src="https://www.ourkidsread.org/myimg/dashboard/book_w.png" alt="book" />
                             </span>
                             Free Books
                         </li>
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" /></span>Home</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning" /></span>Traning</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="home" /></span>Surveys And Tools</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home" /></span>Reading Library</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png" alt="puzzle" /></span>Games</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/fantasy_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/fantasy_w.png" alt="fantasy" /></span>Animated Stories</li>-->
-                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsreadinc.org/myimg/dashboard/book_w.png"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/book_w.png" alt="book" /></span>Free Books</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/home_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/home_w.png" alt="home" /></span>Home</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/training_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/training_w.png" alt="traning" /></span>Traning</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/setting_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/setting_w.png" alt="home" /></span>Surveys And Tools</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/home_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/home_w.png" alt="home" /></span>Reading Library</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png" alt="puzzle" /></span>Games</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/fantasy_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/fantasy_w.png" alt="fantasy" /></span>Animated Stories</li>-->
+                        <!--<li><span class="menu-icon" data-original-image="https://www.ourkidsread.org/myimg/dashboard/book_w.png"><img src="https://www.ourkidsread.org/myimg/dashboard/book_w.png" alt="book" /></span>Free Books</li>-->
                     </ul>
                 </div>
                 <div class="chat">
-                    <div class="avatar"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/avatar.webp" alt="avatar" /></div>
+                    <div class="avatar"><img src="https://www.ourkidsread.org/myimg/dashboard/avatar.webp" alt="avatar" /></div>
                     <div class="chat_btn">Live Chat Help</div>
                 </div>
             </div>
             <div class="main">
 
                 <div class="hambuger">
-                    <span><img onClick="toggleSidebar()" src="https://www.ourkidsreadinc.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
+                    <span><img onClick="toggleSidebar()" src="https://www.ourkidsread.org/myimg/dashboard/hambuger.svg" alt="menu" /></span>
                     <form class="ml-auto" action="{{route('reading-portal-logout')}}" method="post">
                         @csrf
                         <button type="submit" style="background: none; border: none;">
@@ -475,18 +487,18 @@
                 <div class="hambuger">READING SESSIONS</div>
                 <div class="profile-announce" style="display: flex; gap: 30px; flex: 1">
                     <div class="dashboard_profile">
-                        <div class="banner"><img src="https://www.ourkidsreadinc.org/myimg/dashboard/anna_banner.png" alt="banner" /></div>
+                        <div class="banner"><img src="https://www.ourkidsread.org/myimg/dashboard/anna_banner.png" alt="banner" /></div>
                         <div>
                             <div class="detail">
                                 <div class="name">Anna</div>
-                                <div class="age" style="display: flex"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/age.png" alt="age" style="width: 15px; height: 15px" /></span>9 years old</div>
-                                <div class="address" style="display: flex"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/location.png" alt="age" style="width: 15px; height: 15px" /></span>New York, NY 3rd Grade</div>
-                                <div class="interest" style="display: flex"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/love.png" alt="age" style="width: 15px; height: 15px" /></span>Interests: Pizza soccer, bownling</div>
+                                <div class="age" style="display: flex"><span><img src="https://www.ourkidsread.org/myimg/dashboard/age.png" alt="age" style="width: 15px; height: 15px" /></span>9 years old</div>
+                                <div class="address" style="display: flex"><span><img src="https://www.ourkidsread.org/myimg/dashboard/location.png" alt="age" style="width: 15px; height: 15px" /></span>New York, NY 3rd Grade</div>
+                                <div class="interest" style="display: flex"><span><img src="https://www.ourkidsread.org/myimg/dashboard/love.png" alt="age" style="width: 15px; height: 15px" /></span>Interests: Pizza soccer, bownling</div>
                             </div>
                         </div>
                     </div>
                     <div class="announcement">
-                        <div class="icon"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/announcement.png" alt="icon" /></span></div>
+                        <div class="icon"><span><img src="https://www.ourkidsread.org/myimg/dashboard/announcement.png" alt="icon" /></span></div>
                         <div class="header" style="text-align: center">Announcements</div>
                         <div>Reading Budy Sessions Paused for the week of May 20, 2024, in between Spring and Summer sessions<br /><br />
                             New Tranining Available: Developing, Rapport with Your Student
@@ -501,7 +513,7 @@
                             </div>
                             <div class="schedule_btn">CLICK HERE TO CONNECT TO YOUR SESSION</div>
                         </div>
-                        <div class="header"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/news.png" alt="inbox_icon" /></span>INBOX</div>
+                        <div class="header"><span><img src="https://www.ourkidsread.org/myimg/dashboard/news.png" alt="inbox_icon" /></span>INBOX</div>
                         <div class="table">
                             <table>
                                 <tr>
@@ -533,7 +545,7 @@
                         </div>
                     </div>
                     <div class="news">
-                        <div class="icon"><span><img src="https://www.ourkidsreadinc.org/myimg/dashboard/news.png" alt="icon" /></span></div>
+                        <div class="icon"><span><img src="https://www.ourkidsread.org/myimg/dashboard/news.png" alt="icon" /></span></div>
                         <div class="header" style="text-align: center">News</div>
                         <div>New Jersey Schools Facing 2024-2025 Budget Cuts</div>
                         <div>________________________</div>

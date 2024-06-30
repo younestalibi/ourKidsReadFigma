@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -62,15 +63,27 @@
 
             <div class="p-3 d-flex text-sm-left text-md-left justify-content-center flex-column ">
               <b class="text-white">{{ $user->user_name_first . ' ' . $user->user_name_last }}</b>
-              <div class="text-light">{{ $user->user_email }}</div>
+              <div class="text-light">{{ $user->email }}</div>
             </div>
           </div>
         </li>
+        @if ($user->sms_opt_in_flag)
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          You are opted in for SMS alerts!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @else
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          You are still not opted in for SMS alerts!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
 
         <li class="nav-item d-flex border-secondary justify-content-between p-3 {{ request()->routeIs(['home-dashboard']) ? 'nav-item-active' : '' }}">
           <div class="d-flex align-items-center w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/home_w.png" alt="home">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/home_w.png" alt="home">
             </div>
             <div class="list-text"><a href="{{route('home-dashboard')}}"><b>Home</b></a></div>
           </div>
@@ -79,7 +92,7 @@
 
           <div class="d-flex align-items-center  w-100 ">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="onBoarding">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/setting_w.png" alt="onBoarding">
             </div>
             <div class="list-text"><a href="{{route('main-dashboard')}}">OnBoarding</a></div>
           </div>
@@ -88,17 +101,17 @@
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/training_w.png" alt="traning">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/training_w.png" alt="traning">
             </div>
             <div class="list-text"><a href="{{route('training')}}">Training
-          </a></div>
+              </a></div>
           </div>
         </li>
         <li class=" nav-item d-flex border-secondary justify-content-between p-3 ">
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/setting_w.png" alt="setting">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/setting_w.png" alt="setting">
             </div>
             <div class="list-text"><a href="">Surveys And Tools</a></div>
           </div>
@@ -107,7 +120,7 @@
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png" alt="puzzle">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png" alt="puzzle">
             </div>
             <div class="list-text"><a href="">Games</a></div>
           </div>
@@ -116,7 +129,7 @@
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/fantasy_w.png" alt="fantasy">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/fantasy_w.png" alt="fantasy">
             </div>
             <div class="list-text"><a>Animated Stories</a></div>
           </div>
@@ -125,7 +138,7 @@
 
           <div class="d-flex align-items-center  w-100">
             <div class="list-icon">
-              <img class="list-img" src="https://www.ourkidsreadinc.org/myimg/dashboard/puzzle_w.png" alt="puzzle">
+              <img class="list-img" src="https://www.ourkidsread.org/myimg/dashboard/puzzle_w.png" alt="puzzle">
             </div>
             <div class="list-text"><a href="">Free Books</a></div>
           </div>
@@ -134,7 +147,7 @@
           <div class="row d-flex justify-content-center align-items-center">
             <div class=" d-flex justify-content-center col-md-4">
               <div class="image ">
-                <img class="rounded" src="https://www.ourkidsreadinc.org/myimg/dashboard/avatar.webp" alt="" />
+                <img class="rounded" src="https://www.ourkidsread.org/myimg/dashboard/avatar.webp" alt="" />
                 <!--<img class="rounded-circle" src="https://s3-alpha-sig.figma.com/img/66b2/132a/13e8d368acee97c5f223fc6662b5b1f2?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=OO7vJXxG18mkBKD60No-2IiJ0Qs3QsM6SN~ni6SBfrL1f1pwm7XP-g545jai3jerANf7YmrWyPju3BsdiklbDvTdv7AirvM-uH01fwCe-FfIO4vEmTpIhBDxEEYiMJG3hMTR-Zj2IlsfXxJZm4~ceaVbGrnjklG5sCjdt7ybBihki4y7J3ZqU1qA64ojTTiOuIjIqe5~bOrnKGj7FPcCDcQO21Z5ry6UwDtt6j3VuSFyUV-USUenK1gvBWZQzx9gJhavzGMP56cqUVUlDiuvuXS4VQypPJKRrmycIQGAb7if0Ho6h1~me~QmpCpOrQpbEuDoYBBwWH9p18giBx9qjQ__" alt="" />-->
               </div>
             </div>
@@ -174,7 +187,7 @@
               <div class="menu-toggle-btn mr-15 d-flex align-items-center">
                 <button id="menu-toggle" class="main-btn rounded-circle primary-btn btn-hover">
                   <!--<i class="lni lni-chevron-left me-2"></i>-->
-                  <img src="https://www.ourkidsreadinc.org/myimg/dashboard/hambuger.svg" style="object-fit: contain;" width="30" alt="">
+                  <img src="https://www.ourkidsread.org/myimg/dashboard/hambuger.svg" style="object-fit: contain;" width="30" alt="">
                 </button>
                 <h1 class="title-header">READING SESSION</h1>
               </div>

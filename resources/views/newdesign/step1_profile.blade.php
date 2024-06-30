@@ -60,9 +60,9 @@
 
     <div class="row">
         <div class="col-md-6 col-sm-6">
-            <input name='id' type="hidden" value="{{$user->user_id}}" />
+            <input name='id' type="hidden" value="{{$user->id}}" />
             <div class="input-style-1">
-                <input name='email' type="text" value="{{ old('email',$user->user_email)}}" placeholder="E-mail address" />
+                <input name='email' type="text" value="{{ old('email',$user->email)}}" placeholder="E-mail address" />
                 @error('email')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -80,6 +80,26 @@
                 @error('phone')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
+            </div>
+            <!-- end input -->
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <div class="input-style-1">
+                <div class="">
+                    <input class="w-auto" name="sms_opt_in_flag" type="checkbox" {{ old('sms_opt_in_flag', isset($user) && $user->sms_opt_in_flag ? 'checked' : '') ? 'checked' : '' }} />
+
+                    @error('sms_opt_in_flag')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <b>Yes I would like to receive text reminders the day before and the day of my reading sessions</b>
+                </div>
+                <p>By entering my mobile number I agree to receive appointment reminder texts from Our Kids Read. Message frequency varies, but no more than two reminders per scheduled session per week. Message + data rates may apply. Reply STOP to unsubscribe or HELP for help. View terms/conditions and Privacy Policy <a href="/policy-sms">here.</a></p>
             </div>
             <!-- end input -->
         </div>
@@ -283,20 +303,20 @@
 
 <script>
     document.getElementById('employment').addEventListener('change', function() {
-    const otherEmploymentDiv = document.getElementById('other-employment-div');
-    const optionOther = document.getElementById('option-other');
-    
-    // Check if the "Other" option is selected
-    if (this.selectedOptions[0].id === 'option-other') {
-        otherEmploymentDiv.style.display = 'block';
-        // Set the value of the employment field to null (empty string)
-        // this.value = '';
-    } else {
-        otherEmploymentDiv.style.display = 'none';
-        // Clear the other employment input when other is not selected
-        document.getElementById('other_employment').value = '';
-    }
-});
+        const otherEmploymentDiv = document.getElementById('other-employment-div');
+        const optionOther = document.getElementById('option-other');
+
+        // Check if the "Other" option is selected
+        if (this.selectedOptions[0].id === 'option-other') {
+            otherEmploymentDiv.style.display = 'block';
+            // Set the value of the employment field to null (empty string)
+            // this.value = '';
+        } else {
+            otherEmploymentDiv.style.display = 'none';
+            // Clear the other employment input when other is not selected
+            document.getElementById('other_employment').value = '';
+        }
+    });
 
 
 
